@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dalab.dalabapp.Adapter.ListAdapter;
 import com.dalab.dalabapp.Animation.Animation;
 import com.dalab.dalabapp.BlueTooth.BlueTooth;
+import com.dalab.dalabapp.Trains.BindPage;
+import com.dalab.dalabapp.Trains.Hemostasis;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainPage extends AppCompatActivity {
@@ -38,18 +40,20 @@ public class MainPage extends AppCompatActivity {
         );
     }
     private class MyOnItemClickListener implements AdapterView.OnItemClickListener {
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
+            Intent intent = new Intent();
             if(position == 0)
             {
-                Intent intent = new Intent();
-                intent.setClass(MainPage.this, Animation.class);
+                intent.setClass(MainPage.this, Hemostasis.class);
+                startActivity(intent);
+            }
+            else
+            {
+                intent.setClass(MainPage.this, BindPage.class);
                 startActivity(intent);
             }
         }
-
-
     }
 }

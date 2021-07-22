@@ -30,6 +30,8 @@
         <activity android:name=".Animation.Animation"/>
         <activity android:name=".TimerActivity"/>
         <activity android:name=".BlueTooth.BlueTooth"/>
+        <activity android:name=".Trains.Hemostasis"/>
+        <activity android:name=".Trains.BindPage"/>
     </application>
 
 </manifest>
