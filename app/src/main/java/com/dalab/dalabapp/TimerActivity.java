@@ -30,7 +30,7 @@ public class TimerActivity extends AppCompatActivity {
 
         timer=findViewById(R.id.timer);
 //        Pause=findViewById(R.id.pause);
-        textView=findViewById(R.id.textView);
+//        textView=findViewById(R.id.textView);
         timer1=new Timer();
     }
     public void Exit(View view)

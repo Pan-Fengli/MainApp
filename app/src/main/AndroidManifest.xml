@@ -32,6 +32,7 @@
         <activity android:name=".BlueTooth.BlueTooth"/>
         <activity android:name=".Trains.Hemostasis"/>
         <activity android:name=".Trains.BindPage"/>
+        <activity android:name=".TrainingPages.TrainingHomeostasis"/>
     </application>
 
 </manifest>

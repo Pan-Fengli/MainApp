@@ -4,17 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.dalab.dalabapp.Adapter.ListAdapter;
 import com.dalab.dalabapp.Adapter.hemostasisAdapter;
-import com.dalab.dalabapp.Animation.Animation;
-import com.dalab.dalabapp.BlueTooth.BlueTooth;
-import com.dalab.dalabapp.MainPage;
 import com.dalab.dalabapp.R;
+import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,7 +36,7 @@ public class Hemostasis extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent();
-                intent.setClass(Hemostasis.this, Animation.class);
+                intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
                 startActivity(intent);
             }
         });
