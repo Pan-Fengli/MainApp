@@ -2,27 +2,16 @@ package com.dalab.dalabapp.TrainingPages;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.dalab.dalabapp.MainPage;
 import com.dalab.dalabapp.R;
-import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
-
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class TrainingHomeostasis extends AppCompatActivity {
+public class TrainingBind extends AppCompatActivity {
     ImageView wound;
     ImageView bound;
     ImageView body;
@@ -41,7 +30,7 @@ public class TrainingHomeostasis extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(TrainingHomeostasis.this, MainPage.class);
+                intent.setClass(TrainingBind.this, MainPage.class);
                 startActivity(intent);
             }
         });
@@ -55,20 +44,11 @@ public class TrainingHomeostasis extends AppCompatActivity {
             bound = findViewById(R.id.blood_bound_upper_left);
             wound = findViewById(R.id.blood_upper_left);
         }
-        else if(type == 1)
-        {
-            bound = findViewById(R.id.blood_bound_upper_right);
-            wound = findViewById(R.id.blood_upper_right);
-        }
-        else if(type == 2)
+        else
         {
             bound = findViewById(R.id.blood_bound_down_left);
             wound = findViewById(R.id.blood_down_left);
         }
-        else
-        {
-            bound = findViewById(R.id.blood_bound_down_right);
-            wound = findViewById(R.id.blood_down_right);
-        }
+
     }
 }

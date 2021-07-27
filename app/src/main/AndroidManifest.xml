@@ -33,6 +33,7 @@
         <activity android:name=".Trains.Hemostasis"/>
         <activity android:name=".Trains.BindPage"/>
         <activity android:name=".TrainingPages.TrainingHomeostasis"/>
+        <activity android:name=".TrainingPages.TrainingBind"/>
     </application>
 
 </manifest>

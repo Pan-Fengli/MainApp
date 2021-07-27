@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="15dp">
 
     <ImageView
         android:id="@+id/body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="TODO"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,54 +17,121 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/body" />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.03"
+        android:text="这里放一些文字提示"
+        android:textSize="17sp"
+        />
     <ImageView
         android:id="@+id/blood_bound_upper_left"
         android:layout_width="27dp"
         android:layout_height="46dp"
-        android:contentDescription="TODO"
         android:src="@drawable/position"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/body"
         app:layout_constraintEnd_toStartOf="@+id/body"
         app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toEndOf="@+id/body"
         app:layout_constraintTop_toBottomOf="@+id/body"
         app:layout_constraintVertical_bias="0.59" />
+    <ImageView
+        android:id="@+id/blood_bound_upper_right"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:src="@drawable/position"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/body"
+        app:layout_constraintEnd_toStartOf="@+id/body"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/body"
+        app:layout_constraintTop_toBottomOf="@+id/body"
+        app:layout_constraintVertical_bias="0.59" />
+    <ImageView
+        android:id="@+id/blood_bound_down_left"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:src="@drawable/position"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/body"
+        app:layout_constraintEnd_toStartOf="@+id/body"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toEndOf="@+id/body"
+        app:layout_constraintTop_toBottomOf="@+id/body"
+        app:layout_constraintVertical_bias="0.45" />
+    <ImageView
+        android:id="@+id/blood_bound_down_right"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:src="@drawable/position"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/body"
+        app:layout_constraintEnd_toStartOf="@+id/body"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toEndOf="@+id/body"
+        app:layout_constraintTop_toBottomOf="@+id/body"
+        app:layout_constraintVertical_bias="0.45" />
 
     <ImageView
         android:id="@+id/blood_upper_left"
         android:layout_width="27dp"
         android:layout_height="46dp"
-        android:contentDescription="TODO"
         android:src="@drawable/blood"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/body"
         app:layout_constraintEnd_toStartOf="@+id/body"
         app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toEndOf="@+id/body"
         app:layout_constraintTop_toBottomOf="@+id/body"
         app:layout_constraintVertical_bias="0.532" />
-
-
-    <TextView
-        android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:00"
-        android:textSize="60sp"
+    <ImageView
+        android:id="@+id/blood_upper_right"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:src="@drawable/blood"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/body"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/body"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toEndOf="@+id/body"
         app:layout_constraintTop_toBottomOf="@+id/body"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.532" />
+    <ImageView
+        android:id="@+id/blood_down_left"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:src="@drawable/blood"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/body"
+        app:layout_constraintEnd_toStartOf="@+id/body"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toEndOf="@+id/body"
+        app:layout_constraintTop_toBottomOf="@+id/body"
+        app:layout_constraintVertical_bias="0.4" />
+    <ImageView
+        android:id="@+id/blood_down_right"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:src="@drawable/blood"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/body"
+        app:layout_constraintEnd_toStartOf="@+id/body"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toEndOf="@+id/body"
+        app:layout_constraintTop_toBottomOf="@+id/body"
+        app:layout_constraintVertical_bias="0.4" />
+
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="点击返回"
+        android:text="点击开始"
         app:layout_constraintBottom_toBottomOf="@+id/body"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -72,26 +139,5 @@
         app:layout_constraintTop_toTopOf="@+id/body"
         app:layout_constraintVertical_bias="0.83" />
 
-
-    <!---->
-    <FrameLayout
-        android:id="@+id/layout"
-        android:layout_width="264dp"
-        android:layout_height="226dp"
-
-
-        app:layout_constraintBottom_toTopOf="@+id/body"
-        app:layout_constraintEnd_toStartOf="@+id/body"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <com.dalab.dalabapp.SelfDefineViews.DrawLineChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
-    </FrameLayout>
-    <!---->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
