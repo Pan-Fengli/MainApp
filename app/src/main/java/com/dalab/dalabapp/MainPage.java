@@ -29,8 +29,8 @@ public class MainPage extends AppCompatActivity {
     LinearLayout mDrawerContent;
     EditText lowerBound;
     EditText upperBound;
-    int lowerValue = 200;
-    int upperValue = 600;
+    public static int lowerValue = 200;
+    public static int upperValue = 600;
 
     ListView mylist;
     @Override

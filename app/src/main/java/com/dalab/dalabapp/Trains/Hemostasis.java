@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.dalab.dalabapp.Adapter.hemostasisAdapter;
+import com.dalab.dalabapp.HoeostasisDataPage;
 import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
 
@@ -36,7 +37,8 @@ public class Hemostasis extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent();
-                intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
+//                intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
+                intent.setClass(Hemostasis.this, HoeostasisDataPage.class);
                 startActivity(intent);
             }
         });
