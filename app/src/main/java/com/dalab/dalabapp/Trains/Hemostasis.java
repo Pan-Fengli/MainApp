@@ -30,18 +30,18 @@ public class Hemostasis extends AppCompatActivity {
         dialog.setTitle("未检测到设备连接！");
         dialog.setMessage("请检查设备是否打开");
 
-        remindDialog = new AlertDialog.Builder(Hemostasis.this);
-        remindDialog.setTitle("准备好！");
-        remindDialog.setMessage("请先绑好止血带，然后点击开始即可");
-        remindDialog.setPositiveButton("开始", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-//                intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
-                intent.setClass(Hemostasis.this, HoeostasisDataPage.class);
-                startActivity(intent);
-            }
-        });
+//        remindDialog = new AlertDialog.Builder(Hemostasis.this);
+//        remindDialog.setTitle("准备好！");
+//        remindDialog.setMessage("请先绑好止血带，然后点击开始即可");
+//        remindDialog.setPositiveButton("开始", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Intent intent = new Intent();
+////                intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
+//                intent.setClass(Hemostasis.this, HoeostasisDataPage.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
     private class MyOnItemClickListener implements AdapterView.OnItemClickListener {
@@ -59,7 +59,8 @@ public class Hemostasis extends AppCompatActivity {
 //                dialog.show();
 //            }
             Intent intent = new Intent();
-            intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
+//            intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
+            intent.setClass(Hemostasis.this, HoeostasisDataPage.class);
             intent.putExtra("TrainType", position);
             startActivity(intent);
         }
