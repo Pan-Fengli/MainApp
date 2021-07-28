@@ -29,13 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainPage" />
-        <activity android:name=".Animation.Animation" />
-        <activity android:name=".TimerActivity" />
-        <activity android:name=".BlueTooth.BlueTooth" />
-        <activity android:name=".Trains.Hemostasis" />
-        <activity android:name=".Trains.BindPage" />
-        <activity android:name=".TrainingPages.TrainingHomeostasis" />
+
+        <activity android:name=".MainPage"/>
+        <activity android:name=".Animation.Animation"/>
+        <activity android:name=".TimerActivity"/>
+        <activity android:name=".BlueTooth.BlueTooth"/>
+        <activity android:name=".Trains.Hemostasis"/>
+        <activity android:name=".Trains.BindPage"/>
+        <activity android:name=".TrainingPages.TrainingHomeostasis"/>
+        <activity android:name=".TrainingPages.TrainingBind"/>
     </application>
 
 </manifest>

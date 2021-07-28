@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Hemostasis extends AppCompatActivity {
     ListView mylist;
     AlertDialog.Builder dialog;
-    AlertDialog.Builder remindDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +29,7 @@ public class Hemostasis extends AppCompatActivity {
         dialog = new AlertDialog.Builder(Hemostasis.this);
         dialog.setTitle("未检测到设备连接！");
         dialog.setMessage("请检查设备是否打开");
+
         remindDialog = new AlertDialog.Builder(Hemostasis.this);
         remindDialog.setTitle("准备好！");
         remindDialog.setMessage("请先绑好止血带，然后点击开始即可");
@@ -42,20 +42,26 @@ public class Hemostasis extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
     private class MyOnItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
+//            if(position == 0)
+//            {
+//                Intent intent = new Intent();
+//                intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
+//                startActivity(intent);
+//            }
+//            else
+//            {
+//                dialog.show();
+//            }
             Intent intent = new Intent();
-            if(position == 0)
-            {
-                remindDialog.show();
-            }
-            else
-            {
-                dialog.show();
-            }
+            intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
+            intent.putExtra("TrainType", position);
+            startActivity(intent);
         }
     }
 }
