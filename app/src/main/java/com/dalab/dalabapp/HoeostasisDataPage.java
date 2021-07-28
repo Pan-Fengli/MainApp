@@ -133,18 +133,22 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             timerText.setTextColor(Color.rgb(255,120,71));
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间跳动到15min...");
+
+                            release=true;//提示松开，之后的数据生成就是松开的数据...
+                            //然后此刻开始计时，时间用于判断是主动松开还是被动松开——实际上这个计时还是在generateData函数里面去进行
                         }
                         if (count >= 900000) {//15min
                             timerText.setText("止血成功！！");
                             System.out.println("lowerTime:"+lowerTime);
                             System.out.println("overTime:"+overTime);
+                            System.out.println("releaseTime:"+releaseTime);
                             timer1.cancel();
                         }
                     }
                 });
             }
         };
-        timer1.schedule(timerTask, 0, 10);//每0.01s调用一次
+        timer1.schedule(timerTask, 0, 10);//每0.01s调用一次//period实际上也就是interval
     }
 
     private String getStringTime(int cnt) {
@@ -188,6 +192,9 @@ public class HoeostasisDataPage extends AppCompatActivity {
             checkColor((int)average);
             //以及处理全局变量，lower&overvalue来为评分做准备
             updateValue((int)average);
+
+
+
             //调用流血的展示函数
             minus();
         }
@@ -292,11 +299,34 @@ public class HoeostasisDataPage extends AppCompatActivity {
         }
     }
 
+    boolean release=false;
+    int speed=1;//下降的速度——10好像有点太快了...
+    int declineValue=speed;
+    int releaseTime=0;
     private int  generateData()
     {
+        //判断decline？
         Random random=new Random();
-        int range=max-min;
-        int value=min+random.nextInt(range);
+        int value,range;
+        if(!release)//还没有松开
+        {
+            range=max-min;
+            value=min+random.nextInt(range);
+        }
+        else{//开始松开
+            declineValue+=speed;
+
+            value=max-declineValue;
+            if(value<=0)
+            {
+                value=0;
+            }
+            if(value>lowerValue)
+            {
+                releaseTime++;
+            }
+        }
+
         return value;
     }
 }
