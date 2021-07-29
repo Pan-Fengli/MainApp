@@ -51,62 +51,63 @@ public class HoeostasisDataPage extends AppCompatActivity {
     int Volumn = 1000;//满血是1000ml，即流血量大于这个就会休克
     float lose = 0;//流血量
 
-    int overTime=0;//这两个是用来记录小于bond和大于bond的时间的
-    int lowerTime=0;
+    int overTime = 0;//这两个是用来记录小于bond和大于bond的时间的
+    int lowerTime = 0;
 
 
-    int mode=0;//这是一个随机数，用来表示我生成的数据是模拟：0:压力过小，止血失败。1：压力在范围内，止血成功。2：压力过大，肢体失血坏死
-    int max=600;
-    int min=200;
+    int mode = 0;//这是一个随机数，用来表示我生成的数据是模拟：0:压力过小，止血失败。1：压力在范围内，止血成功。2：压力过大，肢体失血坏死
+    int max = 600;
+    int min = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoeostasis_data_page);
-        findViewById(R.id.nextPage).setVisibility(View.INVISIBLE);
+//        findViewById(R.id.nextPage).setVisibility(View.INVISIBLE);
         heartImage = findViewById(R.id.imageView3);
         bleedText = findViewById(R.id.textView3);
         stateText = findViewById(R.id.textView6);
-        infoText=findViewById(R.id.textView2);
+        infoText = findViewById(R.id.textView2);
         percentText = findViewById(R.id.percent);
         percent = Integer.valueOf(percentText.getText().toString());
         changeImage(100);//
         heartBeat(1000);
 
-        lowerValue=MainPage.lowerValue;
-        upperValue=MainPage.upperValue;
+        lowerValue = MainPage.lowerValue;
+        upperValue = MainPage.upperValue;
 
         Random random = new Random();
-        mode=random.nextInt(3);//0,1,2
-        if(mode==0)
-        {
-            max=300;
-            min=100;
-        }
-        else if(mode==1)
-        {
-            max=600;
-            min=200;
-        }
-        else if(mode==2)
-        {
-            max=700;
-            min=500;
+        mode = random.nextInt(3);//0,1,2
+        if (mode == 0) {
+            max = 300;
+            min = 100;
+        } else if (mode == 1) {
+            max = 600;
+            min = 200;
+        } else if (mode == 2) {
+            max = 700;
+            min = 500;
         }
         init();//初始化坐标数据
         Values.add(0.0f);
         timerText = findViewById(R.id.timerText);
-        validTimeText=findViewById(R.id.textView7);
+        validTimeText = findViewById(R.id.textView7);
         forceText = findViewById(R.id.forceText);
         timer1 = new Timer();
         startTimer();
         // jumpRelated
         jump = findViewById(R.id.JumpToRes);
         jump.setVisibility(View.INVISIBLE);
-        jump.setOnClickListener(new View.OnClickListener(){
+        jump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
+                //此外，这里还需要传递一些数据到下一个页面去，比如：
+                intent.putExtra("overTime", overTime * 10);//超过上限的时间，单位s——(float) overTime * 0.01已经转化成s了，看是否需要保留ms？
+                intent.putExtra("belowTime", lose);//流血量，float类型 单位ml
+                intent.putExtra("validTime", validTime);//有效止血时间，单位是ms
+                intent.putExtra("hasReleased", hasReleased);//最后是否已经松开，布尔值
                 startActivity(intent);
             }
         });
@@ -130,9 +131,12 @@ public class HoeostasisDataPage extends AppCompatActivity {
         chart.setLower((float) lowerValue);
 
     }
-    int speed=10;//时间流速——一次interval中流过了多少毫秒。
-    int interval=10;
-    boolean acceleration=false;
+
+    int speed = 10;//时间流速——一次interval中流过了多少毫秒。
+    int interval = 10;//interval和speed一样的话就是现实中的流速。
+    boolean acceleration = false;
+    boolean hasReleased = false;//到达20min的时候是否已经松开
+
     private void startTimer() {
         timerTask = new TimerTask() {
             int count;
@@ -146,32 +150,34 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
                         if (count >= 5000) {//5s的时候
 //                            count += 1000;
-                            speed=800;
+                            speed = 800;
 
                             //颜色变化作为提示
-                            timerText.setTextColor(Color.rgb(255,120,71));
+                            timerText.setTextColor(Color.rgb(255, 120, 71));
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
-                            acceleration=true;
+                            acceleration = true;
                         }
                         if (count >= 900000) {//15min
-                            speed=213;//15min之后流速又减慢一点点
+                            speed = 213;//15min之后流速又减慢一点点
 //                            timerText.setText("止血成功！！");
                             infoText.setText("15min！！");
-                            release=true;//提示松开，之后的数据生成就是松开的数据...
+                            release = true;//提示松开，之后的数据生成就是松开的数据...
                             //然后此刻开始计时，时间用于判断是主动松开还是被动松开——实际上这个计时还是在generateData函数里面去进行
                         }
                         count += speed;
                         changeWithSample();
                         timerText.setText(getStringTime(count));
-                        if(count>=20*60*1000)//20min
+                        if (count >= 20 * 60 * 1000)//20min
                         {
-                            timerText.setText("20min！！训练完成，进入评价页面");
-                            System.out.println("lowerTime:"+lowerTime);
-                            System.out.println("overTime:"+overTime);
-                            System.out.println("releaseTime:"+releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
-                            speed=10;//速度变回去（有必要吗？）
-                            findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
+                            timerText.setText("训练完成");
+                            //这里还应该检查一下压力是否已经小于了200，也就是是否已经松掉。可以作为一个布尔值传递过去。
+                            hasReleased = true;//因为根据我们生成的数据，肯定是松掉了的
+                            System.out.println("lowerTime:" + lowerTime);
+                            System.out.println("overTime:" + (float) overTime * 0.01);//转化成s的单位——或者乘10变成毫秒？
+                            System.out.println("releaseTime:" + releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
+                            speed = 10;//速度变回去（有必要吗？）
+//                            findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
                             timer1.cancel();
                             jump.setVisibility(View.VISIBLE);
                         }
@@ -189,6 +195,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         int minisecond = cnt % 1000 / 10;
         return String.format(Locale.CHINA, "%02d:%02d:%02d", min, second, minisecond);
     }
+
     private String getMinStringTime(int cnt) {//有效时间可以不用那么精细，可以不用精确到毫秒...
         int min = cnt / 60000;
         int second = cnt % 60000 / 1000;
@@ -197,23 +204,24 @@ public class HoeostasisDataPage extends AppCompatActivity {
     }
 
 
-    private void changeWithSample() {
+    private void changeWithSample() {//每次时间数据更新都调用这个函数，在这个函数里面模拟数据的生成和更新
         DrawLineChart chart = findViewById(R.id.chart);
 
         Random random = new Random();
         float f = random.nextFloat();
         float data = f * 600;//这个是生成的data，之后当然是用传递过来的数据
         //可以写成一个函数来生成这里的data
-        data=generateData();
+        data = generateData();
 
         storage.add(data);
         //更新有效止血时间——这个只能放在外面每次都更新，不能够存满了才更新一次，否则会因为speed发生了变化而产生问题
         updateValidTime(data);
 
+        updateValue((int) data);//计算超过最大范围的时间
+
         //计算流血量
-         if(data<lowerValue && !release&& !acceleration)
-         {//需要加上一个条件，如果小于范围并且还没有发出松开的指令（即15min的时候的指令。）
-             //以及试了试，在我们加速的时候也不应该记这个——或者说速度应该和正常速度一样
+        if (data < lowerValue && !release && !acceleration) {//需要加上一个条件，如果小于范围并且还没有发出松开的指令（即15min的时候的指令。）
+            //以及试了试，在我们加速的时候也不应该记这个——或者说速度应该和正常速度一样
 //            lowerTime++;
             //调用流血的展示函数——那么既然压力过小会流血，那么就在这里计算一下流血量就ok了嘛——当然还是得在外面计算，因为speed会变化...
             minus();
@@ -239,30 +247,28 @@ public class HoeostasisDataPage extends AppCompatActivity {
             String newForce = String.valueOf((int) average) + "mmHg";
             forceText.setText(newForce);
             //还要检查一下颜色
-            checkColor((int)average);
+            checkColor((int) average);
             //以及处理全局变量，lower&overvalue来为评分做准备
-            updateValue((int)average);
-
-
+//            updateValue((int)average);
 //            //调用流血的展示函数
 //            minus();
         }
+
     }
-    int validTime=0;
-    private void updateValidTime(float data)
-    {
-        if(lowerValue<data && data<upperValue)
-        {
-            validTime+=speed;//单位仍然是毫秒
+
+    int validTime = 0;
+
+    private void updateValidTime(float data) {
+        if (lowerValue < data && data < upperValue) {
+            validTime += speed;//单位仍然是毫秒
             //然后更新text
-            String text="有效止血时间："+getMinStringTime(validTime);
+            String text = "有效止血时间：" + getMinStringTime(validTime);
             validTimeText.setText(text);
         }
     }
 
-    private void updateValue(int cnt)
-    {
-        if(cnt>upperValue)//——这里的记录是全程记录，那么时间不如就算成现实的时间，也就是和interval 的0.01s。不像lower还需要计算出血量...——不过当然计算是放在下个页面了罢
+    private void updateValue(int cnt) {
+        if (cnt > upperValue && !release && !acceleration)//——这里的记录是全程记录，那么时间不如就算成现实的时间，也就是和interval 的0.01s。不像lower还需要计算出血量...——不过当然计算是放在下个页面了罢
         {
             overTime++;
         }
@@ -274,20 +280,16 @@ public class HoeostasisDataPage extends AppCompatActivity {
         //处理完了之后就保存在这个类里面，当点击按钮切换到评价页面的时候就可以把这两个数据传递过去。
     }
 
-    private void checkColor(int cnt)
-    {
-        if(cnt<lowerValue)
-        {
-            forceText.setTextColor(Color.rgb(255,160,0));
-        }
-        else if(lowerValue < cnt && cnt <upperValue)
-        {
-            forceText.setTextColor(Color.rgb(0,238,0));
-        }
-        else{
+    private void checkColor(int cnt) {
+        if (cnt < lowerValue) {
+            forceText.setTextColor(Color.rgb(255, 160, 0));
+        } else if (lowerValue < cnt && cnt < upperValue) {
+            forceText.setTextColor(Color.rgb(0, 238, 0));
+        } else {
             forceText.setTextColor(Color.RED);
         }
     }
+
     private void changeImage(int oldPercent) {
 
         int number = (100 - percent) * 45 / 100;//得到图片的编号
@@ -328,8 +330,9 @@ public class HoeostasisDataPage extends AppCompatActivity {
         heartImage.startAnimation(animationSet);
     }
 
-    float bleedspeed=26.9f;
-    private void minus()//点击 - 按钮
+    float bleedspeed = 26.9f;//如果是下肢，那么就是171.1f
+
+    private void minus()//流血的计算和更新
     {
         if (percent <= 0)//不能再变小了
         {
@@ -337,15 +340,13 @@ public class HoeostasisDataPage extends AppCompatActivity {
             percentText.setText(zero);
             return;
         }
-//        int oldPercent=percent;
-//        percent-=1;
         int oldPercent = percent;
 //        lose += 10;//流血量变多
-        lose += speed* (bleedspeed/1000.0f);//流血量变多//speed是ms单位，所以需要转换一下——lose的类型改成float是为了防止因为过小而导致的流血量不能加上去。
-        String bleed = "失血量：" + (int)lose + "ml";
+        lose += speed * (bleedspeed / 1000.0f);//流血量变多//speed是时间流速，ms单位，所以需要转换一下——lose的类型改成float是为了防止因为过小而导致的流血量不能加上去。
+        String bleed = "失血量：" + (int) lose + "ml";
         bleedText.setText(bleed);
         updateState();
-        percent = (Volumn - (int)lose) * 100 / Volumn;//计算之后的比例
+        percent = (Volumn - (int) lose) * 100 / Volumn;//计算之后的比例
         String percentage = String.valueOf(percent);
         percentText.setText(percentage);
         changeImage(oldPercent);
@@ -353,63 +354,62 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
     private void updateState()//根据流血量来更新状态
     {
-        if(lose<500)
-        {
-            String state="当前状态:"+"流血";
+        if (lose < 500) {
+            String state = "当前状态:" + "没有明显症状";
             stateText.setText(state);
-        }
-        else if (lose >= 800) {
-            String state="当前状态:"+"昏迷";
+        } else if (lose >= 500 && lose < 1000) {
+            String state = "当前状态:" + "神经焦虑";
+            stateText.setText(state);
+        } else if (lose > 1000 && lose < 1500) {
+            String state = "当前状态:" + "面色发白，出冷汗";
+            stateText.setText(state);
+        } else if (lose > 1500 && lose < 2000) {
+            String state = "当前状态:" + "萎靡不振，手脚无力";
+            stateText.setText(state);
+        } else if (lose > 2000) {
+            String state = "当前状态:" + "昏迷休克";
             stateText.setText(state);
         }
     }
 
-    boolean release=false;
-    int decline_speed=1;//下降的速度——10好像有点太快了...
-    int declineValue=decline_speed;
-    int releaseTime=0;
-    private int  generateData()
-    {
-        //判断decline？
-        Random random=new Random();
-        int value,range;
-        if(!release)//还没有松开
-        {
-            range=max-min;
-            value=min+random.nextInt(range);
-        }
-        else{//开始松开
-            declineValue+=decline_speed;
+    boolean release = false;
+    int decline_speed = 1;//下降的速度——10好像有点太快了...
+    int declineValue = decline_speed;
+    int releaseTime = 0;
 
-            value=max-declineValue;
-            if(value<=0)
-            {
-                value=0;
+    private int generateData() {//生成数据
+        //判断是否已经发出了release的指令decline？
+        Random random = new Random();
+        int value, range;
+        if (!release)//还没有松开
+        {
+            range = max - min;
+            value = min + random.nextInt(range);
+        } else {//开始松开
+            declineValue += decline_speed;
+
+            value = max - declineValue;
+            if (value <= 0) {
+                value = 0;
             }
-            if(value>lowerValue)
-            {
+            if (value > lowerValue) {
                 releaseTime++;
             }
         }
         return value;
     }
 
-    public void nextPage(View view)
-    {
+    public void nextPage(View view) {
         //这个函数是设计给跳转按钮的，需要传递一些数据过去到评价页面。
         Intent intent = new Intent();
         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
         //然后把一些参数输入进去。
-        intent.putExtra("upper",upperValue);
-        intent.putExtra("lower",lowerValue);
+        intent.putExtra("overTime", overTime * interval);//ms
+        intent.putExtra("belowTime", lose);//float类型
+        intent.putExtra("validTime", validTime);//单位是ms
+        intent.putExtra("hasReleased", hasReleased);
+
         startActivity(intent);
     }
-
-//     void Jump()
-//     {
-//         Intent intent = new Intent();
-//         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
-//         startActivity(intent);
-//     }
 
 }
