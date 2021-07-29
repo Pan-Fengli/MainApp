@@ -18,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
+
+import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
+
 import com.dalab.dalabapp.TrainingPages.ResHomeostasis;
 
 import java.util.ArrayList;
@@ -46,7 +49,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     int lowerValue = 200;
     int upperValue = 600;
     int Volumn = 1000;//满血是1000ml，即流血量大于这个就会休克
-    int lose = 0;//流血量
+    float lose = 0;//流血量
 
     int overTime=0;//这两个是用来记录小于bond和大于bond的时间的
     int lowerTime=0;
@@ -59,6 +62,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoeostasis_data_page);
+        findViewById(R.id.nextPage).setVisibility(View.INVISIBLE);
         heartImage = findViewById(R.id.imageView3);
         bleedText = findViewById(R.id.textView3);
         stateText = findViewById(R.id.textView6);
@@ -128,6 +132,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     }
     int speed=10;//时间流速——一次interval中流过了多少毫秒。
     int interval=10;
+    boolean acceleration=false;
     private void startTimer() {
         timerTask = new TimerTask() {
             int count;
@@ -139,7 +144,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                     public void run() {
 //                        count += 10;
 
-                        if (count >= 5000) {
+                        if (count >= 5000) {//5s的时候
 //                            count += 1000;
                             speed=800;
 
@@ -147,7 +152,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             timerText.setTextColor(Color.rgb(255,120,71));
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
-
+                            acceleration=true;
                         }
                         if (count >= 900000) {//15min
                             speed=213;//15min之后流速又减慢一点点
@@ -164,8 +169,9 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             timerText.setText("20min！！训练完成，进入评价页面");
                             System.out.println("lowerTime:"+lowerTime);
                             System.out.println("overTime:"+overTime);
-                            System.out.println("releaseTime:"+releaseTime);
+                            System.out.println("releaseTime:"+releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
                             speed=10;//速度变回去（有必要吗？）
+                            findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
                             timer1.cancel();
                             jump.setVisibility(View.VISIBLE);
                         }
@@ -204,6 +210,15 @@ public class HoeostasisDataPage extends AppCompatActivity {
         //更新有效止血时间——这个只能放在外面每次都更新，不能够存满了才更新一次，否则会因为speed发生了变化而产生问题
         updateValidTime(data);
 
+        //计算流血量
+         if(data<lowerValue && !release&& !acceleration)
+         {//需要加上一个条件，如果小于范围并且还没有发出松开的指令（即15min的时候的指令。）
+             //以及试了试，在我们加速的时候也不应该记这个——或者说速度应该和正常速度一样
+//            lowerTime++;
+            //调用流血的展示函数——那么既然压力过小会流血，那么就在这里计算一下流血量就ok了嘛——当然还是得在外面计算，因为speed会变化...
+            minus();
+        }
+
         if (storage.size() == sampleDistance) {//存满了之后才计算一次。
             float average = 0;
             for (final Float value : storage) {
@@ -229,8 +244,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
             updateValue((int)average);
 
 
-            //调用流血的展示函数
-            minus();
+//            //调用流血的展示函数
+//            minus();
         }
     }
     int validTime=0;
@@ -247,13 +262,15 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
     private void updateValue(int cnt)
     {
-        if(cnt>upperValue)
+        if(cnt>upperValue)//——这里的记录是全程记录，那么时间不如就算成现实的时间，也就是和interval 的0.01s。不像lower还需要计算出血量...——不过当然计算是放在下个页面了罢
         {
             overTime++;
         }
-        else if(cnt<lowerValue){
-            lowerTime++;
-        }
+//        else if(cnt<lowerValue&&!release){//需要加上一个条件，如果小于范围并且还没有发出松开的指令（即15min的时候的指令。）
+//            lowerTime++;
+//            //调用流血的展示函数——那么既然压力过小会流血，那么就在这里计算一下流血量就ok了嘛——
+//            minus();
+//        }
         //处理完了之后就保存在这个类里面，当点击按钮切换到评价页面的时候就可以把这两个数据传递过去。
     }
 
@@ -311,6 +328,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         heartImage.startAnimation(animationSet);
     }
 
+    float bleedspeed=26.9f;
     private void minus()//点击 - 按钮
     {
         if (percent <= 0)//不能再变小了
@@ -322,11 +340,12 @@ public class HoeostasisDataPage extends AppCompatActivity {
 //        int oldPercent=percent;
 //        percent-=1;
         int oldPercent = percent;
-        lose += 10;//流血量变多
-        String bleed = "失血量：" + lose + "ml";
+//        lose += 10;//流血量变多
+        lose += speed* (bleedspeed/1000.0f);//流血量变多//speed是ms单位，所以需要转换一下——lose的类型改成float是为了防止因为过小而导致的流血量不能加上去。
+        String bleed = "失血量：" + (int)lose + "ml";
         bleedText.setText(bleed);
         updateState();
-        percent = (Volumn - lose) * 100 / Volumn;//计算之后的比例
+        percent = (Volumn - (int)lose) * 100 / Volumn;//计算之后的比例
         String percentage = String.valueOf(percent);
         percentText.setText(percentage);
         changeImage(oldPercent);
@@ -374,10 +393,23 @@ public class HoeostasisDataPage extends AppCompatActivity {
         }
         return value;
     }
-    void Jump()
+
+    public void nextPage(View view)
     {
+        //这个函数是设计给跳转按钮的，需要传递一些数据过去到评价页面。
         Intent intent = new Intent();
         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
+        //然后把一些参数输入进去。
+        intent.putExtra("upper",upperValue);
+        intent.putExtra("lower",lowerValue);
         startActivity(intent);
     }
+
+//     void Jump()
+//     {
+//         Intent intent = new Intent();
+//         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
+//         startActivity(intent);
+//     }
+
 }
