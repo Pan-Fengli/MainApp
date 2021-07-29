@@ -10,9 +10,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dalab.dalabapp.HoeostasisDataPage;
 import com.dalab.dalabapp.MainPage;
 import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
+import com.dalab.dalabapp.Trains.Hemostasis;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -41,7 +43,7 @@ public class TrainingHomeostasis extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(TrainingHomeostasis.this, MainPage.class);
+                intent.setClass(TrainingHomeostasis.this, HoeostasisDataPage.class);
                 startActivity(intent);
             }
         });

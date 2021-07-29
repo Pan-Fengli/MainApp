@@ -1,21 +1,27 @@
 package com.dalab.dalabapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.renderscript.Script;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
+
 import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
+
+import com.dalab.dalabapp.TrainingPages.ResHomeostasis;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -33,6 +39,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     TextView bleedText;
     TextView stateText;
     TextView infoText;
+    Button jump;
 
     int percent;
     Timer timer1;
@@ -92,6 +99,17 @@ public class HoeostasisDataPage extends AppCompatActivity {
         forceText = findViewById(R.id.forceText);
         timer1 = new Timer();
         startTimer();
+        // jumpRelated
+        jump = findViewById(R.id.JumpToRes);
+        jump.setVisibility(View.INVISIBLE);
+        jump.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init() {
@@ -111,14 +129,6 @@ public class HoeostasisDataPage extends AppCompatActivity {
         chart.setUpper((float) upperValue);//这两个就是上下限范围...
         chart.setLower((float) lowerValue);
 
-//        Random random = new Random();
-//        float[] floats = new float[24];
-//        for (int i = 0; i < floats.length; i++) {
-//            float f = random.nextFloat();
-//            floats[i] = f * 60 - 10;
-////            Log.i("onCreate", "onCreate: f" + f);
-//        }
-//        chart.setValue(floats);//随机生成初始值
     }
     int speed=10;//时间流速——一次interval中流过了多少毫秒。
     int interval=10;
@@ -163,6 +173,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             speed=10;//速度变回去（有必要吗？）
                             findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
                             timer1.cancel();
+                            jump.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -387,11 +398,18 @@ public class HoeostasisDataPage extends AppCompatActivity {
     {
         //这个函数是设计给跳转按钮的，需要传递一些数据过去到评价页面。
         Intent intent = new Intent();
-        intent.setClass(HoeostasisDataPage.this, MainPage.class);
+        intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
         //然后把一些参数输入进去。
         intent.putExtra("upper",upperValue);
         intent.putExtra("lower",lowerValue);
         startActivity(intent);
     }
+
+//     void Jump()
+//     {
+//         Intent intent = new Intent();
+//         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
+//         startActivity(intent);
+//     }
 
 }
