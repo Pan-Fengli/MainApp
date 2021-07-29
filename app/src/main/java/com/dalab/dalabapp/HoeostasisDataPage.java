@@ -24,12 +24,14 @@ import java.util.TimerTask;
 public class HoeostasisDataPage extends AppCompatActivity {
     TimerTask timerTask;
     TextView timerText;
+    TextView validTimeText;
     TextView forceText;
     ImageView heartImage;
     TextView percentText;
     TextView bleedText;
     TextView stateText;
     TextView infoText;
+
     int percent;
     Timer timer1;
     ArrayList<Float> Values = new ArrayList<Float>();
@@ -83,6 +85,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         init();//初始化坐标数据
         Values.add(0.0f);
         timerText = findViewById(R.id.timerText);
+        validTimeText=findViewById(R.id.textView7);
         forceText = findViewById(R.id.forceText);
         timer1 = new Timer();
         startTimer();
@@ -114,7 +117,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
 //        }
 //        chart.setValue(floats);//随机生成初始值
     }
-
+    int speed=10;//时间流速——一次interval中流过了多少毫秒。
+    int interval=10;
     private void startTimer() {
         timerTask = new TimerTask() {
             int count;
@@ -124,31 +128,43 @@ public class HoeostasisDataPage extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        count += 10;
-                        changeWithSample();
-                        timerText.setText(getStringTime(count));
+//                        count += 10;
+
                         if (count >= 5000) {
-                            count += 1000;
+//                            count += 1000;
+                            speed=800;
+
                             //颜色变化作为提示
                             timerText.setTextColor(Color.rgb(255,120,71));
                             //或许还可以加上其他的提示信息
-                            infoText.setText("时间跳动到15min...");
+                            infoText.setText("时间加速跳动到15min...");
 
+                        }
+                        if (count >= 900000) {//15min
+                            speed=213;//15min之后流速又减慢一点点
+//                            timerText.setText("止血成功！！");
+                            infoText.setText("15min！！");
                             release=true;//提示松开，之后的数据生成就是松开的数据...
                             //然后此刻开始计时，时间用于判断是主动松开还是被动松开——实际上这个计时还是在generateData函数里面去进行
                         }
-                        if (count >= 900000) {//15min
-                            timerText.setText("止血成功！！");
+                        count += speed;
+                        changeWithSample();
+                        timerText.setText(getStringTime(count));
+                        if(count>=20*60*1000)//20min
+                        {
+                            timerText.setText("20min！！训练完成，进入评价页面");
                             System.out.println("lowerTime:"+lowerTime);
                             System.out.println("overTime:"+overTime);
                             System.out.println("releaseTime:"+releaseTime);
+                            speed=10;//速度变回去（有必要吗？）
                             timer1.cancel();
                         }
+
                     }
                 });
             }
         };
-        timer1.schedule(timerTask, 0, 10);//每0.01s调用一次//period实际上也就是interval
+        timer1.schedule(timerTask, 0, interval);//每0.01s调用一次//period实际上也就是interval
     }
 
     private String getStringTime(int cnt) {
@@ -157,6 +173,13 @@ public class HoeostasisDataPage extends AppCompatActivity {
         int minisecond = cnt % 1000 / 10;
         return String.format(Locale.CHINA, "%02d:%02d:%02d", min, second, minisecond);
     }
+    private String getMinStringTime(int cnt) {//有效时间可以不用那么精细，可以不用精确到毫秒...
+        int min = cnt / 60000;
+        int second = cnt % 60000 / 1000;
+//        int minisecond = cnt % 1000 / 10;
+        return String.format(Locale.CHINA, "%02d:%02d", min, second);
+    }
+
 
     private void changeWithSample() {
         DrawLineChart chart = findViewById(R.id.chart);
@@ -168,6 +191,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
         data=generateData();
 
         storage.add(data);
+        //更新有效止血时间——这个只能放在外面每次都更新，不能够存满了才更新一次，否则会因为speed发生了变化而产生问题
+        updateValidTime(data);
 
         if (storage.size() == sampleDistance) {//存满了之后才计算一次。
             float average = 0;
@@ -194,11 +219,22 @@ public class HoeostasisDataPage extends AppCompatActivity {
             updateValue((int)average);
 
 
-
             //调用流血的展示函数
             minus();
         }
     }
+    int validTime=0;
+    private void updateValidTime(float data)
+    {
+        if(lowerValue<data && data<upperValue)
+        {
+            validTime+=speed;//单位仍然是毫秒
+            //然后更新text
+            String text="有效止血时间："+getMinStringTime(validTime);
+            validTimeText.setText(text);
+        }
+    }
+
     private void updateValue(int cnt)
     {
         if(cnt>upperValue)
@@ -300,8 +336,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
     }
 
     boolean release=false;
-    int speed=1;//下降的速度——10好像有点太快了...
-    int declineValue=speed;
+    int decline_speed=1;//下降的速度——10好像有点太快了...
+    int declineValue=decline_speed;
     int releaseTime=0;
     private int  generateData()
     {
@@ -314,7 +350,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
             value=min+random.nextInt(range);
         }
         else{//开始松开
-            declineValue+=speed;
+            declineValue+=decline_speed;
 
             value=max-declineValue;
             if(value<=0)
