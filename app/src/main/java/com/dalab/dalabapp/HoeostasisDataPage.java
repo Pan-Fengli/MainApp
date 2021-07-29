@@ -62,7 +62,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoeostasis_data_page);
-        findViewById(R.id.nextPage).setVisibility(View.INVISIBLE);
+//        findViewById(R.id.nextPage).setVisibility(View.INVISIBLE);
         heartImage = findViewById(R.id.imageView3);
         bleedText = findViewById(R.id.textView3);
         stateText = findViewById(R.id.textView6);
@@ -171,7 +171,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             System.out.println("overTime:"+overTime);
                             System.out.println("releaseTime:"+releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
                             speed=10;//速度变回去（有必要吗？）
-                            findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
+//                            findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
                             timer1.cancel();
                             jump.setVisibility(View.VISIBLE);
                         }
