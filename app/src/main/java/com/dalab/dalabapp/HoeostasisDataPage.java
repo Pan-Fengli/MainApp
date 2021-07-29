@@ -170,6 +170,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                         timerText.setText(getStringTime(count));
                         if (count >= 20 * 60 * 1000)//20min
                         {
+
                             timerText.setText("训练完成");
                             //这里还应该检查一下压力是否已经小于了200，也就是是否已经松掉。可以作为一个布尔值传递过去。
                             hasReleased = true;//因为根据我们生成的数据，肯定是松掉了的
@@ -177,6 +178,13 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             System.out.println("overTime:" + (float) overTime * 0.01);//转化成s的单位——或者乘10变成毫秒？
                             System.out.println("releaseTime:" + releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
                             speed = 10;//速度变回去（有必要吗？）
+
+//                             timerText.setText("20min！！训练完成，进入评价页面");
+//                             System.out.println("lowerTime:"+lowerTime);
+//                             System.out.println("overTime:"+overTime);
+//                             System.out.println("releaseTime:"+releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
+//                             speed=10;//速度变回去（有必要吗？）
+
 //                            findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
                             timer1.cancel();
                             jump.setVisibility(View.VISIBLE);
@@ -321,7 +329,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         scale.setDuration(interval);
         scale.setFillAfter(true);
         scale.setFillBefore(true);
-        scale.setRepeatCount(-1);//-1就是无穷次
+        scale.setRepeatCount(-1);// -1就是无穷次
         scale.setRepeatMode(Animation.REVERSE);
 
         AnimationSet animationSet = new AnimationSet(true);
