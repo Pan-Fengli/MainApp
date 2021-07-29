@@ -319,7 +319,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         scale.setDuration(interval);
         scale.setFillAfter(true);
         scale.setFillBefore(true);
-        scale.setRepeatCount(-1);//-1就是无穷次
+        scale.setRepeatCount(-1);// -1就是无穷次
         scale.setRepeatMode(Animation.REVERSE);
 
         AnimationSet animationSet = new AnimationSet(true);
@@ -404,12 +404,5 @@ public class HoeostasisDataPage extends AppCompatActivity {
         intent.putExtra("lower",lowerValue);
         startActivity(intent);
     }
-
-//     void Jump()
-//     {
-//         Intent intent = new Intent();
-//         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
-//         startActivity(intent);
-//     }
 
 }
