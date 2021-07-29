@@ -105,9 +105,9 @@ public class HoeostasisDataPage extends AppCompatActivity {
                 intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
                 //此外，这里还需要传递一些数据到下一个页面去，比如：
                 intent.putExtra("overTime", overTime * 10);//超过上限的时间，单位s——(float) overTime * 0.01已经转化成s了，看是否需要保留ms？
-                intent.putExtra("belowTime", lose);//流血量，float类型 单位ml
+                intent.putExtra("belowTime", (int)lose);//流血量，float类型 单位ml
                 intent.putExtra("validTime", validTime);//有效止血时间，单位是ms
-                intent.putExtra("hasReleased", hasReleased);//最后是否已经松开，布尔值
+                intent.putExtra("loose", hasReleased);//最后是否已经松开，布尔值
                 startActivity(intent);
             }
         });
