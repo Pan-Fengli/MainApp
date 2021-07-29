@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 训练结果："
+        android:textSize="40sp"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/ResImage"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        tools:srcCompat="@drawable/body"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="有效止血时间："
+            android:textSize="20sp"
+            android:paddingTop="100dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="压力过大时间："
+            android:textSize="20sp"
+            android:paddingTop="80dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="压力过小时间："
+            android:textSize="20sp"
+            android:paddingTop="80dp"
+            />
+    </LinearLayout>
+</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="止血成功！"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="您当前的评分是：90"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+</LinearLayout>
