@@ -91,7 +91,10 @@ public class HoeostasisDataPage extends AppCompatActivity {
         init();//初始化坐标数据
         Values.add(0.0f);
         timerText = findViewById(R.id.timerText);
-        validTimeText = findViewById(R.id.textView7);
+//        validTimeText = findViewById(R.id.textView7);
+        validTimeText = findViewById(R.id.timerText2);
+        validTimeText.setTextColor(Color.rgb(0, 238, 0));
+        timerText.setTextColor(Color.rgb(0, 238, 0));
         forceText = findViewById(R.id.forceText);
         timer1 = new Timer();
         startTimer();
@@ -153,7 +156,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             speed = 800;
 
                             //颜色变化作为提示
-                            timerText.setTextColor(Color.rgb(255, 120, 71));
+//                            timerText.setTextColor(Color.rgb(255, 120, 71));
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
                             acceleration = true;
@@ -270,7 +273,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
         if (lowerValue < data && data < upperValue) {
             validTime += speed;//单位仍然是毫秒
             //然后更新text
-            String text = "有效止血时间：" + getMinStringTime(validTime);
+//            String text = "有效止血时间：" + getMinStringTime(validTime);
+            String text = getMinStringTime(validTime);
             validTimeText.setText(text);
         }
     }
