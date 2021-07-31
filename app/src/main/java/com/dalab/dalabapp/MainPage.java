@@ -27,6 +27,7 @@ public class MainPage extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     Toolbar toolbar;
     LinearLayout mDrawerContent;
+    LinearLayout textLayout;
     EditText lowerBound;
     EditText upperBound;
     public static int lowerValue = 200;
@@ -40,6 +41,13 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.main_page);
 
         mDrawerLayout=findViewById(R.id.drawer_layout);
+//        findViewById(R.id.right_drawer).getParent().requestDisallowInterceptTouchEvent(true);//这样就不会自动退出了?
+        mDrawerContent=findViewById(R.id.right_drawer);
+//        mDrawerLayout.requestDisallowInterceptTouchEvent(true);
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);//一开始是打开的，不能够自动关闭，但是能够通过代码的方式关闭
+        mDrawerLayout.closeDrawer(mDrawerContent);
+//        textLayout=findViewById(R.id.textlayout);
+//        textLayout.requestDisallowInterceptTouchEvent(true);
         toolbar=findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu);
         setSupportActionBar(toolbar);//用我们自定义的toolbar
@@ -61,7 +69,7 @@ public class MainPage extends AppCompatActivity {
                 }
         );
 
-        mDrawerContent=findViewById(R.id.right_drawer);
+
 
         lowerBound = findViewById(R.id.lowerBound);
         upperBound = findViewById(R.id.upperBound);
@@ -101,6 +109,7 @@ public class MainPage extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     // 此处为得到焦点时的处理内容
+                    System.out.println("get Foucus");
                 } else {
                     // 此处为失去焦点时的处理内容
                     if (lowerBound.getText() != null && !lowerBound.getText().toString().equals("")) {
@@ -116,9 +125,7 @@ public class MainPage extends AppCompatActivity {
                     } else {
                         upperValue = 1;
                         upperBound.setText("");
-
                     }
-
                     if (lowerValue > upperValue || lowerValue == upperValue) {
                         upperValue = lowerValue + 1;
                         upperBound.setText(String.valueOf(upperValue));
@@ -142,6 +149,11 @@ public class MainPage extends AppCompatActivity {
     public void closeSettings(View view)
     {
         //这是一个按钮的函数，用来打开侧边栏。之后甚至还可以设置设计一个返回按钮来关闭侧边栏
+        System.out.println("close!");
         mDrawerLayout.closeDrawer(mDrawerContent);
     }
+
+
+    //解决点击自动关闭的问题
+
 }
