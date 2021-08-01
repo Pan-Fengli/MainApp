@@ -420,6 +420,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         intent.putExtra("belowTime", lose);//float类型
         intent.putExtra("validTime", validTime);//单位是ms
         intent.putExtra("hasReleased", hasReleased);
+        intent.putExtra("lose", lose);
 
         startActivity(intent);
     }

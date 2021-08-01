@@ -14,7 +14,8 @@ public class ResHomeostasis extends AppCompatActivity {
     int belowTime;
     int validTime;
     boolean loose;
-    TextView tover, tbelow, tvalid, tloose, score;
+    float lose;
+    TextView tover, tbelow, tvalid, tloose, score, tres;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,11 +26,13 @@ public class ResHomeostasis extends AppCompatActivity {
         belowTime = getIntent().getIntExtra("belowTime",0);
         validTime = getIntent().getIntExtra("validTime",0);
         loose = getIntent().getBooleanExtra("loose",false);
+        lose = getIntent().getFloatExtra("lose", 0f);
 //
         tover = findViewById(R.id.overText);
         tbelow = findViewById(R.id.belowText);
         tvalid = findViewById(R.id.validText);
         tloose = findViewById(R.id.loose);
+        tres = findViewById(R.id._res);
         score=findViewById(R.id.score);
         tover.setText("压力过大时间:"+(float) overTime * 0.01+"s");
 //        tbelow.setText("压力过低时间"+belowTime);
@@ -47,6 +50,31 @@ public class ResHomeostasis extends AppCompatActivity {
     // 简易的计算模型
     int getPoint()
     {
-        return 89;
+        String res = "";
+        int score = 100;
+        if(lose <= 1000)
+        {
+            res += "止血成功";
+        }
+        else if(lose > 1000 && lose <= 1500)
+        {
+            res += "面色发白，出冷汗";
+            score -= 10;
+        }
+        else if(lose > 1500 && lose <= 2000) {
+            res += "萎靡不振，手脚无力";
+            score -= 20;
+        }
+        else {
+            res += "昏迷休克";
+            score -= 100;
+        }
+        if(!loose) {
+            score -= 20;
+            res += "。肢端坏死";
+        }
+        score = Math.max(score, 0);
+        tres.setText(res);
+        return score;
     }
 }
