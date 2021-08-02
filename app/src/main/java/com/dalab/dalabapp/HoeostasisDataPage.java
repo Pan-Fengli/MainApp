@@ -75,6 +75,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
         lowerValue = MainPage.lowerValue;
         upperValue = MainPage.upperValue;
+        lowerValue = MainPage.left_up_low_value.value;
+        upperValue = MainPage.left_up_high_value.value;
 
         Random random = new Random();
         mode = random.nextInt(3);//0,1,2

@@ -25,6 +25,7 @@
             app:subtitle="战场自救训练系统"
             app:title="DALAB" />
     </LinearLayout>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
 
         android:layout_width="match_parent"
@@ -45,14 +46,15 @@
             app:srcCompat="@android:drawable/stat_sys_data_bluetooth" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     <LinearLayout
         android:id="@+id/right_drawer"
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="#111"
-        android:descendantFocusability="beforeDescendants"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,291 +79,408 @@
                 android:textColor="@android:color/background_light"
                 android:textSize="20sp" />
         </LinearLayout>
-        <!--                *********************************************-->
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="左上肢压力"
-                android:textColor="@android:color/background_light" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="#111"
+                android:descendantFocusability="beforeDescendants"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="操作标准"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/left_up_Low"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="下限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="左上肢压力"
+                        android:textColor="@android:color/background_light" />
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="~"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/left_up_High"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="上限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
-        </LinearLayout>
-        <!--                *********************************************-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="右上肢压力"
-            android:textColor="@android:color/background_light" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/left_up_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
 
-            <EditText
-                android:id="@+id/right_up_Low"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="下限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="~"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp" />
+                    <EditText
+                        android:id="@+id/left_up_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="右上肢压力"
+                    android:textColor="@android:color/background_light" />
 
-            <EditText
-                android:id="@+id/right_up_High"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="上限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
-        </LinearLayout>
-        <!--                *********************************************-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="左下肢压力"
-            android:textColor="@android:color/background_light" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/left_down_Low"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="下限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
+                    <EditText
+                        android:id="@+id/right_up_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="~"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/left_down_High"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="上限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
-        </LinearLayout>
-        <!--                *********************************************-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="右下肢压力"
-            android:textColor="@android:color/background_light" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/right_up_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="左下肢压力"
+                    android:textColor="@android:color/background_light" />
 
-            <EditText
-                android:id="@+id/right_down_Low"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="下限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="~"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp" />
-            <EditText
-                android:id="@+id/right_down_High"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="上限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
-        </LinearLayout>
-        <!--                *********************************************-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="包扎上肢压力"
-            android:textColor="@android:color/background_light" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/left_down_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
 
-            <EditText
-                android:id="@+id/up_Low"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="下限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="~"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp" />
+                    <EditText
+                        android:id="@+id/left_down_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="右下肢压力"
+                    android:textColor="@android:color/background_light" />
 
-            <EditText
-                android:id="@+id/up_High"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="上限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
-        </LinearLayout>
-        <!--                *********************************************-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="包扎下肢压力"
-            android:textColor="@android:color/background_light" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:descendantFocusability="beforeDescendants"
-            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/down_Low"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="下限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
+                    <EditText
+                        android:id="@+id/right_down_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="~"
-                android:textColor="@android:color/background_light"
-                android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/down_High"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:hint="上限"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:textColor="@android:color/background_light"
-                android:textColorHint="@android:color/background_light" />
-        </LinearLayout>
-        <EditText
-            android:id="@+id/height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="5"
-            android:hint="身高(cm)"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:textColor="@android:color/background_light"
-            android:textColorHint="@android:color/background_light"
-            />
-        <EditText
-            android:id="@+id/weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="5"
-            android:hint="体重(kg)"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:textColor="@android:color/background_light"
-            android:textColorHint="@android:color/background_light"
-            />
-        </LinearLayout>
+                    <EditText
+                        android:id="@+id/right_down_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎上肢压力"
+                    android:textColor="@android:color/background_light" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/up_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/up_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎下肢压力"
+                    android:textColor="@android:color/background_light" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/down_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/down_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <View
+                    android:layout_height="1.5dp"
+                    android:text="分割线"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorAccent"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="用户参数"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/background_light" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="身高"
+                    android:textColor="@android:color/background_light" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="身高(cm)"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="cm"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="体重"
+                    android:textColor="@android:color/background_light" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="体重(kg)"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="kg"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/set_def"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:onClick="setDefault"
+                    android:text="恢复默认设置" />
+
+                <View
+                    android:layout_height="1.5dp"
+                    android:text="分割线"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorAccent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="硬件设置"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/background_light" />
+                <ListView
+                    android:id="@+id/device_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </ListView>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
