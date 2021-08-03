@@ -45,7 +45,7 @@ public class MainPage extends AppCompatActivity {
     EditText left_down_High;
     EditText right_down_Low;
     EditText right_down_High;
-    EditText up_Low;//绷带的数据
+    EditText up_Low;// 绷带的数据
     EditText up_High;
     EditText down_Low;
     EditText down_High;

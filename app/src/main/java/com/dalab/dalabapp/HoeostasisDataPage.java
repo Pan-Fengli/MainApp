@@ -93,7 +93,6 @@ public class HoeostasisDataPage extends AppCompatActivity {
         init();//初始化坐标数据
         Values.add(0.0f);
         timerText = findViewById(R.id.timerText);
-//        validTimeText = findViewById(R.id.textView7);
         validTimeText = findViewById(R.id.timerText2);
         validTimeText.setTextColor(Color.rgb(0, 238, 0));
         timerText.setTextColor(Color.rgb(0, 238, 0));
@@ -106,14 +105,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         jump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
-                //此外，这里还需要传递一些数据到下一个页面去，比如：
-                intent.putExtra("overTime", overTime * 10);//超过上限的时间，单位s——(float) overTime * 0.01已经转化成s了，看是否需要保留ms？
-                intent.putExtra("belowTime", (int)lose);//流血量，float类型 单位ml
-                intent.putExtra("validTime", validTime);//有效止血时间，单位是ms
-                intent.putExtra("loose", hasReleased);//最后是否已经松开，布尔值
-                startActivity(intent);
+                nextPage(view);
             }
         });
     }
@@ -145,37 +137,28 @@ public class HoeostasisDataPage extends AppCompatActivity {
     private void startTimer() {
         timerTask = new TimerTask() {
             int count;
-
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        count += 10;
 
                         if (count >= 5000) {//5s的时候
-//                            count += 1000;
                             speed = 800;
-
-                            //颜色变化作为提示
-//                            timerText.setTextColor(Color.rgb(255, 120, 71));
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
                             acceleration = true;
                         }
                         if (count >= 900000) {//15min
                             speed = 213;//15min之后流速又减慢一点点
-//                            timerText.setText("止血成功！！");
-                            infoText.setText("15min！！");
+                            infoText.setText("请稍微放松止血带");
                             release = true;//提示松开，之后的数据生成就是松开的数据...
-                            //然后此刻开始计时，时间用于判断是主动松开还是被动松开——实际上这个计时还是在generateData函数里面去进行
                         }
                         count += speed;
                         changeWithSample();
                         timerText.setText(getStringTime(count));
                         if (count >= 20 * 60 * 1000)//20min
                         {
-
                             timerText.setText("训练完成");
                             //这里还应该检查一下压力是否已经小于了200，也就是是否已经松掉。可以作为一个布尔值传递过去。
                             hasReleased = true;//因为根据我们生成的数据，肯定是松掉了的
@@ -184,17 +167,10 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             System.out.println("releaseTime:" + releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
                             speed = 10;//速度变回去（有必要吗？）
 
-//                             timerText.setText("20min！！训练完成，进入评价页面");
-//                             System.out.println("lowerTime:"+lowerTime);
-//                             System.out.println("overTime:"+overTime);
-//                             System.out.println("releaseTime:"+releaseTime);//我们需要用这个来判断主动松开还是被动松开——这个本身的含义是我们发出松开指令之后到压力降低到范围之下的时间
-//                             speed=10;//速度变回去（有必要吗？）
-
 //                            findViewById(R.id.nextPage).setVisibility(View.VISIBLE);
                             timer1.cancel();
                             jump.setVisibility(View.VISIBLE);
                         }
-
                     }
                 });
             }
@@ -286,14 +262,9 @@ public class HoeostasisDataPage extends AppCompatActivity {
         {
             overTime++;
         }
-//        else if(cnt<lowerValue&&!release){//需要加上一个条件，如果小于范围并且还没有发出松开的指令（即15min的时候的指令。）
-//            lowerTime++;
-//            //调用流血的展示函数——那么既然压力过小会流血，那么就在这里计算一下流血量就ok了嘛——
-//            minus();
-//        }
-        //处理完了之后就保存在这个类里面，当点击按钮切换到评价页面的时候就可以把这两个数据传递过去。
     }
 
+    // UI相关
     private void checkColor(int cnt) {
         if (cnt < lowerValue) {
             forceText.setTextColor(Color.rgb(255, 160, 0));
@@ -391,8 +362,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     int declineValue = decline_speed;
     int releaseTime = 0;
 
-    private int generateData() {//生成数据
-        //判断是否已经发出了release的指令decline？
+    private int generateData() {
         Random random = new Random();
         int value, range;
         if (!release)//还没有松开
