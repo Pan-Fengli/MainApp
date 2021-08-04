@@ -48,7 +48,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     ArrayList<Float> storage = new ArrayList<Float>();
     int lowerValue = 200;
     int upperValue = 600;
-    int Volumn = 1000;//满血是1000ml，即流血量大于这个就会休克
+    int Volumn = 2000;//满血是2000ml，即流血量大于这个就会休克
     float lose = 0;//流血量
 
     int overTime = 0;//这两个是用来记录小于bond和大于bond的时间的
@@ -94,7 +94,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         Values.add(0.0f);
         timerText = findViewById(R.id.timerText);
         validTimeText = findViewById(R.id.timerText2);
-        validTimeText.setTextColor(Color.rgb(0, 238, 0));
+        validTimeText.setTextColor(Color.rgb(255, 130, 71));//有效时间和训练时间用不同的颜色
         timerText.setTextColor(Color.rgb(0, 238, 0));
         forceText = findViewById(R.id.forceText);
         timer1 = new Timer();
@@ -237,15 +237,35 @@ public class HoeostasisDataPage extends AppCompatActivity {
         }
 
     }
-
-    int validTime = 0;
-
+    int threshold=2000;//2s?
+    int validTime = 0;//这次的有效时间
+    int validLastTime=0;//上次的有效时间
+    boolean valid=false;
     private void updateValidTime(float data) {
         if (lowerValue < data && data < upperValue) {
+            valid=true;//第一次进去之后设置为true
             validTime += speed;//单位仍然是毫秒
             //然后更新text
 //            String text = "有效止血时间：" + getMinStringTime(validTime);
-            String text = getMinStringTime(validTime);
+            String text = getMinStringTime(validTime+validLastTime);
+            validTimeText.setText(text);
+        }
+        else if(data <lowerValue &&valid )
+        {
+            //从有效区间变成了无效区间
+            if(validTime<threshold)
+            {
+                //用上次的validtime计算流血量
+                loseBlood(validTime);
+//                float bleed=validTime*bleedspeed;
+            }
+            else{
+                validLastTime=validLastTime+validTime;
+            }
+
+            valid=false;
+            validTime=0;//
+            String text = getMinStringTime(validTime+validLastTime);
             validTimeText.setText(text);
         }
     }
@@ -321,6 +341,25 @@ public class HoeostasisDataPage extends AppCompatActivity {
         int oldPercent = percent;
 //        lose += 10;//流血量变多
         lose += speed * (bleedspeed / 1000.0f);//流血量变多//speed是时间流速，ms单位，所以需要转换一下——lose的类型改成float是为了防止因为过小而导致的流血量不能加上去。
+        String bleed = "失血量：" + (int) lose + "ml";
+        bleedText.setText(bleed);
+        updateState();
+        percent = (Volumn - (int) lose) * 100 / Volumn;//计算之后的比例
+        String percentage = String.valueOf(percent);
+        percentText.setText(percentage);
+        changeImage(oldPercent);
+    }
+    private void loseBlood(int time)//流血的计算和更新
+    {
+        if (percent <= 0)//不能再变小了
+        {
+            String zero = "0";
+            percentText.setText(zero);
+            return;
+        }
+        int oldPercent = percent;
+//        lose += 10;//流血量变多
+        lose += time * (bleedspeed / 1000.0f);//流血量变多//time是，ms单位，所以需要转换一下——lose的类型改成float是为了防止因为过小而导致的流血量不能加上去。
         String bleed = "失血量：" + (int) lose + "ml";
         bleedText.setText(bleed);
         updateState();
