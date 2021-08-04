@@ -22,6 +22,7 @@ import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
 import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
 
 import com.dalab.dalabapp.TrainingPages.ResHomeostasis;
+import com.dalab.dalabapp.Utils.GenerateData;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -48,7 +49,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     ArrayList<Float> storage = new ArrayList<Float>();
     int lowerValue = 200;
     int upperValue = 600;
-    int Volumn = 2000;//满血是2000ml，即流血量大于这个就会休克
+    int Volumn = 3000;//满血是2000ml，即流血量大于这个就会休克
     float lose = 0;//流血量
 
     int overTime = 0;//这两个是用来记录小于bond和大于bond的时间的
@@ -58,11 +59,20 @@ public class HoeostasisDataPage extends AppCompatActivity {
     int mode = 0;//这是一个随机数，用来表示我生成的数据是模拟：0:压力过小，止血失败。1：压力在范围内，止血成功。2：压力过大，肢体失血坏死
     int max = 600;
     int min = 200;
+    //-------更新获取数据-------------
+    float currentData;
+    //-------用来计算是否放松的变量------
+    int relaxLowStress = 100;
+    int relaxHighStress = 200;
+    //----------------生成数据---------
+    GenerateData generateData;
+    //-------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoeostasis_data_page);
+        generateData = new GenerateData();
 //        findViewById(R.id.nextPage).setVisibility(View.INVISIBLE);
         heartImage = findViewById(R.id.imageView3);
         bleedText = findViewById(R.id.textView3);
@@ -126,7 +136,6 @@ public class HoeostasisDataPage extends AppCompatActivity {
         chart.setBorderTransverseLineWidth(1.0f);//中间横线的宽度
         chart.setUpper((float) upperValue);//这两个就是上下限范围...
         chart.setLower((float) lowerValue);
-
     }
 
     int speed = 10;//时间流速——一次interval中流过了多少毫秒。
@@ -155,7 +164,14 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             release = true;//提示松开，之后的数据生成就是松开的数据...
                         }
                         count += speed;
+                        // 更改表单，更新时间
+                        currentData = generateData.generate(max, min, decline_speed, release);
                         changeWithSample();
+                        updateValidTime(currentData);//更新有效止血时间——这个只能放在外面每次都更新，不能够存满了才更新一次，否则会因为speed发生了变化而产生问题
+                        updateValue((int) currentData);//计算超过最大范围的时间
+                        if(release)
+                            updateReleaseValue(currentData);
+                        //----------------------
                         timerText.setText(getStringTime(count));
                         if (count >= 20 * 60 * 1000)//20min
                         {
@@ -188,31 +204,21 @@ public class HoeostasisDataPage extends AppCompatActivity {
     private String getMinStringTime(int cnt) {//有效时间可以不用那么精细，可以不用精确到毫秒...
         int min = cnt / 60000;
         int second = cnt % 60000 / 1000;
-//        int minisecond = cnt % 1000 / 10;
         return String.format(Locale.CHINA, "%02d:%02d", min, second);
     }
 
 
     private void changeWithSample() {//每次时间数据更新都调用这个函数，在这个函数里面模拟数据的生成和更新
         DrawLineChart chart = findViewById(R.id.chart);
-
-        Random random = new Random();
-        float f = random.nextFloat();
-        float data = f * 600;//这个是生成的data，之后当然是用传递过来的数据
+        float data;
         //可以写成一个函数来生成这里的data
-        data = generateData();
-
+        data = currentData;
         storage.add(data);
-        //更新有效止血时间——这个只能放在外面每次都更新，不能够存满了才更新一次，否则会因为speed发生了变化而产生问题
-        updateValidTime(data);
-
-        updateValue((int) data);//计算超过最大范围的时间
 
         //计算流血量
         if (data < lowerValue && !release) {
             minus();
         }
-
         if (storage.size() == sampleDistance) {//存满了之后才计算一次。
             float average = 0;
             for (final Float value : storage) {
@@ -228,14 +234,12 @@ public class HoeostasisDataPage extends AppCompatActivity {
             chart.setValue(floats);
             chart.invalidate();//重绘
             storage.clear();
-
             //最后再修改text
             String newForce = String.valueOf((int) average) + "mmHg";
             forceText.setText(newForce);
             //还要检查一下颜色
             checkColor((int) average);
         }
-
     }
     int threshold=2000;//2s?
     int validTime = 0;//这次的有效时间
@@ -269,7 +273,14 @@ public class HoeostasisDataPage extends AppCompatActivity {
             validTimeText.setText(text);
         }
     }
-
+    private void updateReleaseValue(float data)
+    {
+        if(data <= relaxHighStress && data >= relaxLowStress)
+        {
+            releaseTime += speed;
+//            stateText.setText(getStringTime(releaseTime));
+        }
+    }
     private void updateValue(int cnt) {
         if (cnt > upperValue && !release && !acceleration)//——这里的记录是全程记录，那么时间不如就算成现实的时间，也就是和interval 的0.01s。不像lower还需要计算出血量...——不过当然计算是放在下个页面了罢
         {
@@ -394,37 +405,17 @@ public class HoeostasisDataPage extends AppCompatActivity {
     int declineValue = decline_speed;
     int releaseTime = 0;
 
-    private int generateData() {
-        Random random = new Random();
-        int value, range;
-        if (!release)//还没有松开
-        {
-            range = max - min;
-            value = min + random.nextInt(range);
-        } else {//开始松开
-            declineValue += decline_speed;
-
-            value = max - declineValue;
-            if (value <= 0) {
-                value = 0;
-            }
-            if (value > lowerValue) {
-                releaseTime++;
-            }
-        }
-        return value;
-    }
 
     public void nextPage(View view) {
         //这个函数是设计给跳转按钮的，需要传递一些数据过去到评价页面。
         Intent intent = new Intent();
         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
         //然后把一些参数输入进去。
+        intent.putExtra("delay", 0);
         intent.putExtra("overTime", overTime * interval);//ms
-        intent.putExtra("belowTime", lose);//float类型
-        intent.putExtra("validTime", validTime);//单位是ms
-        intent.putExtra("hasReleased", hasReleased);
+        intent.putExtra("validTime", validLastTime);//单位是ms
         intent.putExtra("lose", lose);
+        intent.putExtra("loose", releaseTime >= 10000);
 
         startActivity(intent);
     }

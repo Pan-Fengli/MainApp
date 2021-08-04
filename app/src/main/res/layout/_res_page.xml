@@ -23,7 +23,7 @@
         android:layout_width="180dp"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"
-        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:src="@drawable/body"
         android:contentDescription="@string/app_name"
          />
     <LinearLayout
@@ -34,7 +34,7 @@
             android:id="@+id/validText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="有效止血时间："
+            android:text="valid"
             android:textSize="18sp"
             android:paddingTop="10dp"
             />
@@ -42,15 +42,15 @@
             android:id="@+id/overText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="压力过大时间："
+            android:text="overstress"
             android:textSize="18sp"
             android:paddingTop="10dp"
             />
         <TextView
-            android:id="@+id/belowText"
+            android:id="@+id/loseBloodText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="压力过小时间："
+            android:text="loseBlood"
             android:textSize="18sp"
             android:paddingTop="10dp"
             />
@@ -58,7 +58,7 @@
             android:id="@+id/loose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="忘记适当放松？"
+            android:text="relax"
             android:textSize="18sp"
             android:paddingTop="10dp"
             />
@@ -68,8 +68,8 @@
         android:id="@+id/_res"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="止血成功！"
+        android:textSize="30sp"
+        android:text="result"
         android:textAlignment="center"
         android:gravity="center_horizontal" />
     <TextView
@@ -77,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:text="您当前的评分是：90"
+        android:text="score"
         android:textAlignment="center"
         android:gravity="center_horizontal" />
 </LinearLayout>
