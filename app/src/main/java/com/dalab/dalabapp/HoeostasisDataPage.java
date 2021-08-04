@@ -209,10 +209,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         updateValue((int) data);//计算超过最大范围的时间
 
         //计算流血量
-        if (data < lowerValue && !release && !acceleration) {//需要加上一个条件，如果小于范围并且还没有发出松开的指令（即15min的时候的指令。）
-            //以及试了试，在我们加速的时候也不应该记这个——或者说速度应该和正常速度一样
-//            lowerTime++;
-            //调用流血的展示函数——那么既然压力过小会流血，那么就在这里计算一下流血量就ok了嘛——当然还是得在外面计算，因为speed会变化...
+        if (data < lowerValue && !release) {
             minus();
         }
 
@@ -237,10 +234,6 @@ public class HoeostasisDataPage extends AppCompatActivity {
             forceText.setText(newForce);
             //还要检查一下颜色
             checkColor((int) average);
-            //以及处理全局变量，lower&overvalue来为评分做准备
-//            updateValue((int)average);
-//            //调用流血的展示函数
-//            minus();
         }
 
     }
