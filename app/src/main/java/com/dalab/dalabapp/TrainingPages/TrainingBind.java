@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.dalab.dalabapp.BindDataPage;
 import com.dalab.dalabapp.HoeostasisDataPage;
 import com.dalab.dalabapp.MainPage;
 import com.dalab.dalabapp.R;
@@ -32,7 +33,7 @@ public class TrainingBind extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(TrainingBind.this, HoeostasisDataPage.class);
+                intent.setClass(TrainingBind.this, BindDataPage.class);
                 startActivity(intent);
             }
         });
