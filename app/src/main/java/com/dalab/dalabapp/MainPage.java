@@ -51,6 +51,7 @@ public class MainPage extends AppCompatActivity {
     EditText down_High;
     EditText height, weight;
 
+    boolean opened=false;
     //
     public static int lowerValue = 200;
     public static int upperValue = 600;
@@ -66,10 +67,10 @@ public class MainPage extends AppCompatActivity {
     static int left_down_high_def=600;
     static int right_down_low_def=200;
     static int right_down_high_def=600;
-    static int up_low_def=200;
-    static int up_high_def=600;
-    static int down_low_def=200;
-    static int down_high_def=600;
+    static int up_low_def=10;
+    static int up_high_def=35;
+    static int down_low_def=10;
+    static int down_high_def=35;
 
     static int height_def=175;//cm
     static int weight_def=65;//kg
@@ -123,6 +124,10 @@ public class MainPage extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(opened)
+                        {
+                            return;//如果侧边栏是打开状态，那么就提前跳出，不会响应按钮
+                        }
                         Intent intent = new Intent();
                         intent.setClass(MainPage.this, BlueTooth.class);
                         startActivity(intent);
@@ -179,6 +184,10 @@ public class MainPage extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             Intent intent = new Intent();
+            if(opened)
+            {
+                return;//如果侧边栏是打开状态，那么就提前跳出，不会响应按钮
+            }
             if(position == 0)
             {
                 intent.setClass(MainPage.this, Hemostasis.class);
@@ -289,12 +298,14 @@ public class MainPage extends AppCompatActivity {
     {
         //这是一个按钮的函数，用来打开侧边栏。之后甚至还可以设置设计一个返回按钮来关闭侧边栏
         mDrawerLayout.openDrawer(mDrawerContent);
+        opened=true;
     }
     public void closeSettings(View view)
     {
-        //这是一个按钮的函数，用来打开侧边栏。之后甚至还可以设置设计一个返回按钮来关闭侧边栏
+        //返回按钮来关闭侧边栏
         System.out.println("close!");
         mDrawerLayout.closeDrawer(mDrawerContent);
+        opened=false;
     }
 
 
