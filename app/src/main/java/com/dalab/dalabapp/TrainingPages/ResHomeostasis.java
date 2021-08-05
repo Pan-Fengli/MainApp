@@ -48,11 +48,21 @@ public class ResHomeostasis extends AppCompatActivity {
     // 简易的计算模型
     int getPoint()
     {
-        tres.setText("你做得很好！");
+        tres.setText("你做得很好!");
         float D = 1;
-        float P = 1;
         float T = 1;
-        float R = 1;
-        return (int)(D*P*T*R * 100);
+        // 失血量
+        float L = 1;
+        if(lose > 1000)
+        {
+            L -= (lose - 1000) / 1000;
+            L = Math.max(L, 0);
+        }
+        // 放松
+        float R;
+        if(loose)
+            R = 1;
+        else R = 0.6f;
+        return (int)(D*L*T*R * 100);
     }
 }

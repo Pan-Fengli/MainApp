@@ -4,7 +4,15 @@ import java.util.Random;
 
 public class GenerateData {
     int declineValue = 0;
-    public int generate(int max, int min, int decline_speed, Boolean release) {
+    int max;
+    int min;
+    int decline_speed = 1;
+    public GenerateData(int ma, int mi)
+    {
+        max = ma;
+        min = mi;
+    }
+    public int generate(Boolean release) {
         Random random = new Random();
         int value, range;
         if (!release)//还没有松开
