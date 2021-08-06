@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DataPage.BindDataPage"></activity>
+        <activity android:name=".Bluno.Bluno_demo"></activity>
+        <activity android:name=".DataPage.BindDataPage" />
         <activity
             android:name=".MainPage"
             android:label="@string/app_name"
@@ -38,6 +39,7 @@
         <activity android:name=".TrainingPages.TrainingBind" />
         <activity android:name=".DataPage.HoeostasisDataPage" />
         <activity android:name=".TrainingPages.ResHomeostasis" />
+        <service android:name="com.dalab.dalabapp.Bluno.BluetoothLeService" android:enabled="true"/>
     </application>
 
 </manifest>
