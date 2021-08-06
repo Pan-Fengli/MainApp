@@ -13,6 +13,7 @@ import com.dalab.dalabapp.MainPage;
 import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
 import com.dalab.dalabapp.TrainingPages.ResHomeostasis;
+import com.dalab.dalabapp.Utils.GenerateData;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -55,7 +56,7 @@ public class BindDataPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind_data_page);
 
-        generateData = new GenerateData();
+
         infoText = findViewById(R.id.textView2);
         lowerValue = MainPage.up_low_value.value;
         upperValue = MainPage.up_high_value.value;
@@ -72,7 +73,7 @@ public class BindDataPage extends AppCompatActivity {
             max = 50;
             min = 30;
         }
-
+        generateData = new GenerateData(max,min);
         init();//初始化坐标数据
 
         Values.add(0.0f);
@@ -139,7 +140,7 @@ public class BindDataPage extends AppCompatActivity {
 //                        }//上面的都可以不要了，因为不会发生时间流速变快的事件
                         count += speed;
                         // 更改表单，更新时间
-                        currentData = generateData.generate(max, min, decline_speed, release);
+                        currentData = generateData.generate(release);
                         changeWithSample();//画图
                         int result=updateValidTime(currentData);//更新有效止血时间,返回值是检测是否松开
 //                        updateValue((int) currentData);//计算超过最大范围的时间
