@@ -328,9 +328,13 @@ public class BlueTooth extends AppCompatActivity {
             super.handleMessage(message);
             switch (message.what) {
                 case com.dalab.dalabapp.connect.Constant.MSG_GOT_DATA:
-                    //showToast("data:" + String.valueOf(message.obj));
-                    byte[] data=(byte[])message.obj;
-                    showToast("data:" + com.dalab.dalabapp.controller.ChatController.getInstance().decodeMessage(data)+"\n");//解码之后的消息
+                    String msg=String.valueOf(message.obj);
+                    showToast("data:" + msg);
+//                    byte[] data=(byte[])message.obj;//不能直接转化
+//                    showToast("data:" + com.dalab.dalabapp.controller.ChatController.getInstance().decodeMessage(data)+"\n");//解码之后的消息
+                    //接收到了再发过去？
+                    com.dalab.dalabapp.controller.ChatController.getInstance().sendMessage(msg);
+                    logView.setText("say Hello");
                     break;
                 case com.dalab.dalabapp.connect.Constant.MSG_ERROR:
                     showToast("error:" + String.valueOf(message.obj));
