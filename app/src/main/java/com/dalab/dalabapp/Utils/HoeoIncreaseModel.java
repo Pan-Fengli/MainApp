@@ -25,7 +25,7 @@ public class HoeoIncreaseModel {
     }
     public void update(int speed, float data)
     {
-        if(data < min)
+        if(data < min && validTime == 0)
             delayTime += speed;
         // 主要判断逻辑：先判断是否是噪声，确认不是噪声后且压力大于最小值后，开始算入有效止血时间
         if(judgeGap >= gap)
