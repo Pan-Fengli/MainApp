@@ -2,7 +2,7 @@ package com.dalab.dalabapp.constant;
 
 import android.app.Application;
 
-public final class Global extends Application {
+public class Global extends Application {
     // 止血
     public int left_up_Low;
     public int left_up_High;
@@ -18,4 +18,11 @@ public final class Global extends Application {
     public int down_Low;
     public int down_High;
     // 文字
+    public static Global global;
+    @Override
+    public void onCreate()
+    {
+        super.onCreate();
+        global = this;
+    }
 }
