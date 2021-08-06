@@ -1,16 +1,21 @@
 package com.dalab.dalabapp.Utils;
 //此工具类用来保存、计算开始的时间，计算有效时间与失血量
 public class HoeoIncreaseModel {
-    public int validTime = 0;
     public int percent = 100;
     int max;
     int min;
     int volumn;
     float bloodSpeed;
-    // lose
+    // 有效时间达到之后，认为血管已经愈合了
+    boolean recover = false;
+    // 计分相关项
     public float lose = 0;
+    public int validTime = 0;
+    public int delayTime = 0;
+    public int overTime = 0;
     // 用来判断是否是噪声的gap
     int gap = 3000;
+    int judgeGap = 0;
     public HoeoIncreaseModel(int ma, int mi, int vol, float bs)
     {
         max = ma;
@@ -21,13 +26,48 @@ public class HoeoIncreaseModel {
     public void update(int speed, float data)
     {
         if(data < min)
+            delayTime += speed;
+        // 主要判断逻辑：先判断是否是噪声，确认不是噪声后且压力大于最小值后，开始算入有效止血时间
+        if(judgeGap >= gap)
         {
-            lose += speed;
-            percent = (volumn - (int)lose) * 100 / volumn;
+            if(data < min)
+            {
+                if(!recover)
+                {
+                    lose += speed;
+                    percent = Math.max((volumn - (int)lose) * 100 / volumn, 0);
+                }
+                judgeGap = 0;
+            }
+            else if(data <= max && data >= min)
+            {
+                validTime += speed;
+                if(validTime >= 900000)
+                    recover = true;
+            }
+            else
+            {
+                validTime += speed;
+                if(validTime >= 900000)
+                    recover = true;
+                overTime += speed;
+            }
         }
         else
         {
-            validTime += speed;
+            if(data >= min)
+            {
+                judgeGap += speed;
+            }
+            else
+            {
+                judgeGap = 0;
+                if(!recover)
+                {
+                    lose += speed;
+                    percent = Math.max((volumn - (int)lose) * 100 / volumn, 0);
+                }
+            }
         }
     }
 }

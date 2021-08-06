@@ -1,14 +1,11 @@
-package com.dalab.dalabapp;
+package com.dalab.dalabapp.DataPage;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.renderscript.Script;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -18,9 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dalab.dalabapp.MainPage;
+import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
-
-import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
 
 import com.dalab.dalabapp.TrainingPages.ResHomeostasis;
 import com.dalab.dalabapp.Utils.GenerateData;
@@ -29,7 +26,6 @@ import com.dalab.dalabapp.Utils.RelaxModel;
 
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,11 +49,11 @@ public class HoeostasisDataPage extends AppCompatActivity {
     int lowerValue = 200;
     int upperValue = 600;
     int Volumn = 3000;//满血是2000ml，即流血量大于这个就会休克
-
     int max = 600;
     int min = 200;
     //-------更新获取数据-------------
     float currentData;
+    int lastNum = 0;
     //-------用来计算是否放松的变量------
     int relaxLowStress = 100;
     int relaxHighStress = 200;
@@ -145,7 +141,6 @@ public class HoeostasisDataPage extends AppCompatActivity {
                         }
                         if (count >= 900000) {//15min
                             speed = 213;//15min之后流速又减慢一点点
-                            infoText.setText("请稍微放松止血带");
                             release = true;//提示松开，之后的数据生成就是松开的数据...
                         }
                         count += speed;
@@ -164,7 +159,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                         {
                             relaxModel.update(speed, currentData);
                         }
-                        else increaseModel.update(speed, currentData);
+                        increaseModel.update(speed, currentData);
                         timerText.setText(getStringTime(count));
                         // 收尾工作
                         if (count >= 20 * 60 * 1000)//20min
@@ -230,6 +225,9 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
     private void changeImage() {
         int number = (100 - increaseModel.percent) * 45 / 100;//得到图片的编号
+        if(number == lastNum)
+            return;
+        lastNum = number;
         String name = "h" + number;
         //根据文件名字来获得id号
         int id = this.getResources().getIdentifier(name, "drawable", this.getPackageName());
@@ -269,6 +267,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
         updateState(increaseModel.lose);
         bleedText.setText("失血量：" + increaseModel.lose);
         validTimeText.setText(getStringTime(increaseModel.validTime));
+        if(increaseModel.validTime >= 900000)
+            infoText.setText("请稍微放松止血带");
     }
 
     private void updateState(float lose)//根据流血量来更新状态
@@ -296,11 +296,11 @@ public class HoeostasisDataPage extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(HoeostasisDataPage.this, ResHomeostasis.class);
         //然后把一些参数输入进去。
-//        intent.putExtra("delay", 0);
-//        intent.putExtra("overTime", overTime * interval);//ms
-//        intent.putExtra("validTime", increaseModel.validTime);//单位是ms
-//        intent.putExtra("lose", lose);
-//        intent.putExtra("loose", relaxModel.releaseTime >= 10000);
+        intent.putExtra("validTime", increaseModel.validTime);
+        intent.putExtra("delayTime", increaseModel.delayTime);
+        intent.putExtra("lose", increaseModel.lose);
+        intent.putExtra("releaseTime", relaxModel.releaseTime);
+        intent.putExtra("overTime", increaseModel.overTime);
         startActivity(intent);
     }
 

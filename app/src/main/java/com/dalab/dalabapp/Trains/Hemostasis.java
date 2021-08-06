@@ -1,7 +1,6 @@
 package com.dalab.dalabapp.Trains;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.dalab.dalabapp.Adapter.hemostasisAdapter;
-import com.dalab.dalabapp.HoeostasisDataPage;
 import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
 

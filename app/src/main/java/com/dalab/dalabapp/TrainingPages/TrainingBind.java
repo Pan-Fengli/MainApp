@@ -6,11 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.dalab.dalabapp.BindDataPage;
-import com.dalab.dalabapp.HoeostasisDataPage;
-import com.dalab.dalabapp.MainPage;
+import com.dalab.dalabapp.DataPage.BindDataPage;
 import com.dalab.dalabapp.R;
-import com.dalab.dalabapp.Trains.Hemostasis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
