@@ -23,6 +23,7 @@ import com.dalab.dalabapp.TrainingPages.ResHomeostasis;
 import com.dalab.dalabapp.Utils.GenerateData;
 import com.dalab.dalabapp.Utils.HoeoIncreaseModel;
 import com.dalab.dalabapp.Utils.RelaxModel;
+import com.dalab.dalabapp.constant.Global;
 
 import java.util.ArrayList;
 import java.util.Locale;

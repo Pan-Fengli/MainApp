@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dalab.dalabapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,13 +13,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".constant.Global"
         android:allowBackup="true"
         android:icon="@drawable/apk_pic"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DataPage.BindDataPage"></activity>
         <activity
             android:name=".MainPage"
             android:label="@string/app_name"
@@ -38,6 +39,7 @@
         <activity android:name=".TrainingPages.TrainingBind" />
         <activity android:name=".DataPage.HoeostasisDataPage" />
         <activity android:name=".TrainingPages.ResHomeostasis" />
+        <activity android:name=".DataPage.BindDataPage"/>
     </application>
 
 </manifest>
