@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.dalab.dalabapp.MainPage;
 import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.SelfDefineViews.DrawLineChart;
+import com.dalab.dalabapp.TrainingPages.ResBind;
 import com.dalab.dalabapp.TrainingPages.ResHomeostasis;
 import com.dalab.dalabapp.Trains.BindPage;
 import com.dalab.dalabapp.Utils.BindModel;
@@ -49,6 +50,7 @@ public class BindDataPage extends AppCompatActivity {
     // utils
     int speed = 10;
     float currentData;
+    boolean broken = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,7 @@ public class BindDataPage extends AppCompatActivity {
     private void bre()
     {
         timer1.cancel();
+        broken = true;
         jump.setVisibility(View.VISIBLE);
     }
     private void over()
@@ -170,7 +173,6 @@ public class BindDataPage extends AppCompatActivity {
         chart.setCircleWidth(1f);
         chart.setBorderTextSize(15);//修改边框文字大小
         chart.setBrokenLineTextSize(10);//修改这线上文字大小
-//        chart.setMaxVlaue(600);
         chart.setMaxVlaue(45);
         chart.setMinValue(0);
         chart.setNumberLine(4);//5根线
@@ -183,15 +185,18 @@ public class BindDataPage extends AppCompatActivity {
     private String getStringTime(int cnt) {
         int min = cnt / 60000;
         int second = cnt % 60000 / 1000;
-//        int minisecond = cnt % 1000 / 10;
         return String.format(Locale.CHINA, "%02d:%02d", min, second);
     }
 
     public void nextPage(View view) {
-        //这个函数是设计给跳转按钮的，需要传递一些数据过去到评价页面。
         Intent intent = new Intent();
-        intent.setClass(BindDataPage.this, MainPage.class);
-        //然后把一些参数输入进去。
+        intent.setClass(BindDataPage.this, ResBind.class);
+        //然后把一些参数输入进去
+        intent.putExtra("validTime", bindModel.validTime);
+        intent.putExtra("delayTime", bindModel.delayTime);
+        intent.putExtra("average", bindModel.getAverage());
+        intent.putExtra("broken", broken);
+        intent.putExtra("max", max);
         startActivity(intent);
     }
 }
