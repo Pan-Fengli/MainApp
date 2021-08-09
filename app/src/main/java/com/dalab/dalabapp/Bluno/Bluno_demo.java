@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.dalab.dalabapp.R;
+import com.dalab.dalabapp.constant.Global;
 
 public class Bluno_demo extends BlunoLibrary {
     private Button buttonScan;
@@ -22,6 +24,8 @@ public class Bluno_demo extends BlunoLibrary {
     private EditText serialSendText;
     private TextView serialReceivedText;
     public static final int ACCESS_LOCATION = 1;
+    boolean inOrOut=false;
+    Global app;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +33,8 @@ public class Bluno_demo extends BlunoLibrary {
         getPermission();//授权
 
         onCreateProcess();														//onCreate Process by BlunoLibrary
-
+        inOrOut=false;
+        app=(Global)getApplication();
 
         serialBegin(115200);													//set the Uart Baudrate on BLE chip to 115200
 
@@ -72,22 +77,28 @@ public class Bluno_demo extends BlunoLibrary {
         onActivityResultProcess(requestCode, resultCode, data);					//onActivityResult Process by BlunoLibrary
         super.onActivityResult(requestCode, resultCode, data);
     }
-
+    private static final String TAG= "Bluno";
     @Override
     protected void onPause() {
         super.onPause();
-        onPauseProcess();														//onPause Process by BlunoLibrary
+        Log.i(TAG,"onPause");
+        inOrOut=true;
+//        onPauseProcess();														//onPause Process by BlunoLibrary
     }
 
     protected void onStop() {
         super.onStop();
-        onStopProcess();														//onStop Process by BlunoLibrary
+        inOrOut=true;
+        Log.i(TAG,"onStop");
+//        onStopProcess();														//onStop Process by BlunoLibrary
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        onDestroyProcess();														//onDestroy Process by BlunoLibrary
+        inOrOut=true;
+        Log.i(TAG,"onDestroy");
+//        onDestroyProcess();														//onDestroy Process by BlunoLibrary
     }
 
     @Override
@@ -116,9 +127,17 @@ public class Bluno_demo extends BlunoLibrary {
     @Override
     public void onSerialReceived(String theString) {							//Once connection data received, this function will be called
         // TODO Auto-generated method stub
-        serialReceivedText.append(theString);							//append the text into the EditText
-        //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
-        ((ScrollView)serialReceivedText.getParent()).fullScroll(View.FOCUS_DOWN);
+        if(!inOrOut)
+        {
+            serialReceivedText.append(theString);							//append the text into the EditText
+            //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
+            ((ScrollView)serialReceivedText.getParent()).fullScroll(View.FOCUS_DOWN);
+        }
+        else{
+            //就不用那么复杂的append，在这里就直接修改全局变量就行了
+            System.out.println(app.down_High);
+        }
+
     }
 
     //下面这一段是为了获取到权限，才能够扫描得到
