@@ -14,4 +14,6 @@
     <string name="stop_listening">结束监听</string>
     <string name="disconnect">断开连接</string>
     <string name="hello">hello</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+    <string name="unknown_device">Unknown device</string>
 </resources>

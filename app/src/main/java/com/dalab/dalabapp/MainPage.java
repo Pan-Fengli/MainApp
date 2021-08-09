@@ -24,6 +24,7 @@ import com.dalab.dalabapp.Adapter.ListAdapter;
 import com.dalab.dalabapp.Animation.Animation;
 import com.dalab.dalabapp.BlueTooth.BlueTooth;
 import com.dalab.dalabapp.BlueTooth.DeviceAdapter;
+import com.dalab.dalabapp.Bluno.Bluno_demo;
 import com.dalab.dalabapp.Trains.BindPage;
 import com.dalab.dalabapp.Trains.Hemostasis;
 import com.dalab.dalabapp.constant.BoundValue;
@@ -129,7 +130,8 @@ public class MainPage extends AppCompatActivity {
                             return;//如果侧边栏是打开状态，那么就提前跳出，不会响应按钮
                         }
                         Intent intent = new Intent();
-                        intent.setClass(MainPage.this, BlueTooth.class);
+//                        intent.setClass(MainPage.this, BlueTooth.class);
+                        intent.setClass(MainPage.this, Bluno_demo.class);
                         startActivity(intent);
                     }
                 }
