@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dalab.dalabapp.DataPage.BindDataPage;
 import com.dalab.dalabapp.R;
@@ -16,7 +17,8 @@ public class TrainingBind extends AppCompatActivity {
     ImageView bound;
     ImageView body;
     Button button;
-
+    TextView hintInfo;
+    int type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +39,18 @@ public class TrainingBind extends AppCompatActivity {
     }
     void init()
     {
+        hintInfo=findViewById(R.id.hintInfo);
         // 0,1,2,3 分别代表左上，右上，坐下，右下
-        int type = getIntent().getExtras().getInt("TrainType");
+        type = getIntent().getIntExtra("TrainType",0);
         if(type == 0)
         {
+            hintInfo.setText("上肢毛细血管出血。\n呈小点状的红色血液，从伤口表面渗出，看不见明显的血管出血。");//\n换行符
             bound = findViewById(R.id.blood_bound_upper_left);
             wound = findViewById(R.id.blood_upper_left);
         }
         else
         {
+            hintInfo.setText("下肢静脉血管出血。\n暗红色的血液，迅速而持续不断地从伤口流出。");//\n换行符
             bound = findViewById(R.id.blood_bound_down_left);
             wound = findViewById(R.id.blood_down_left);
         }

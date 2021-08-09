@@ -2,6 +2,9 @@ package com.dalab.dalabapp.TrainingPages;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ public class ResHomeostasis extends AppCompatActivity {
     float lose = 2000;
     TextView delayText, overText, validText, loseText, releaseText, scoreText, resText;
     ImageView predictImage;
+    ImageView broken;
     // 正常0 休克1 肢端坏死2
     int predictType = 0;
     @SuppressLint("SetTextI18n")
@@ -35,6 +39,7 @@ public class ResHomeostasis extends AppCompatActivity {
         resText = findViewById(R.id._res);
         scoreText=findViewById(R.id.score);
         predictImage = findViewById(R.id.ResImage);
+        broken=findViewById(R.id.left_up_broken);//这个其实需要根据我们训练的类型来改变，这里以左上肢为例。
         // 获取计分相关项
         validTime = getIntent().getIntExtra("validTime", 0);
         lose = getIntent().getFloatExtra("lose", 2000);
@@ -96,9 +101,18 @@ public class ResHomeostasis extends AppCompatActivity {
         }
         else
         {
-            int id = this.getResources().getIdentifier("predict_shock", "drawable", this.getPackageName());
-            predictImage.setImageResource(id);
+//            int id = this.getResources().getIdentifier("predict_shock", "drawable", this.getPackageName());
+//            predictImage.setImageResource(id);
             resText.setText("肢端坏死");
+//            然后展示坏死的动画
+            broken.setVisibility(View.VISIBLE);
+            Animation merge=new AlphaAnimation(0.4f,0.9f);
+            merge.setDuration(1000);//1s
+            merge.setFillAfter(true);
+            merge.setFillBefore(true);
+            merge.setRepeatCount(-1);
+            merge.setRepeatMode(Animation.REVERSE);
+            broken.startAnimation(merge);
         }
     }
 
