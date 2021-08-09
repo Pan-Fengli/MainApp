@@ -43,7 +43,7 @@
         <activity android:name=".TrainingPages.TrainingBind" />
         <activity android:name=".DataPage.HoeostasisDataPage" />
         <activity android:name=".TrainingPages.ResHomeostasis" />
-
+        <activity android:name=".TrainingPages.ResBind"/>
         <service android:name="com.dalab.dalabapp.Bluno.BluetoothLeService" android:enabled="true"/>
 
         <activity android:name=".DataPage.BindDataPage"/>

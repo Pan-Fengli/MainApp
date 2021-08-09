@@ -19,6 +19,8 @@ public class Global extends Application {
     public int down_High;
     // 文字
     public static Global global;
+    // 当前模式
+    public int currentType = 0;
     @Override
     public void onCreate()
     {

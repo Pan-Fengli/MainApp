@@ -6,8 +6,8 @@ public class BindModel {
     double allStress;
     int count;
     boolean first;
-    int delayTime;
-    int validTime;
+    public int delayTime;
+    public int validTime;
     public BindModel(int ma, int mi)
     {
         max = ma;

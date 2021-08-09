@@ -10,6 +10,7 @@ import com.dalab.dalabapp.Adapter.bindAdapter;
 import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.TrainingPages.TrainingBind;
 import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
+import com.dalab.dalabapp.constant.Global;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +30,7 @@ public class BindPage extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-
+            Global.global.currentType = 10 + position;
             Intent intent = new Intent();
             intent.setClass(BindPage.this, TrainingBind.class);
             intent.putExtra("TrainType", position);

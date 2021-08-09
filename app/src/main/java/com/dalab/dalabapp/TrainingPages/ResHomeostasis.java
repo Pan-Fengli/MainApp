@@ -101,8 +101,6 @@ public class ResHomeostasis extends AppCompatActivity {
         }
         else
         {
-//            int id = this.getResources().getIdentifier("predict_shock", "drawable", this.getPackageName());
-//            predictImage.setImageResource(id);
             resText.setText("肢端坏死");
 //            然后展示坏死的动画
             broken.setVisibility(View.VISIBLE);
