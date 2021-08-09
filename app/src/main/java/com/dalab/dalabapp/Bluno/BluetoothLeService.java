@@ -302,6 +302,7 @@ public class BluetoothLeService extends Service {
             intent.putExtra(EXTRA_DATA, msg);
             sendBroadcast(intent);
         }
+        //其实想了想，这个解码也可以放在最外层去做——也就是我们的onreceive那里，可以最后从string去解码，变到我们需要的东西，不然中途传递数据的过程就会比较复杂
 //        }
     }
     private static final String CHARSET_NAME="utf-8";
