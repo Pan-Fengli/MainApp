@@ -95,7 +95,9 @@ public abstract class BlunoLibrary extends Activity {
             if(mConnectionState==connectionStateEnum.isConnecting)
                 mConnectionState=connectionStateEnum.isToScan;
             onConectionStateChange(mConnectionState);
+            System.out.println("close11");
             mBluetoothLeService.close();
+
         }};
 
     private Runnable mDisonnectingOverTimeRunnable=new Runnable(){
@@ -105,7 +107,9 @@ public abstract class BlunoLibrary extends Activity {
             if(mConnectionState==connectionStateEnum.isDisconnecting)
                 mConnectionState=connectionStateEnum.isToScan;
             onConectionStateChange(mConnectionState);
+            System.out.println("close12");
             mBluetoothLeService.close();
+
         }};
 
     public static final String SerialPortUUID="0000dfb1-0000-1000-8000-00805f9b34fb";
@@ -116,6 +120,7 @@ public abstract class BlunoLibrary extends Activity {
     {
         if(!initiate())
         {
+            //如果不支持BLE，那就finish
             Toast.makeText(mainContext, R.string.error_bluetooth_not_supported,
                     Toast.LENGTH_SHORT).show();
             ((Activity) mainContext).finish();
@@ -125,9 +130,9 @@ public abstract class BlunoLibrary extends Activity {
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
-        // Initializes list view adapter.
+        // Initializes list view adapter.//初始化list
         mLeDeviceListAdapter = new LeDeviceListAdapter();
-        // Initializes and show the scan Device Dialog
+        // Initializes and show the scan Device Dialog//初始化并展示scan的列表
         mScanDeviceDialog = new AlertDialog.Builder(mainContext)
                 .setTitle("BLE Device Scan...").setAdapter(mLeDeviceListAdapter, new DialogInterface.OnClickListener() {
 
@@ -180,7 +185,6 @@ public abstract class BlunoLibrary extends Activity {
                         scanLeDevice(false);
                     }
                 }).create();
-
     }
 
 
@@ -199,7 +203,7 @@ public abstract class BlunoLibrary extends Activity {
             }
         }
 
-
+//如果我不重新注册这个——
         mainContext.registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
 
     }
@@ -232,6 +236,7 @@ public abstract class BlunoLibrary extends Activity {
 //			mBluetoothLeService.disconnect();
 //            mHandler.postDelayed(mDisonnectingOverTimeRunnable, 10000);
             mHandler.removeCallbacks(mDisonnectingOverTimeRunnable);
+            //如果我把close给关掉？不断开服务器？
             mBluetoothLeService.close();
         }
         mSCharacteristic=null;
@@ -295,6 +300,8 @@ public abstract class BlunoLibrary extends Activity {
                 mConnectionState = connectionStateEnum.isToScan;
                 onConectionStateChange(mConnectionState);
                 mHandler.removeCallbacks(mDisonnectingOverTimeRunnable);
+                //如果我把close给关掉？不断开服务器？，甚至我把这里面的所有响应都去掉？
+                System.out.println("close304");
                 mBluetoothLeService.close();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
@@ -338,6 +345,7 @@ public abstract class BlunoLibrary extends Activity {
 
 
             }
+            System.out.println("brocast mGattUpdateReceiver ");
         }
     };
 

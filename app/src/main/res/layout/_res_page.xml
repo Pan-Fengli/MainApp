@@ -37,7 +37,7 @@
             tools:visibility="visible" />
 
         <ImageView
-            android:id="@+id/left_up_broken"
+            android:id="@+id/broken_image"
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/app_name"
@@ -81,22 +81,21 @@
             android:textSize="18sp"
             android:paddingTop="10dp"
             />
+
         <TextView
             android:id="@+id/loseBloodText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="loseBlood"
-            android:textSize="18sp"
+            android:contentDescription="loseBlood"
             android:paddingTop="10dp"
-            />
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/loose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="relax"
-            android:textSize="18sp"
             android:paddingTop="10dp"
-            />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

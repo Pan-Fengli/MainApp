@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Bluno.Bluno_demo"></activity>
+        <activity android:name=".Bluno.Bluno_demo"
+            android:launchMode="singleInstance"></activity>
 
 
         <activity

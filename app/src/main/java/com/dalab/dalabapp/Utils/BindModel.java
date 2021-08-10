@@ -52,7 +52,8 @@ public class BindModel {
                 return false;
         }
         // 不用打断的情况，给总压力值做贡献
-        allStress += data;
+//        allStress += data;
+        allStress += data*speed;
         count += speed;
         return true;
     }

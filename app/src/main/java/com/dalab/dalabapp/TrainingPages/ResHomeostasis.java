@@ -8,7 +8,6 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dalab.dalabapp.MainPage;
 import com.dalab.dalabapp.R;
 
 import java.util.Locale;
@@ -39,7 +38,8 @@ public class ResHomeostasis extends AppCompatActivity {
         resText = findViewById(R.id._res);
         scoreText=findViewById(R.id.score);
         predictImage = findViewById(R.id.ResImage);
-        broken=findViewById(R.id.left_up_broken);//这个其实需要根据我们训练的类型来改变，这里以左上肢为例。
+        broken=findViewById(R.id.broken_image);//这个其实需要根据我们训练的类型来改变,在下面会写到
+        broken.setVisibility(View.INVISIBLE);
         // 获取计分相关项
         validTime = getIntent().getIntExtra("validTime", 0);
         lose = getIntent().getFloatExtra("lose", 2000);
@@ -102,6 +102,9 @@ public class ResHomeostasis extends AppCompatActivity {
         else
         {
             resText.setText("肢端坏死");
+            //可以动态修改图片的源,比如这里改成了left_up_broken
+            int id = this.getResources().getIdentifier("left_up_broken", "drawable", this.getPackageName());
+            broken.setImageResource(id);
 //            然后展示坏死的动画
             broken.setVisibility(View.VISIBLE);
             Animation merge=new AlphaAnimation(0.4f,0.9f);
