@@ -2,6 +2,7 @@ package com.dalab.dalabapp.TrainingPages;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +17,10 @@ public class ResBind extends AppCompatActivity {
     TextView delayText, validText, averageText, resText, scoreText;
     ImageView image;
     boolean broken;
+    ImageView broken_image;
     int delayTime, validTime;
     int max;
-    float averageStress;
+    double averageStress;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,10 +33,12 @@ public class ResBind extends AppCompatActivity {
         resText = findViewById(R.id._res);
         scoreText=findViewById(R.id.score);
         image = findViewById(R.id.ResImage);
+        broken_image=findViewById(R.id.broken_image);//这个其实需要根据我们训练的类型来改变，这里以左上肢为例。
+        broken_image.setVisibility(View.INVISIBLE);
         // 获取计分相关项
         validTime = getIntent().getIntExtra("validTime", 0);
         delayTime = getIntent().getIntExtra("delayTime", 900000);
-        averageStress = getIntent().getFloatExtra("average", 0);
+        averageStress = getIntent().getDoubleExtra("average", 0);
         broken = getIntent().getBooleanExtra("broken", false);
         max = getIntent().getIntExtra("max", 35);
         //
@@ -56,25 +60,39 @@ public class ResBind extends AppCompatActivity {
     {
         delayText.setText("延迟" + getStringTime(delayTime));
         validText.setText("有效" + getStringTime(validTime));
-        averageText.setText("平均压力" + averageStress);
+        averageText.setText("平均压力" + String.format("%.2f", averageStress)+"mmHg");//保留两位小数
 
         if(score == 20)
         {
             resText.setText("压力过小，包扎失败");
+            int id = this.getResources().getIdentifier("loose", "drawable", this.getPackageName());
+            image.setImageResource(id);
         }
         else if(score == 80)
         {
             resText.setText("压力过大，产生不适");
+            if(Global.global.currentType == 10)//10表示绷带-上肢，那么11就表示绷带，下肢之类的...
+            {
+                int id = this.getResources().getIdentifier("bind_up_tite", "drawable", this.getPackageName());
+                image.setImageResource(id);
+            }
+//            else if(Global.global.currentType == 11)
+            else
+            {
+                int id = this.getResources().getIdentifier("bind_down_tite", "drawable", this.getPackageName());
+                image.setImageResource(id);
+            }
         }
         else
         {
             resText.setText("包扎成功");
-            if(Global.global.currentType == 10)
+            if(Global.global.currentType == 10)//10表示绷带，上肢，那么11就表示绷带，下肢之类的...
             {
                 int id = this.getResources().getIdentifier("bind_up_ok", "drawable", this.getPackageName());
                 System.out.println("xjh" + this.getPackageName());
                 image.setImageResource(id);
             }
+//            else if(Global.global.currentType == 11)
             else
             {
                 int id = this.getResources().getIdentifier("bind_down_ok", "drawable", this.getPackageName());

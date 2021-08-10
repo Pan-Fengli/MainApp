@@ -67,6 +67,8 @@ public class BindDataPage extends AppCompatActivity {
         forceText = findViewById(R.id.forceText);
         totalTimeText = findViewById(R.id.timerText);
         validTimeText = findViewById(R.id.timerText2);
+        validTimeText.setTextColor(Color.rgb(255, 130, 71));//有效时间和训练时间用不同的颜色
+        totalTimeText.setTextColor(Color.rgb(0, 238, 0));
         jump = findViewById(R.id.JumpToRes);
         // 开始
         timer1 = new Timer();

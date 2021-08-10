@@ -49,7 +49,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     ArrayList<Float> storage = new ArrayList<Float>();
     int lowerValue = 200;
     int upperValue = 600;
-    int Volumn = 3000;//满血是2000ml，即流血量大于这个就会休克
+    int Volumn = 2000;//满血是2000ml，即流血量大于这个就会休克
     int max = 600;
     int min = 200;
     //-------更新获取数据-------------
@@ -267,6 +267,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     {
         updateState(increaseModel.lose);
         bleedText.setText("失血量：" + increaseModel.lose);
+        percentText.setText(String.valueOf(increaseModel.percent));
         validTimeText.setText(getStringTime(increaseModel.validTime));
         if(increaseModel.validTime >= 900000)
             infoText.setText("请稍微放松止血带");

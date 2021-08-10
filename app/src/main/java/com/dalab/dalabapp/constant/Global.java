@@ -3,6 +3,8 @@ package com.dalab.dalabapp.constant;
 import android.app.Application;
 
 public class Global extends Application {
+    //压力数据
+    public float pressure=0;
     // 止血
     public int left_up_Low;
     public int left_up_High;

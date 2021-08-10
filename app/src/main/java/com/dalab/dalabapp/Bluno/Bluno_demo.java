@@ -75,7 +75,7 @@ public class Bluno_demo extends BlunoLibrary {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         onActivityResultProcess(requestCode, resultCode, data);					//onActivityResult Process by BlunoLibrary
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);//打开蓝牙失败就finish
     }
     private static final String TAG= "Bluno";
     @Override
@@ -132,12 +132,12 @@ public class Bluno_demo extends BlunoLibrary {
             serialReceivedText.append(theString);							//append the text into the EditText
             //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
             ((ScrollView)serialReceivedText.getParent()).fullScroll(View.FOCUS_DOWN);
+            System.out.println("msg:"+app.pressure);
         }
         else{
             //就不用那么复杂的append，在这里就直接修改全局变量就行了
-            System.out.println(app.down_High);
+            System.out.println("app.down_High");
         }
-
     }
 
     //下面这一段是为了获取到权限，才能够扫描得到
