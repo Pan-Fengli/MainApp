@@ -3,22 +3,23 @@ package com.dalab.dalabapp.constant;
 import android.app.Application;
 
 public class Global extends Application {
-    //压力数据
     public float pressure=0;
     // 止血
-    public int left_up_Low;
-    public int left_up_High;
-    public int right_up_Low;
-    public int right_up_High;
-    public int left_down_Low;
-    public int left_down_High;
-    public int right_down_Low;
-    public int right_down_High;
+    public int left_up_low_value;
+    public int left_up_high_value;
+    public int right_up_low_value;
+    public int right_up_high_value;
+    public int left_down_low_value;
+    public int left_down_high_value;
+    public int right_down_low_value;
+    public int right_down_high_value;
     // 包扎
-    public int up_Low;
-    public int up_High;
-    public int down_Low;
-    public int down_High;
+    public int up_low_value;
+    public int up_high_value;
+    public int down_low_value;
+    public int down_high_value;
+    public int height_value;
+    public int weight_value;
     // 文字
     public static Global global;
     // 当前模式

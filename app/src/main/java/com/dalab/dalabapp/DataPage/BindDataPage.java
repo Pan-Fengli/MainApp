@@ -40,7 +40,7 @@ public class BindDataPage extends AppCompatActivity {
     BindModel bindModel;
     GenerateData generateData;
     // 最大最小值
-    int max = 35, min = 10;
+    int max = Global.global.down_high_value, min = Global.global.down_low_value;
     int count;
     // 页面组件
     TextView forceText;
@@ -93,7 +93,7 @@ public class BindDataPage extends AppCompatActivity {
                     public void run() {
                         // 对待压力较小的态度：提前打断，初次容忍10s，回落容忍2s
                         // 对待压力过大的态度，到最后看平均值，如果大了就扣分
-                        if(count >= 300)
+                        if(count >= 30000)
                         {
                             over();
                         }

@@ -83,10 +83,11 @@ public class HoeostasisDataPage extends AppCompatActivity {
         changeImage();//
         heartBeat(1000);
 
-        lowerValue = MainPage.lowerValue;
-        upperValue = MainPage.upperValue;
-        lowerValue = MainPage.left_up_low_value.value;
-        upperValue = MainPage.left_up_high_value.value;
+
+        lowerValue = Global.global.left_up_low_value;
+        upperValue = Global.global.left_up_high_value;
+        System.out.println("xjh "+ Global.global.left_up_low_value);
+        System.out.println("xjh" + Global.global.left_up_high_value);
 
         init();//初始化坐标数据
         Values.add(0.0f);

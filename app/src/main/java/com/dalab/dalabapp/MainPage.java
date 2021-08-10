@@ -28,6 +28,7 @@ import com.dalab.dalabapp.Bluno.Bluno_demo;
 import com.dalab.dalabapp.Trains.BindPage;
 import com.dalab.dalabapp.Trains.Hemostasis;
 import com.dalab.dalabapp.constant.BoundValue;
+import com.dalab.dalabapp.constant.Global;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -56,8 +57,6 @@ public class MainPage extends AppCompatActivity {
     //
     public static int lowerValue = 200;
     public static int upperValue = 600;
-    public static BoundValue LowValue=new BoundValue(200);
-    public static BoundValue HighValue=new BoundValue(600);
 
     //先设定默认值
     static int left_up_low_def=200;//改成static只是为了能够在下面全局变量赋值的时候能够输入进去，这个值之后本身也不会给用户去修改。
@@ -75,21 +74,7 @@ public class MainPage extends AppCompatActivity {
 
     static int height_def=175;//cm
     static int weight_def=65;//kg
-    //全局的变量，之后可以在不同页面访问到
-    public static BoundValue left_up_low_value=new BoundValue(left_up_low_def);
-    public static BoundValue left_up_high_value=new BoundValue(left_up_high_def);
-    public static BoundValue right_up_low_value=new BoundValue(right_up_low_def);
-    public static BoundValue right_up_high_value=new BoundValue(right_up_high_def);
-    public static BoundValue left_down_low_value=new BoundValue(left_down_low_def);
-    public static BoundValue left_down_high_value=new BoundValue(left_down_high_def);
-    public static BoundValue right_down_low_value=new BoundValue(right_down_low_def);
-    public static BoundValue right_down_high_value=new BoundValue(right_down_high_def);
-    public static BoundValue up_low_value=new BoundValue(up_low_def);
-    public static BoundValue up_high_value=new BoundValue(up_high_def);
-    public static BoundValue down_low_value=new BoundValue(down_low_def);
-    public static BoundValue down_high_value=new BoundValue(down_high_def);
-    public static BoundValue height_value=new BoundValue(height_def);
-    public static BoundValue weight_value=new BoundValue(weight_def);
+
 
     ListView mylist;
     AlertDialog textTips;
@@ -138,7 +123,7 @@ public class MainPage extends AppCompatActivity {
         );
         repeatFind();
         repaetSet();
-
+        setDef();
         //创建对话框
         textTips = new AlertDialog.Builder(MainPage.this)
                 .setTitle("Tips:")
@@ -192,40 +177,8 @@ public class MainPage extends AppCompatActivity {
             }
         }
     }
-    private void setFoucus(final EditText et)
-    {
-        et.setOnFocusChangeListener(new android.view.View.
-                OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    // 此处为得到焦点时的处理内容
-                    System.out.println("get Foucus");
-                } else {
-                    // 此处为失去焦点时的处理内容
-                    if (left_up_Low.getText() != null && !left_up_Low.getText().toString().equals("")) {
-                        lowerValue = Integer.parseInt(left_up_Low.getText().toString());
-                        left_up_Low.setText(String.valueOf(lowerValue));
-                    } else {
-                        lowerValue = 0;
-                        left_up_Low.setText("");
-                    }
-                    if (left_up_High.getText() != null && !left_up_High.getText().toString().equals("")) {
-                        upperValue = Integer.parseInt(left_up_High.getText().toString());
-                        left_up_High.setText(String.valueOf(upperValue));
-                    } else {
-                        upperValue = 1;
-                        left_up_High.setText("");
-                    }
-                    if (lowerValue > upperValue || lowerValue == upperValue) {
-                        upperValue = lowerValue + 1;
-                        left_up_High.setText(String.valueOf(upperValue));
-                    }
-                }
-            }
-        });
-    }
-    private void HWsetFoucus(final EditText et,final BoundValue hw)//height 和weight 的值设置。
+
+    private void HWsetFoucus(final EditText et,final int type)//height 和weight 的值设置。
     {
         et.setOnFocusChangeListener(new android.view.View.
                 OnFocusChangeListener() {
@@ -237,54 +190,92 @@ public class MainPage extends AppCompatActivity {
                 } else {
                     // 此处为失去焦点时的处理内容
                     if (et.getText() != null && !et.getText().toString().equals("")) {
-                        hw.value = Integer.parseInt(et.getText().toString());
-                        et.setText(String.valueOf(hw.value));
+                        int tmp = Integer.parseInt(et.getText().toString());
+                        setValue(tmp, type);
+                        et.setText(String.valueOf(tmp));
                     } else {
-                        hw.value = 0;
+                        setValue(0,type);
                         et.setText("");
                     }
                 }
             }
         });
     }
-    private void setFoucuses(final EditText et,final EditText High,final EditText Low, final BoundValue lowerBound,final BoundValue upperBound)
+    private void setFoucuses(final EditText et, final EditText High, final EditText Low, final int type)
     {
         et.setOnFocusChangeListener(new android.view.View.
                 OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                int tmpLow = 0, tmpHigh = 1;
                 if (hasFocus) {
                     // 此处为得到焦点时的处理内容
                     System.out.println("get Foucus");
                 } else {
                     // 此处为失去焦点时的处理内容
                     if (Low.getText() != null && !Low.getText().toString().equals("")) {
-                        lowerBound.value = Integer.parseInt(Low.getText().toString());
-                        Low.setText(String.valueOf(lowerBound.value));
+                        tmpLow = Integer.parseInt(Low.getText().toString());
+                        Low.setText(String.valueOf(tmpLow));
+                        setValue(tmpLow, type);
+
                     } else {
-                        lowerBound.value = 0;
+                        setValue(0, type);
                         Low.setText("");
                     }
+
                     if (High.getText() != null && !High.getText().toString().equals("")) {
-                        upperBound.value = Integer.parseInt(High.getText().toString());
-                        High.setText(String.valueOf(upperBound.value));
+                        tmpHigh = Integer.parseInt(High.getText().toString());
+                        setValue(tmpHigh, type + 1);
+                        High.setText(String.valueOf(tmpHigh));
                     } else {
-                        upperBound.value = 1;
+                        setValue(1, type + 1);
                         High.setText("");
                     }
-                    if (lowerBound.value > upperBound.value || lowerBound.value  == upperBound.value) {
-                        upperBound.value = lowerBound.value  + 1;
-                        High.setText(String.valueOf(upperBound.value));
+                    if (tmpHigh <= tmpLow) {
+                        tmpHigh = tmpLow  + 1;
+                        High.setText(String.valueOf(tmpHigh));
+                        setValue(tmpHigh, type + 1);
                     }
                 }
             }
         });
     }
-    public void openSettings(View view)
+    // setValue
+    void setValue(int value, int type)
     {
-        //这是一个按钮的函数，用来打开侧边栏。之后甚至还可以设置设计一个返回按钮来关闭侧边栏
-        mDrawerLayout.openDrawer(mDrawerContent);
+        switch (type)
+        {
+            case 1: Global.global.left_up_low_value = value;
+                break;
+            case 2: Global.global.left_up_high_value = value;
+                break;
+            case 3: Global.global.right_up_low_value = value;
+                break;
+            case 4: Global.global.right_up_high_value = value;
+                break;
+            case 5: Global.global.left_down_low_value = value;
+                break;
+            case 6: Global.global.left_down_high_value = value;
+                break;
+            case 7: Global.global.right_down_low_value = value;
+                break;
+            case 8: Global.global.right_down_high_value = value;
+                break;
+            case 9: Global.global.up_low_value = value;
+                break;
+            case 10: Global.global.up_high_value = value;
+                break;
+            case 11: Global.global.down_low_value = value;
+                break;
+            case 12: Global.global.down_high_value = value;
+                break;
+            case 13: Global.global.height_value = value;
+                break;
+            default:
+                Global.global.weight_value = value;
+        }
     }
+
 
     public void MenuOpenSettings(MenuItem menuItem)
     {
@@ -295,7 +286,6 @@ public class MainPage extends AppCompatActivity {
     public void closeSettings(View view)
     {
         //返回按钮来关闭侧边栏
-        System.out.println("close!");
         mDrawerLayout.closeDrawer(mDrawerContent);
         opened=false;
     }
@@ -322,86 +312,81 @@ public class MainPage extends AppCompatActivity {
     }
     void repaetSet()
     {
-        left_up_Low.setText(String.valueOf(left_up_low_value.value));
-        left_up_High.setText(String.valueOf(left_up_high_value.value));
-        setFoucuses(left_up_Low,left_up_High,left_up_Low,left_up_low_value,left_up_high_value);
-        setFoucuses(left_up_High,left_up_High,left_up_Low,left_up_low_value,left_up_high_value);
+        left_up_Low.setText(String.valueOf(Global.global.left_up_low_value));
+        left_up_High.setText(String.valueOf(Global.global.left_up_high_value));
+        setFoucuses(left_up_Low,left_up_High,left_up_Low,1);
+        setFoucuses(left_up_High,left_up_High,left_up_Low,1);
 
-        right_up_Low.setText(String.valueOf(right_up_low_value.value));
-        right_up_High.setText(String.valueOf(right_up_high_value.value));
-        setFoucuses(right_up_Low,right_up_High,right_up_Low,right_up_low_value,right_up_high_value);
-        setFoucuses(right_up_High,right_up_High,right_up_Low,right_up_low_value,right_up_high_value);
+        right_up_Low.setText(String.valueOf(Global.global.right_up_low_value));
+        right_up_High.setText(String.valueOf(Global.global.right_up_high_value));
+        setFoucuses(right_up_Low,right_up_High,right_up_Low,3);
+        setFoucuses(right_up_High,right_up_High,right_up_Low,3);
 
-        left_down_Low.setText(String.valueOf(left_down_low_value.value));
-        left_down_High.setText(String.valueOf(left_down_high_value.value));
-        setFoucuses(left_down_Low,left_down_High,left_down_Low,left_down_low_value,left_down_high_value);
-        setFoucuses(left_down_High,left_down_High,left_down_Low,left_down_low_value,left_down_high_value);
+        left_down_Low.setText(String.valueOf(Global.global.left_down_low_value));
+        left_down_High.setText(String.valueOf(Global.global.left_down_high_value));
+        setFoucuses(left_down_Low,left_down_High,left_down_Low,5);
+        setFoucuses(left_down_High,left_down_High,left_down_Low,5);
 
-        right_down_Low.setText(String.valueOf(right_down_low_value.value));
-        right_down_High.setText(String.valueOf(right_down_high_value.value));
-        setFoucuses(right_down_Low,right_down_High,right_down_Low,right_down_low_value,right_down_high_value);
-        setFoucuses(right_down_High,right_down_High,right_down_Low,right_down_low_value,right_down_high_value);
+        right_down_Low.setText(String.valueOf(Global.global.right_down_low_value));
+        right_down_High.setText(String.valueOf(Global.global.right_down_high_value));
+        setFoucuses(right_down_Low,right_down_High,right_down_Low,7);
+        setFoucuses(right_down_High,right_down_High,right_down_Low,7);
 
-        up_Low.setText(String.valueOf(up_low_value.value));
-        up_High.setText(String.valueOf(up_high_value.value));
-        setFoucuses(up_Low,up_High,up_Low,up_low_value,up_high_value);
-        setFoucuses(up_High,up_High,up_Low,up_low_value,up_high_value);
+        up_Low.setText(String.valueOf(Global.global.up_low_value));
+        up_High.setText(String.valueOf(Global.global.up_high_value));
+        setFoucuses(up_Low,up_High,up_Low,9);
+        setFoucuses(up_High,up_High,up_Low,9);
 
-        down_Low.setText(String.valueOf(down_low_value.value));
-        down_High.setText(String.valueOf(down_high_value.value));
-        setFoucuses(down_Low,down_High,down_Low,down_low_value,down_high_value);
-        setFoucuses(down_High,down_High,down_Low,down_low_value,down_high_value);
+        down_Low.setText(String.valueOf(Global.global.down_low_value));
+        down_High.setText(String.valueOf(Global.global.down_high_value));
+        setFoucuses(down_Low,down_High,down_Low,11);
+        setFoucuses(down_High,down_High,down_Low,11);
 
-        height.setText(String.valueOf(height_value.value));
-        weight.setText(String.valueOf(weight_value.value));
-        HWsetFoucus(height,height_value);
-        HWsetFoucus(weight,weight_value);
+        height.setText(String.valueOf(Global.global.height_value));
+        weight.setText(String.valueOf(Global.global.weight_value));
+        HWsetFoucus(height,13);
+        HWsetFoucus(weight,14);
     }
 
     public void setDefault(View view)//在这之前是不是还应该弹出窗口来向用户确认一下？
     {
         textTips.show();
-//        if(asure)
-//        {
-//
-//        }
-//        asure=false;
     }
     private void setDef()
     {
-        left_up_low_value.value=left_up_low_def;
-        left_up_Low.setText(String.valueOf(left_up_low_value.value));
-        left_up_high_value.value=left_up_high_def;
-        left_up_High.setText(String.valueOf(left_up_high_value.value));
+        Global.global.left_up_low_value = left_up_low_def;
+        left_up_Low.setText(String.valueOf(left_up_low_def));
+        Global.global.left_up_high_value=left_up_high_def;
+        left_up_High.setText(String.valueOf(left_up_high_def));
 
-        left_down_low_value.value=left_down_low_def;
-        left_down_Low.setText(String.valueOf(left_down_low_value.value));
-        left_down_high_value.value=left_down_high_def;
-        left_down_High.setText(String.valueOf(left_down_high_value.value));
+        Global.global.left_down_low_value=left_down_low_def;
+        left_down_Low.setText(String.valueOf(left_down_low_def));
+        Global.global.left_down_high_value=left_down_high_def;
+        left_down_High.setText(String.valueOf(left_down_high_def));
 
-        right_up_low_value.value=right_up_low_def;
-        right_up_Low.setText(String.valueOf(right_up_low_value.value));
-        right_up_high_value.value=right_up_high_def;
-        right_up_High.setText(String.valueOf(right_up_high_value.value));
+        Global.global.right_up_low_value=right_up_low_def;
+        right_up_Low.setText(String.valueOf(right_up_low_def));
+        Global.global.right_up_high_value=right_up_high_def;
+        right_up_High.setText(String.valueOf(right_up_high_def));
 
-        right_down_low_value.value=right_down_low_def;
-        right_down_Low.setText(String.valueOf(right_down_low_value.value));
-        right_down_high_value.value=right_down_high_def;
-        right_down_High.setText(String.valueOf(right_down_high_value.value));
+        Global.global.right_down_low_value=right_down_low_def;
+        right_down_Low.setText(String.valueOf(right_down_low_def));
+        Global.global.right_down_high_value=right_down_high_def;
+        right_down_High.setText(String.valueOf(right_down_high_def));
 
-        up_low_value.value=up_low_def;
-        up_Low.setText(String.valueOf(up_low_value.value));
-        up_high_value.value=up_high_def;
-        up_High.setText(String.valueOf(up_high_value.value));
+        Global.global.up_low_value=up_low_def;
+        up_Low.setText(String.valueOf(up_low_def));
+        Global.global.up_high_value=up_high_def;
+        up_High.setText(String.valueOf(up_high_def));
 
-        down_low_value.value=down_low_def;
-        down_Low.setText(String.valueOf(down_low_value.value));
-        down_high_value.value=down_high_def;
-        down_High.setText(String.valueOf(down_high_value.value));
+        Global.global.down_low_value=down_low_def;
+        down_Low.setText(String.valueOf(down_low_def));
+        Global.global.down_high_value=down_high_def;
+        down_High.setText(String.valueOf(down_high_def));
 
-        height_value.value=height_def;
-        height.setText(String.valueOf(height_value.value));
-        weight_value.value=weight_def;
-        weight.setText(String.valueOf(weight_value.value));
+        Global.global.height_value=height_def;
+        height.setText(String.valueOf(height_def));
+        Global.global.weight_value=weight_def;
+        weight.setText(String.valueOf(height_def));
     }
 }
