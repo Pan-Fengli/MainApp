@@ -142,9 +142,6 @@ public class MainPage extends AppCompatActivity {
         //创建对话框
         textTips = new AlertDialog.Builder(MainPage.this)
                 .setTitle("Tips:")
-//                .setMessage("1.学科限定输入格式为2—9个汉字+0或1个数字1-4，请用户自觉输入。\n" +
-//                        "2.学分输入限定为小于等于10，允许输入两位小数。\n" +
-//                        "3.成绩限定输入100及以内非负整数。")
                 .setMessage("您确认要恢复至默认设置吗？")
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
@@ -162,17 +159,10 @@ public class MainPage extends AppCompatActivity {
                     }
                 })
                 .create();
-//        left_up_Low.setText(String.valueOf(LowValue.value));
-//        left_up_High.setText(String.valueOf(HighValue.value));
-//        setFoucus(left_up_Low);
-//        setFoucus(left_up_High);
-//        setFoucuses(left_up_Low,left_up_High,left_up_Low,LowValue,HighValue);
-//        setFoucuses(left_up_High,left_up_High,left_up_Low,LowValue,HighValue);
+
 
         //设备list
         mListView = findViewById(R.id.device_list);
-//        mAdapter = new DeviceAdapter(mDeviceList, this);
-//        mListView.setAdapter(mAdapter);
         mListView.setAdapter(new ListAdapter(MainPage.this));//这里的listAdapter是自己写的类
     }
     @Override

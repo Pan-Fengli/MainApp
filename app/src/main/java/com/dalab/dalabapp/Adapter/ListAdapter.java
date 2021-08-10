@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dalab.dalabapp.R;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class ListAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
@@ -64,13 +66,17 @@ public class ListAdapter extends BaseAdapter {
         {
             holder.title.setText("止血训练");
             holder.content.setText("包含左上肢止血、右上肢止血、左下肢止血、右下肢止血");
-            Glide.with(mContext).load("https://img0.baidu.com/it/u=795069135,1579187838&fm=26&fmt=auto&gp=0.jpg").into(holder.imageView);
+//            Glide.with(mContext).load("https://img0.baidu.com/it/u=795069135,1579187838&fm=26&fmt=auto&gp=0.jpg").into(holder.imageView);
+            int id = parent.getResources().getIdentifier("hoeo_main", "drawable", "com.dalab.dalabapp");
+            holder.imageView.setImageResource(id);
         }
         else if(position == 1)
         {
             holder.title.setText("包扎训练");
             holder.content.setText("包含上肢包扎、下肢包扎");
-            Glide.with(mContext).load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11573457968%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629168124&t=a819e526d6c3e82b92ece64cc6bc5887").into(holder.imageView);
+//            Glide.with(mContext).load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F11573457968%2F0.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629168124&t=a819e526d6c3e82b92ece64cc6bc5887").into(holder.imageView);
+            int id = parent.getResources().getIdentifier("bind_main", "drawable", "com.dalab.dalabapp");
+            holder.imageView.setImageResource(id);
         }
         return convertView;
     }
