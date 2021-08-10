@@ -72,6 +72,7 @@ public class ResBind extends AppCompatActivity {
             if(Global.global.currentType == 10)
             {
                 int id = this.getResources().getIdentifier("bind_up_ok", "drawable", this.getPackageName());
+                System.out.println("xjh" + this.getPackageName());
                 image.setImageResource(id);
             }
             else

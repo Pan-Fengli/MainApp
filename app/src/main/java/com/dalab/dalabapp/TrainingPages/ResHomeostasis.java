@@ -52,7 +52,6 @@ public class ResHomeostasis extends AppCompatActivity {
         setUI(score);
     }
 
-    // 简易的计算模型
     int getPoint()
     {
         // D延迟系数T有效时间系数L失血量系数R释放系数
@@ -73,6 +72,8 @@ public class ResHomeostasis extends AppCompatActivity {
             if(predictType == 0)
                 predictType = 2;
         }
+        if(overTime > 180000)
+            R *= 0.9f;
         return (int)(D * T * L * R * 100);
     }
     // 设置页面
