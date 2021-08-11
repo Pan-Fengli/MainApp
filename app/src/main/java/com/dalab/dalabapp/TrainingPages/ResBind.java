@@ -14,7 +14,7 @@ import java.util.Locale;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ResBind extends AppCompatActivity {
-    TextView delayText, validText, averageText, resText, scoreText;
+    TextView delayText, validText, averageText, resText, scoreText, tmp1, tmp2;
     ImageView image;
     boolean broken;
     ImageView broken_image;
@@ -35,6 +35,8 @@ public class ResBind extends AppCompatActivity {
         image = findViewById(R.id.ResImage);
         broken_image=findViewById(R.id.broken_image);//这个其实需要根据我们训练的类型来改变，这里以左上肢为例。
         broken_image.setVisibility(View.INVISIBLE);
+        tmp1 = findViewById(R.id.loseBloodText);
+        tmp2 = findViewById(R.id.loose);
         // 获取计分相关项
         validTime = getIntent().getIntExtra("validTime", 0);
         delayTime = getIntent().getIntExtra("delayTime", 900000);
@@ -100,6 +102,8 @@ public class ResBind extends AppCompatActivity {
             }
         }
         scoreText.setText("得分：" + score);
+        tmp1.setVisibility(View.INVISIBLE);
+        tmp2.setVisibility(View.INVISIBLE);
     }
     private String getStringTime(int cnt) {
         int min = cnt / 60000;
