@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ResHomeostasis extends AppCompatActivity {
     int validTime = 0, delayTime = 900000, releaseTime = 0, overTime = 0;
     float lose = 2000;
+    int shouldReleaseTime = 5000;
     TextView delayText, overText, validText, loseText, releaseText, scoreText, resText;
     ImageView predictImage;
     ImageView broken;
@@ -66,7 +67,7 @@ public class ResHomeostasis extends AppCompatActivity {
             predictType = 1;
         }
         float R = 1;
-        if(releaseTime < 180000)
+        if(releaseTime < shouldReleaseTime)
         {
             R = 0.6f;
             if(predictType == 0)
@@ -84,7 +85,9 @@ public class ResHomeostasis extends AppCompatActivity {
         overText.setText("压力过大" + getStringTime(overTime));
         validText.setText("有效止血" + getStringTime(validTime));
         loseText.setText("失血量" + (int)lose);
-        releaseText.setText("放松" + getStringTime(releaseTime));
+        if(releaseTime >= shouldReleaseTime)
+            releaseText.setText("适当放松√");
+        else releaseText.setText("适当放松×");
 
         scoreText.setText("得分：" + score);
         // 结果预测
