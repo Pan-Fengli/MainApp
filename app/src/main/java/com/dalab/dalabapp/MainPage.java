@@ -52,6 +52,7 @@ public class MainPage extends AppCompatActivity {
     EditText down_Low;
     EditText down_High;
     EditText height, weight;
+    EditText bindTime, hoeoTime;
 
     boolean opened=false;
     //
@@ -271,8 +272,12 @@ public class MainPage extends AppCompatActivity {
                 break;
             case 13: Global.global.height_value = value;
                 break;
-            default:
-                Global.global.weight_value = value;
+            case 14: Global.global.weight_value = value;
+                break;
+            case 15:Global.global.bindTime = value;
+                break;
+            case 16:Global.global.hoeoTime = value;
+                break;
         }
     }
 
@@ -309,6 +314,8 @@ public class MainPage extends AppCompatActivity {
         down_High = findViewById(R.id.down_High);
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
+        bindTime = findViewById(R.id.bindTime);
+        hoeoTime = findViewById(R.id.hoeoTime);
     }
     void repaetSet()
     {
@@ -346,6 +353,8 @@ public class MainPage extends AppCompatActivity {
         weight.setText(String.valueOf(Global.global.weight_value));
         HWsetFoucus(height,13);
         HWsetFoucus(weight,14);
+        HWsetFoucus(bindTime, 15);
+        HWsetFoucus(hoeoTime, 16);
     }
 
     public void setDefault(View view)//在这之前是不是还应该弹出窗口来向用户确认一下？

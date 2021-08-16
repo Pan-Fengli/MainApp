@@ -162,7 +162,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
                         }
-                        if (count >= 900000) {//15min
+                        if (count >= Global.global.hoeoTime * 1000) {//15min
                             speed = 213;//15min之后流速又减慢一点点
                             release = true;//提示松开，之后的数据生成就是松开的数据...
                         }

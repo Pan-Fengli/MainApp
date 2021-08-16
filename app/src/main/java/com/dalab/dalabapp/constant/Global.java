@@ -24,6 +24,9 @@ public class Global extends Application {
     public static Global global;
     // 当前模式
     public int currentType = 0;
+    // 时间设置
+    public int hoeoTime = 900;
+    public int bindTime = 30;
     @Override
     public void onCreate()
     {
