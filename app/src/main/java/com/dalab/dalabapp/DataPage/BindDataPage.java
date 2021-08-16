@@ -104,7 +104,7 @@ public class BindDataPage extends AppCompatActivity {
                     public void run() {
                         // 对待压力较小的态度：提前打断，初次容忍10s，回落容忍2s
                         // 对待压力过大的态度，到最后看平均值，如果大了就扣分
-                        if(count >= 30000)
+                        if(count >= Global.global.bindTime * 1000)
                         {
                             over();
                         }
