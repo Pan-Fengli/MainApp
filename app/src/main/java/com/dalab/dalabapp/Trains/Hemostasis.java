@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.dalab.dalabapp.Adapter.hemostasisAdapter;
 import com.dalab.dalabapp.R;
 import com.dalab.dalabapp.TrainingPages.TrainingHomeostasis;
+import com.dalab.dalabapp.constant.Global;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +37,7 @@ public class Hemostasis extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             Intent intent = new Intent();
+            Global.global.currentType = 20 + position;
             intent.setClass(Hemostasis.this, TrainingHomeostasis.class);
 //            intent.setClass(Hemostasis.this, HoeostasisDataPage.class);
             intent.putExtra("TrainType", position);

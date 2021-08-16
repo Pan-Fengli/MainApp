@@ -18,6 +18,8 @@ import android.util.Log;
 
 import com.dalab.dalabapp.constant.Global;
 
+import net.sf.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -287,12 +289,17 @@ public class BluetoothLeService extends Service {
 
             //此外还需要分割——之后会根据id来做。
             String[] sPlitArray = msg.split("mmHg=");
-            for (int i = 0; i < sPlitArray.length; i++) {
-                System.out.println("第" + i + "部分：" + sPlitArray[i]);
-            }
+//            for (int i = 0; i < sPlitArray.length; i++) {
+//                System.out.println("第" + i + "部分：" + sPlitArray[i]);
+//            }
             //第一部分转化成float，并修改全局变量
             if (!sPlitArray[0].equals("DF Bluno")) {
                 Global.global.pressure = Float.parseFloat(sPlitArray[1]);
+
+                JSONObject json=JSONObject.fromObject(msg);
+                Global.global.pressure = Float.parseFloat(json.get("result").toString());
+                System.out.println("result"+Global.global.pressure);
+
             }
 
 //                intent.putExtra(EXTRA_DATA, new String(data));

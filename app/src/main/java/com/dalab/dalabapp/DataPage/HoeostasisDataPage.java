@@ -71,6 +71,27 @@ public class HoeostasisDataPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoeostasis_data_page);
+
+        if(Global.global.currentType ==20)
+        {
+            //左上肢
+            max = Global.global.left_up_high_value;
+            min = Global.global.left_up_low_value;
+        }
+        else if(Global.global.currentType==21)//右上
+        {
+            max = Global.global.right_up_high_value;
+            min = Global.global.right_down_low_value;
+        }
+        else if(Global.global.currentType==22)//左下
+        {
+            max = Global.global.left_down_high_value;
+            min = Global.global.left_down_low_value;
+        }
+        else{
+            max = Global.global.right_down_high_value;
+            min = Global.global.right_down_low_value;
+        }
         generateData = new GenerateData(max, min);
         increaseModel = new HoeoIncreaseModel(max, min, Volumn, bleedspeed);
         relaxModel = new RelaxModel(relaxLowStress, relaxHighStress);
