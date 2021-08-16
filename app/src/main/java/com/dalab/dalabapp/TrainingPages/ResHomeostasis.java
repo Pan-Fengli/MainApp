@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dalab.dalabapp.R;
+import com.dalab.dalabapp.constant.Global;
 
 import java.util.Locale;
 
@@ -107,7 +108,24 @@ public class ResHomeostasis extends AppCompatActivity {
         {
             resText.setText("肢端坏死");
             //可以动态修改图片的源,比如这里改成了left_up_broken
-            int id = this.getResources().getIdentifier("left_up_broken", "drawable", this.getPackageName());
+            int id;
+            if(Global.global.currentType==20)//左上
+            {
+                id= this.getResources().getIdentifier("left_up_broken", "drawable", this.getPackageName());
+            }
+            else if(Global.global.currentType==21)//右上
+            {
+                id= this.getResources().getIdentifier("right_up_broken", "drawable", this.getPackageName());
+            }
+            else if(Global.global.currentType==22)//左下
+            {
+                id= this.getResources().getIdentifier("left_down_broken", "drawable", this.getPackageName());
+
+            }
+            else{
+                id= this.getResources().getIdentifier("right_down_broken", "drawable", this.getPackageName());
+            }
+
             broken.setImageResource(id);
 //            然后展示坏死的动画
             broken.setVisibility(View.VISIBLE);

@@ -59,6 +59,17 @@ public class BindDataPage extends AppCompatActivity {
         // 获取最大最小值
 //        max = Global.global.down_High;
 //        min = Global.global.down_Low;
+        //根据当前的type来判断是那种类型。
+        if(Global.global.currentType ==10)
+        {
+            //上肢
+            max = Global.global.up_high_value;
+            min = Global.global.up_low_value;
+        }
+        else{
+            max = Global.global.down_high_value;
+            min = Global.global.down_low_value;
+        }
         // 初始化表格和子组件
         init();
         generateData = new GenerateData(max, min);
