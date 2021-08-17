@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dalab.dalabapp.R;
+import com.dalab.dalabapp.constant.Global;
 
 public class hemostasisAdapter extends BaseAdapter {
     private Context mContext;
@@ -61,22 +62,34 @@ public class hemostasisAdapter extends BaseAdapter {
         if(position == 0)
         {
             holder.title.setText("左上肢止血");
-            holder.content.setText("？");
+            int min= Global.global.left_up_low_value;
+            int max=Global.global.left_up_high_value;
+            String info="最佳压力范围"+min+"N~"+max+"N";
+            holder.content.setText(info);
         }
         else if(position == 1)
         {
             holder.title.setText("右上肢止血");
-            holder.content.setText("？");
+            int min= Global.global.right_up_low_value;
+            int max=Global.global.right_up_high_value;
+            int time=15;
+            String info="最佳压力范围"+min+"N~"+max+"N"+"\n"
+                    +"有效包扎时间"+time+"min";//\n换行符
+            holder.content.setText(info);
         }
         else if(position == 2)
         {
             holder.title.setText("左下肢止血");
-            holder.content.setText("？");
+            int time=15;
+            String info="有效包扎时间"+time+"min";
+            holder.content.setText(info);
         }
         else if(position == 3)
         {
             holder.title.setText("右下肢止血");
-            holder.content.setText("？");
+            int time=15;
+            String info="有效包扎时间"+time+"min";
+            holder.content.setText(info);
         }
         return convertView;
     }

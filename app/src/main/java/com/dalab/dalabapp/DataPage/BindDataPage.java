@@ -72,7 +72,9 @@ public class BindDataPage extends AppCompatActivity {
         }
         // 初始化表格和子组件
         init();
+        //手动调整生成数据以测试
         generateData = new GenerateData(max, min);
+//        generateData = new GenerateData(10,5);
         bindModel = new BindModel(max, min);
         // 预留给页面组件初始化
         forceText = findViewById(R.id.forceText);
@@ -186,7 +188,9 @@ public class BindDataPage extends AppCompatActivity {
         chart.setCircleWidth(1f);
         chart.setBorderTextSize(15);//修改边框文字大小
         chart.setBrokenLineTextSize(10);//修改这线上文字大小
-        chart.setMaxVlaue(45);
+        int maxValue=45<max?max:45;
+//        chart.setMaxVlaue(45);
+        chart.setMaxVlaue(maxValue);
         chart.setMinValue(0);
         chart.setNumberLine(4);//5根线
         chart.setBorderWidth(1f);
