@@ -58,12 +58,16 @@ public class bindAdapter extends BaseAdapter {
         if(position == 0)
         {
             holder.inner_title.setText("上肢包扎");
-            holder.inner_content.setText("？");
+            int time=15;
+            String info="有效包扎时间"+time+"min";
+            holder.inner_content.setText(info);
         }
         else if(position == 1)
         {
             holder.inner_title.setText("下肢包扎");
-            holder.inner_content.setText("？");
+            int time=15;
+            String info="有效包扎时间"+time+"min";
+            holder.inner_content.setText(info);
         }
         return convertView;
     }

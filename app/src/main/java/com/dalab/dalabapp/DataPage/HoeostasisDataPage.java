@@ -92,7 +92,10 @@ public class HoeostasisDataPage extends AppCompatActivity {
             max = Global.global.right_down_high_value;
             min = Global.global.right_down_low_value;
         }
+
+        //手动调整max和min以测试
         generateData = new GenerateData(max, min);
+//        generateData = new GenerateData(700, 550);
         increaseModel = new HoeoIncreaseModel(max, min, Volumn, bleedspeed);
         relaxModel = new RelaxModel(relaxLowStress, relaxHighStress);
 
@@ -105,10 +108,10 @@ public class HoeostasisDataPage extends AppCompatActivity {
         heartBeat(1000);
 
 
-        lowerValue = Global.global.left_up_low_value;
-        upperValue = Global.global.left_up_high_value;
-        System.out.println("xjh "+ Global.global.left_up_low_value);
-        System.out.println("xjh" + Global.global.left_up_high_value);
+//        lowerValue = Global.global.left_up_low_value;
+//        upperValue = Global.global.left_up_high_value;
+//        System.out.println("xjh "+ Global.global.left_up_low_value);
+//        System.out.println("xjh" + Global.global.left_up_high_value);
 
         init();//初始化坐标数据
         Values.add(0.0f);
@@ -138,14 +141,18 @@ public class HoeostasisDataPage extends AppCompatActivity {
         chart.setBorderTextSize(15);//修改边框文字大小
         chart.setBrokenLineTextSize(10);//修改这线上文字大小
 //        chart.setMaxVlaue(600);
-        chart.setMaxVlaue(750);
+        int maxValue=750<max?max:750;
+//        chart.setMaxVlaue(750);
+        chart.setMaxVlaue(maxValue);
         chart.setMinValue(0);
         chart.setNumberLine(4);//5根线
         chart.setBorderWidth(1f);
         chart.setBrokenLineWidth(1.5f);
         chart.setBorderTransverseLineWidth(1.0f);//中间横线的宽度
-        chart.setUpper((float) upperValue);//这两个就是上下限范围...
-        chart.setLower((float) lowerValue);
+//        chart.setUpper((float) upperValue);//这两个就是上下限范围...
+//        chart.setLower((float) lowerValue);
+        chart.setUpper((float) max);//这两个就是上下限范围...
+        chart.setLower((float) min);
     }
 
     private void startTimer() {
@@ -237,9 +244,9 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
     // UI相关
     private void checkColor(int cnt) {
-        if (cnt < lowerValue) {
+        if (cnt < min) {
             forceText.setTextColor(Color.rgb(255, 160, 0));
-        } else if (lowerValue < cnt && cnt < upperValue) {
+        } else if (min < cnt && cnt < max) {
             forceText.setTextColor(Color.rgb(0, 238, 0));
         } else {
             forceText.setTextColor(Color.RED);

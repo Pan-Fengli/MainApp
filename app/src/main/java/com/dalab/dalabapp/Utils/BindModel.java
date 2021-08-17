@@ -32,7 +32,7 @@ public class BindModel {
                 validTime += speed;
                 first = false;
             }
-            if(delayTime > 10000)
+            if(delayTime > 10000)//10s
             {
                 return false;
             }
