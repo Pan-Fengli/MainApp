@@ -20,6 +20,7 @@ public class ResHomeostasis extends AppCompatActivity {
     float lose = 2000;
     int shouldReleaseTime = 5000;
     TextView delayText, overText, validText, loseText, releaseText, scoreText, resText;
+    TextView levelText;
     ImageView predictImage;
     ImageView broken;
     // 正常0 休克1 肢端坏死2
@@ -37,6 +38,7 @@ public class ResHomeostasis extends AppCompatActivity {
         loseText = findViewById(R.id.loseBloodText);
         releaseText = findViewById(R.id.loose);
 
+        levelText = findViewById(R.id.Level);
         resText = findViewById(R.id._res);
         scoreText=findViewById(R.id.score);
         predictImage = findViewById(R.id.ResImage);
@@ -57,9 +59,9 @@ public class ResHomeostasis extends AppCompatActivity {
     int getPoint()
     {
         // D延迟系数T有效时间系数L失血量系数R释放系数
-        float D = Math.max(0, 1 - (float)delayTime/30000);
+        float D = Math.max(0, 1 - (float)delayTime/(Global.global.hoeoDelayTime * 1000));
         float T = 1;
-        if(validTime < 900000)
+        if(validTime < Global.global.hoeoValidTime)
             T = 0;
         float L = 1;
         if(lose > 1000)
@@ -70,12 +72,12 @@ public class ResHomeostasis extends AppCompatActivity {
         float R = 1;
         if(releaseTime < shouldReleaseTime)
         {
-            R = 0.6f;
+            R = (float)Global.global.hoeoReleasePunish / 100;
             if(predictType == 0)
                 predictType = 2;
         }
         if(overTime > 180000)
-            R *= 0.9f;
+            R *= (float)Global.global.hoeoPressPunish / 100;
         return (int)(D * T * L * R * 100);
     }
     // 设置页面
@@ -89,7 +91,13 @@ public class ResHomeostasis extends AppCompatActivity {
         if(releaseTime >= shouldReleaseTime)
             releaseText.setText("适当放松√");
         else releaseText.setText("适当放松×");
-
+        if(score >= Global.global.hoeoVeryGood)
+            levelText.setText("优秀");
+        else if(score >= Global.global.hoeoGood)
+            levelText.setText("良好");
+        else if(score >= Global.global.hoeoNormal)
+            levelText.setText("合格");
+        else levelText.setText("不及格");
         scoreText.setText("得分：" + score);
         // 结果预测
         if(predictType == 0)
@@ -120,7 +128,6 @@ public class ResHomeostasis extends AppCompatActivity {
             else if(Global.global.currentType==22)//左下
             {
                 id= this.getResources().getIdentifier("left_down_broken", "drawable", this.getPackageName());
-
             }
             else{
                 id= this.getResources().getIdentifier("right_down_broken", "drawable", this.getPackageName());

@@ -52,7 +52,11 @@ public class MainPage extends AppCompatActivity {
     EditText down_Low;
     EditText down_High;
     EditText height, weight;
-    EditText bindTime, hoeoTime;
+    EditText bindTime, hoeoTime, hoeoValidTime;
+    EditText hoeoVeryGood, hoeoGood, hoeoNormal;
+    EditText bindVeryGood, bindGood, bindNormal;
+    EditText hoeoDelayTime, hoeoPressPunish, hoeoReleasePunish;
+    EditText bindPressPunish, bindDelayTime;
 
     boolean opened=false;
     //
@@ -148,8 +152,8 @@ public class MainPage extends AppCompatActivity {
 
 
         //设备list
-        mListView = findViewById(R.id.device_list);
-        mListView.setAdapter(new ListAdapter(MainPage.this));//这里的listAdapter是自己写的类
+//        mListView = findViewById(R.id.device_list);
+//        mListView.setAdapter(new ListAdapter(MainPage.this));//这里的listAdapter是自己写的类
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -278,6 +282,30 @@ public class MainPage extends AppCompatActivity {
                 break;
             case 16:Global.global.hoeoTime = value;
                 break;
+            case 17: Global.global.hoeoValidTime = value;
+                break;
+            case 18:Global.global.hoeoVeryGood = value;
+                break;
+            case 19:Global.global.hoeoGood = value;
+                break;
+            case 20:Global.global.hoeoNormal = value;
+                break;
+            case 21:Global.global.bindVeryGood = value;
+                break;
+            case 22:Global.global.bindGood = value;
+                break;
+            case 23:Global.global.bindNormal = value;
+                break;
+            case 24:Global.global.hoeoDelayTime = value;
+                break;
+            case 25:Global.global.hoeoPressPunish = value;
+                break;
+            case 26:Global.global.hoeoReleasePunish = value;
+                break;
+            case 27:Global.global.bindDelayTime = value;
+                break;
+            case 28:Global.global.bindPressPunish = value;
+                break;
         }
     }
 
@@ -316,6 +344,18 @@ public class MainPage extends AppCompatActivity {
         weight = findViewById(R.id.weight);
         bindTime = findViewById(R.id.bindTime);
         hoeoTime = findViewById(R.id.hoeoTime);
+        hoeoValidTime = findViewById(R.id.hoeoValidTime);
+        hoeoVeryGood = findViewById(R.id.hoeoVeryGood);
+        hoeoGood = findViewById(R.id.hoeoGood);
+        hoeoNormal = findViewById(R.id.hoeoNormal);
+        bindVeryGood = findViewById(R.id.bindVeryGood);
+        bindGood = findViewById(R.id.bindGood);
+        bindNormal = findViewById(R.id.bindNormal);
+        hoeoDelayTime = findViewById(R.id.hoeoDelayTime);
+        hoeoPressPunish = findViewById(R.id.hoeoPressPunish);
+        hoeoReleasePunish = findViewById(R.id.hoeoReleasePunish);
+        bindDelayTime = findViewById(R.id.bindDelayTime);
+        bindPressPunish = findViewById(R.id.bindPressPunish);
     }
     void repaetSet()
     {
@@ -355,6 +395,18 @@ public class MainPage extends AppCompatActivity {
         HWsetFoucus(weight,14);
         HWsetFoucus(bindTime, 15);
         HWsetFoucus(hoeoTime, 16);
+        HWsetFoucus(hoeoValidTime, 17);
+        HWsetFoucus(hoeoVeryGood, 18);
+        HWsetFoucus(hoeoGood, 19);
+        HWsetFoucus(hoeoNormal, 20);
+        HWsetFoucus(bindVeryGood, 21);
+        HWsetFoucus(bindGood, 22);
+        HWsetFoucus(bindNormal, 23);
+        HWsetFoucus(hoeoDelayTime, 24);
+        HWsetFoucus(hoeoPressPunish, 25);
+        HWsetFoucus(hoeoReleasePunish, 26);
+        HWsetFoucus(bindDelayTime, 27);
+        HWsetFoucus(bindPressPunish, 28);
     }
 
     public void setDefault(View view)//在这之前是不是还应该弹出窗口来向用户确认一下？
