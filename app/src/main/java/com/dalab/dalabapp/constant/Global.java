@@ -25,8 +25,8 @@ public class Global extends Application {
     // 当前模式
     public int currentType = 0;
     // 时间设置
-    public int hoeoTime = 1200; //
-    public int bindTime = 30; //
+    public int hoeoTime = 1500; //
+    public int bindTime = 180; //
     public int hoeoValidTime = 900; //
     // 分数区间设置
     public int hoeoVeryGood = 90;
