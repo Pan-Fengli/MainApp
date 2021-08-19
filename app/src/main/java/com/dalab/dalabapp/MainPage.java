@@ -80,7 +80,23 @@ public class MainPage extends AppCompatActivity {
     static int height_def=175;//cm
     static int weight_def=65;//kg
 
-
+    // 时间设置
+     int hoeoTime_def = 1500; //
+     int bindTime_def = 180; //
+     int hoeoValidTime_def = 900;
+    // 分数区间设置
+     int hoeoVeryGood_def = 90;
+     int hoeoGood_def = 75;
+     int hoeoNormal_def = 60;
+     int bindVeryGood_def = 90;
+     int bindGood_def = 75;
+     int bindNormal_def = 60;
+    // 计算公式
+     int hoeoDelayTime_def = 30;
+     int hoeoPressPunish_def = 90;
+     int hoeoReleasePunish_def = 60;
+     int bindPressPunish_def = 80;
+     int bindDelayTime_def = 30;
     ListView mylist;
     AlertDialog textTips;
 //    boolean asure=false;
@@ -449,5 +465,48 @@ public class MainPage extends AppCompatActivity {
         height.setText(String.valueOf(height_def));
         Global.global.weight_value=weight_def;
         weight.setText(String.valueOf(height_def));
+
+        Global.global.hoeoTime=hoeoTime_def;
+        hoeoTime.setText(String.valueOf(hoeoTime_def));
+
+        Global.global.bindTime=bindTime_def;
+        bindTime.setText(String.valueOf(bindTime_def));
+
+        Global.global.hoeoValidTime=hoeoValidTime_def;
+        hoeoValidTime.setText(String.valueOf(hoeoValidTime_def));
+        
+        Global.global.hoeoVeryGood=hoeoVeryGood_def;
+        hoeoVeryGood.setText(String.valueOf(hoeoVeryGood_def));
+
+        Global.global.hoeoGood=hoeoGood_def;
+        hoeoGood.setText(String.valueOf(hoeoGood_def));
+        
+        Global.global.hoeoNormal=hoeoNormal_def;
+        hoeoNormal.setText(String.valueOf(hoeoNormal_def));
+
+        Global.global.bindVeryGood=bindVeryGood_def;
+        bindVeryGood.setText(String.valueOf(bindVeryGood_def));
+
+        Global.global.bindGood=bindGood_def;
+        bindGood.setText(String.valueOf(bindGood_def));
+
+        Global.global.bindNormal=bindNormal_def;
+        bindNormal.setText(String.valueOf(bindNormal_def));
+
+        Global.global.hoeoDelayTime=hoeoDelayTime_def;
+        hoeoDelayTime.setText(String.valueOf(hoeoDelayTime_def));
+
+        Global.global.hoeoPressPunish=hoeoPressPunish_def;
+        hoeoPressPunish.setText(String.valueOf(hoeoPressPunish_def));
+
+        Global.global.hoeoReleasePunish=hoeoReleasePunish_def;
+        hoeoReleasePunish.setText(String.valueOf(hoeoReleasePunish_def));
+
+        Global.global.bindPressPunish=bindPressPunish_def;
+        bindPressPunish.setText(String.valueOf(bindPressPunish_def));
+
+        Global.global.bindDelayTime=bindDelayTime_def;
+        bindDelayTime.setText(String.valueOf(bindDelayTime_def));
+
     }
 }
