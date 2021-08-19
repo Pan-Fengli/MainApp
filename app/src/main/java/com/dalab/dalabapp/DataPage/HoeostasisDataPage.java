@@ -85,10 +85,12 @@ public class HoeostasisDataPage extends AppCompatActivity {
         }
         else if(Global.global.currentType==22)//左下
         {
+            bleedspeed=171.1f;
             max = Global.global.left_down_high_value;
             min = Global.global.left_down_low_value;
         }
         else{
+            bleedspeed=171.1f;
             max = Global.global.right_down_high_value;
             min = Global.global.right_down_low_value;
         }
