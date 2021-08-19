@@ -29,8 +29,10 @@ public class Hemostasis extends AppCompatActivity {
         // 设置总时间和有效时间
         validTime = findViewById(R.id.detailListPageValidTime);
         totalTime = findViewById(R.id.detailListPageTotalTime);
-        validTime.setText("有效止血时间" + Global.global.hoeoValidTime / 60 + "min");
-        totalTime.setText("总止血时间" + Global.global.hoeoTime / 60 + "min");
+//        validTime.setText("有效止血时间" + Global.global.hoeoValidTime / 60 + "min");
+//        totalTime.setText("总止血时间" + Global.global.hoeoTime / 60 + "min");
+        validTime.setText("有效止血时间" + Global.global.hoeoValidTime + "min");
+        totalTime.setText("总止血时间" + Global.global.hoeoTime + "min");
         validTime.setVisibility(View.VISIBLE);
         totalTime.setVisibility(View.VISIBLE);
         // others

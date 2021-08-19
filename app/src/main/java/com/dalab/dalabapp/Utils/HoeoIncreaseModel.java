@@ -1,4 +1,7 @@
 package com.dalab.dalabapp.Utils;
+
+import com.dalab.dalabapp.constant.Global;
+
 //此工具类用来保存、计算开始的时间，计算有效时间与失血量
 public class HoeoIncreaseModel {
     public int percent = 100;
@@ -14,7 +17,7 @@ public class HoeoIncreaseModel {
     public int delayTime = 0;
     public int overTime = 0;
     // 用来判断是否是噪声的gap
-    int gap = 3000;
+    int gap = 2000;
     int judgeGap = 0;
     public HoeoIncreaseModel(int ma, int mi, int vol, float bs)
     {
@@ -42,13 +45,13 @@ public class HoeoIncreaseModel {
             else if(data <= max && data >= min)
             {
                 validTime += speed;
-                if(validTime >= 900000)
+                if(validTime >= Global.global.hoeoValidTime)
                     recover = true;
             }
             else
             {
                 validTime += speed;
-                if(validTime >= 900000)
+                if(validTime >= Global.global.hoeoValidTime)
                     recover = true;
                 overTime += speed;
             }

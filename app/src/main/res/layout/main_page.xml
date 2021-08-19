@@ -307,10 +307,11 @@
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="秒"
+                        android:text="分"
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -423,10 +424,11 @@
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="秒"
+                        android:text="分"
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -666,10 +668,11 @@
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="秒"
+                        android:text="分"
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
                 </LinearLayout>
