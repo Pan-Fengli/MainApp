@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ResBind extends AppCompatActivity {
     TextView delayText, validText, averageText, resText, scoreText, tmp1, tmp2;
+    TextView levelText;
     ImageView image;
     boolean broken;
     ImageView broken_image;
@@ -37,6 +38,7 @@ public class ResBind extends AppCompatActivity {
         broken_image.setVisibility(View.INVISIBLE);
         tmp1 = findViewById(R.id.loseBloodText);
         tmp2 = findViewById(R.id.loose);
+        levelText = findViewById(R.id.Level);
         // 获取计分相关项
         validTime = getIntent().getIntExtra("validTime", 0);
         delayTime = getIntent().getIntExtra("delayTime", 900000);
@@ -63,7 +65,13 @@ public class ResBind extends AppCompatActivity {
         delayText.setText("延迟" + getStringTime(delayTime));
         validText.setText("有效" + getStringTime(validTime));
         averageText.setText("平均压力" + String.format("%.2f", averageStress)+"mmHg");//保留两位小数
-
+        if(score >= Global.global.bindVeryGood)
+            levelText.setText("优秀");
+        else if(score >= Global.global.bindGood)
+            levelText.setText("良好");
+        else if(score >= Global.global.bindNormal)
+            levelText.setText("合格");
+        else levelText.setText("不及格");
         if(score == 20)
         {
             resText.setText("压力过小，包扎失败");

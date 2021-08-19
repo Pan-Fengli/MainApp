@@ -25,8 +25,22 @@ public class Global extends Application {
     // 当前模式
     public int currentType = 0;
     // 时间设置
-    public int hoeoTime = 900;
-    public int bindTime = 30;
+    public int hoeoTime = 1200; //
+    public int bindTime = 30; //
+    public int hoeoValidTime = 900; //
+    // 分数区间设置
+    public int hoeoVeryGood = 90;
+    public int hoeoGood = 75;
+    public int hoeoNormal = 60;
+    public int bindVeryGood = 90;
+    public int bindGood = 75;
+    public int bindNormal = 60;
+    // 计算公式
+    public int hoeoDelayTime = 30;
+    public int hoeoPressPunish = 90;
+    public int hoeoReleasePunish = 60;
+    public int bindPressPunish = 80;
+    public int bindDelayTime = 30;
     @Override
     public void onCreate()
     {

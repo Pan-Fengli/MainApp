@@ -1,5 +1,7 @@
 package com.dalab.dalabapp.Utils;
 
+import com.dalab.dalabapp.constant.Global;
+
 public class BindModel {
     int max;
     int min;
@@ -32,7 +34,7 @@ public class BindModel {
                 validTime += speed;
                 first = false;
             }
-            if(delayTime > 10000)//10s
+            if(delayTime > Global.global.bindDelayTime * 1000)//10s
             {
                 return false;
             }

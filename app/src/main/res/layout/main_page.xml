@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="操作标准(mmHg)"
+                    android:text="止血设置(N)"
                     android:textSize="20sp"
 
                     android:textColor="@android:color/background_light" />
@@ -130,13 +130,7 @@
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
-<!--                    <TextView-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="2"-->
-<!--                        android:text="mmHg"-->
-<!--                        android:textColor="@android:color/background_light"-->
-<!--                        android:textSize="15sp" />-->
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -144,7 +138,6 @@
                         android:text="~"
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
-
                     <EditText
                         android:id="@+id/left_up_High"
                         android:layout_width="wrap_content"
@@ -264,7 +257,6 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:orientation="horizontal">
-
                     <EditText
                         android:id="@+id/right_down_Low"
                         android:layout_width="wrap_content"
@@ -275,7 +267,6 @@
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -283,7 +274,6 @@
                         android:text="~"
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
-
                     <EditText
                         android:id="@+id/right_down_High"
                         android:layout_width="wrap_content"
@@ -295,6 +285,219 @@
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
                 </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="有效止血时长"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoValidTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="900"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="止血延迟时间"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoDelayTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="30"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未松开止血带惩罚系数"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoReleasePunish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="60"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="压力过大惩罚系数"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoPressPunish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="90"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="止血总时长"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="1200"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="计分区间"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/background_light"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoVeryGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="90"
+                        android:textColor="@android:color/background_light"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="优秀"
+                        android:textColor="@android:color/background_light"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="75"
+                        android:textColor="@android:color/background_light"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="良好"
+                        android:textColor="@android:color/background_light"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/hoeoNormal"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="60"
+                        android:textColor="@android:color/background_light"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="合格"
+                        android:textColor="@android:color/background_light"/>
+                </LinearLayout>
+                <View
+                    android:layout_height="1.5dp"
+                    android:text="分割线"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorAccent"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="包扎设置(N)"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/background_light" />
                 <!--                *********************************************-->
                 <TextView
                     android:layout_width="match_parent"
@@ -383,6 +586,148 @@
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
                 </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎压力过大惩罚系数"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/bindPressPunish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="180"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎延迟时间"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/bindDelayTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="180"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎总时长"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/bindTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="180"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="计分区间"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/background_light"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/bindVeryGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="90"
+                        android:textColor="@android:color/background_light"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="优秀"
+                        android:textColor="@android:color/background_light"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/bindGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="75"
+                        android:textColor="@android:color/background_light"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="良好"
+                        android:textColor="@android:color/background_light"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/bindNormal"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="60"
+                        android:textColor="@android:color/background_light"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="合格"
+                        android:textColor="@android:color/background_light"/>
+                </LinearLayout>
                 <View
                     android:layout_height="1.5dp"
                     android:text="分割线"
@@ -461,52 +806,6 @@
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
                 </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="beforeDescendants"
-                android:gravity="left"
-                android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/bindTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="3"
-                    android:hint="包扎时长"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:textColor="@android:color/background_light"
-                    android:textColorHint="@android:color/background_light" />
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:text="秒"
-                    android:textColor="@android:color/background_light"
-                    android:textSize="20sp" />
-            </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:gravity="left"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:id="@+id/hoeoTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="3"
-                        android:hint="止血时长"
-                        android:importantForAutofill="no"
-                        android:inputType="number"
-                        android:textColor="@android:color/background_light"
-                        android:textColorHint="@android:color/background_light" />
-                    <TextView
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:text="秒"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="20sp" />
-                </LinearLayout>
 
                 <Button
                     android:id="@+id/set_def"
@@ -518,26 +817,6 @@
                     android:layout_marginBottom="5dp"
                     android:onClick="setDefault"
                     android:text="恢复默认设置" />
-
-                <View
-                    android:layout_height="1.5dp"
-                    android:text="分割线"
-                    android:layout_width="match_parent"
-                    android:background="@color/colorAccent"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="硬件设置"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/background_light" />
-                <ListView
-                    android:id="@+id/device_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </ListView>
             </LinearLayout>
         </ScrollView>
 
