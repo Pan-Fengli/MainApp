@@ -405,7 +405,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="止血总时长"
+                    android:text="止血训练总时长"
                     android:textColor="@android:color/background_light" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -418,7 +418,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="3"
-                        android:hint="1200"
+                        android:hint="1500"
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
