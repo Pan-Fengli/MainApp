@@ -237,7 +237,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
             chart.invalidate();//重绘
             storage.clear();
             //最后再修改text
-            String newForce = (int) average + "mmHg";
+            String newForce = (int) average + "N";
             forceText.setText(newForce);
             //还要检查一下颜色
             checkColor((int) average);
@@ -301,7 +301,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         percentText.setText(String.valueOf(increaseModel.percent));
         validTimeText.setText(getStringTime(increaseModel.validTime));
 //        System.out.println(increaseModel.validTime);
-        if(increaseModel.validTime >= Global.global.hoeoValidTime)
+        if(increaseModel.validTime >= Global.global.hoeoValidTime*60*1000)
             infoText.setText("请稍微放松止血带");
     }
 

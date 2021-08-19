@@ -162,7 +162,7 @@ public class BindDataPage extends AppCompatActivity {
             chart.invalidate();//重绘
             storage.clear();
             //最后再修改text
-            String newForce = (int) average + "mmHg";
+            String newForce = (int) average + "N";
             forceText.setText(newForce);
             //还要检查一下颜色
             checkColor((int) average);

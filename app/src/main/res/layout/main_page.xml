@@ -91,15 +91,16 @@
                 android:background="#111"
                 android:descendantFocusability="beforeDescendants"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="止血设置"
-                    android:textSize="20sp"
+                    android:text="止血标准设置"
+                    android:textColor="@android:color/background_light"
 
-                    android:textColor="@android:color/background_light" />
+                    android:textSize="20sp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -117,6 +118,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:descendantFocusability="beforeDescendants"
                     android:orientation="horizontal">
 
@@ -124,7 +126,7 @@
                         android:id="@+id/left_up_Low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="5"
+                        android:ems="4"
                         android:hint="下限"
                         android:importantForAutofill="no"
                         android:inputType="number"
@@ -132,12 +134,13 @@
                         android:textColorHint="@android:color/background_light" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:text="~"
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
+
                     <EditText
                         android:id="@+id/left_up_High"
                         android:layout_width="wrap_content"
@@ -148,13 +151,13 @@
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
                         android:textColorHint="@android:color/background_light" />
-<!--                    <TextView-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="2"-->
-<!--                        android:text="mmHg"-->
-<!--                        android:textColor="@android:color/background_light"-->
-<!--                        android:textSize="15sp" />-->
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="2"-->
+                    <!--                        android:text="mmHg"-->
+                    <!--                        android:textColor="@android:color/background_light"-->
+                    <!--                        android:textSize="15sp" />-->
                 </LinearLayout>
                 <!--                *********************************************-->
                 <TextView
@@ -167,6 +170,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:descendantFocusability="beforeDescendants"
                     android:orientation="horizontal">
 
@@ -174,7 +178,7 @@
                         android:id="@+id/right_up_Low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="5"
+                        android:ems="4"
                         android:hint="下限"
                         android:importantForAutofill="no"
                         android:inputType="number"
@@ -211,6 +215,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:descendantFocusability="beforeDescendants"
                     android:orientation="horizontal">
 
@@ -218,7 +223,7 @@
                         android:id="@+id/left_down_Low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="5"
+                        android:ems="4"
                         android:hint="下限"
                         android:importantForAutofill="no"
                         android:inputType="number"
@@ -255,13 +260,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:descendantFocusability="beforeDescendants"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/right_down_Low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="5"
+                        android:ems="4"
                         android:hint="下限"
                         android:importantForAutofill="no"
                         android:inputType="number"
@@ -296,13 +302,15 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/hoeoValidTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="3"
-                        android:hint="900"
+                        android:hint="15"
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
@@ -326,6 +334,7 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/hoeoDelayTime"
@@ -355,6 +364,7 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/hoeoReleasePunish"
@@ -384,6 +394,7 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/hoeoPressPunish"
@@ -413,13 +424,15 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/hoeoTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="3"
-                        android:hint="1500"
+                        android:hint="20"
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
@@ -442,6 +455,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/hoeoVeryGood"
@@ -458,6 +472,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/hoeoGood"
@@ -474,6 +489,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/hoeoNormal"
@@ -492,14 +508,15 @@
                     android:text="分割线"
                     android:layout_width="match_parent"
                     android:background="@color/colorAccent"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="包扎设置"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/background_light" />
+                    android:text="包扎标准设置"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp" />
                 <!--                *********************************************-->
                 <TextView
                     android:layout_width="match_parent"
@@ -512,13 +529,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/up_Low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="5"
+                        android:ems="4"
                         android:hint="下限"
                         android:importantForAutofill="no"
                         android:inputType="number"
@@ -556,13 +574,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/down_Low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ems="5"
+                        android:ems="4"
                         android:hint="下限"
                         android:importantForAutofill="no"
                         android:inputType="number"
@@ -599,6 +618,7 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/bindPressPunish"
@@ -628,6 +648,7 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/bindDelayTime"
@@ -657,13 +678,15 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/bindTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="3"
-                        android:hint="180"
+                        android:hint="3"
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
@@ -686,6 +709,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/bindVeryGood"
@@ -702,6 +726,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/bindGood"
@@ -718,6 +743,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/bindNormal"
@@ -756,6 +782,7 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
 
                     <EditText
@@ -789,6 +816,7 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:gravity="left"
+                    android:paddingLeft="30dp"
                     android:orientation="horizontal">
 
                     <EditText
