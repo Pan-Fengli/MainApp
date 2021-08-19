@@ -29,7 +29,7 @@ public class BindPage extends AppCompatActivity {
         setContentView(R.layout.detail_list_page);
         totalTime = findViewById(R.id.detailListPageTotalTime);
 //        totalTime.setText("包扎总时长" + Global.global.bindTime / 60 + "min");
-        totalTime.setText("包扎总时长" + Global.global.bindTime  + "min");
+        totalTime.setText("包扎训练总时长" + Global.global.bindTime  + "min");
         tmp = findViewById(R.id.detailListPageValidTime);
         tmp.setTextSize(0);
         myList = findViewById(R.id.list);

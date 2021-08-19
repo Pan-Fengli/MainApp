@@ -45,13 +45,13 @@ public class HoeoIncreaseModel {
             else if(data <= max && data >= min)
             {
                 validTime += speed;
-                if(validTime >= Global.global.hoeoValidTime)
+                if(validTime >= Global.global.hoeoValidTime*60*1000)
                     recover = true;
             }
             else
             {
                 validTime += speed;
-                if(validTime >= Global.global.hoeoValidTime)
+                if(validTime >= Global.global.hoeoValidTime*60*1000)
                     recover = true;
                 overTime += speed;
             }

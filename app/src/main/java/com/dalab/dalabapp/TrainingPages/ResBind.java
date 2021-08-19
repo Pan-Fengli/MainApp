@@ -64,7 +64,7 @@ public class ResBind extends AppCompatActivity {
     {
         delayText.setText("延迟" + getStringTime(delayTime));
         validText.setText("有效" + getStringTime(validTime));
-        averageText.setText("平均压力" + String.format("%.2f", averageStress)+"mmHg");//保留两位小数
+        averageText.setText("平均压力" + String.format("%.2f", averageStress)+"N");//保留两位小数
         if(score >= Global.global.bindVeryGood)
             levelText.setText("优秀");
         else if(score >= Global.global.bindGood)
