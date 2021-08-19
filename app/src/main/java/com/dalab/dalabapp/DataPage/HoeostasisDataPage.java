@@ -171,7 +171,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
                         }
-                        if (count >= Global.global.hoeoValidTime * 1000) {//15min
+                        if (count >= Global.global.hoeoValidTime * 60 * 1000) {//15min
                             speed = 213;//15min之后流速又减慢一点点
                             release = true;//提示松开，之后的数据生成就是松开的数据...
                         }
@@ -194,7 +194,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                         increaseModel.update(speed, currentData);
                         timerText.setText(getStringTime(count));
                         // 收尾工作
-                        if (count >= Global.global.hoeoTime * 1000)//20min
+                        if (count >= Global.global.hoeoTime * 60 * 1000)//20min *60是因为是min为单位
                         {
                             timerText.setText("训练完成");
                             timer1.cancel();
@@ -300,7 +300,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
         bleedText.setText("失血量：" + increaseModel.lose);
         percentText.setText(String.valueOf(increaseModel.percent));
         validTimeText.setText(getStringTime(increaseModel.validTime));
-        if(increaseModel.validTime >= 900000)
+//        System.out.println(increaseModel.validTime);
+        if(increaseModel.validTime >= Global.global.hoeoValidTime)
             infoText.setText("请稍微放松止血带");
     }
 

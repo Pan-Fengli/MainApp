@@ -60,13 +60,11 @@ public class BindDataPage extends AppCompatActivity {
 //        max = Global.global.down_High;
 //        min = Global.global.down_Low;
         //根据当前的type来判断是那种类型。
-        if(Global.global.currentType ==10)
-        {
+        if (Global.global.currentType == 10) {
             //上肢
             max = Global.global.up_high_value;
             min = Global.global.up_low_value;
-        }
-        else{
+        } else {
             max = Global.global.down_high_value;
             min = Global.global.down_low_value;
         }
@@ -88,16 +86,15 @@ public class BindDataPage extends AppCompatActivity {
         StartTimer();
         //
         jump.setVisibility(View.INVISIBLE);
-        jump.setOnClickListener(new View.OnClickListener()
-        {
+        jump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextPage(v);
             }
         });
     }
-    private void StartTimer()
-    {
+
+    private void StartTimer() {
         timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -106,15 +103,13 @@ public class BindDataPage extends AppCompatActivity {
                     public void run() {
                         // 对待压力较小的态度：提前打断，初次容忍10s，回落容忍2s
                         // 对待压力过大的态度，到最后看平均值，如果大了就扣分
-                        if(count >= Global.global.bindTime * 1000)
-                        {
+                        if (count >= Global.global.bindTime * 60 * 1000) {
                             over();
                         }
                         count += speed;
                         currentData = generateData.generate(false);
                         //更新
-                        if(!bindModel.update(currentData, speed))
-                        {
+                        if (!bindModel.update(currentData, speed)) {
                             bre();
                         }
                         // 页面元素
@@ -125,24 +120,25 @@ public class BindDataPage extends AppCompatActivity {
         };
         timer1.schedule(timerTask, 0, interval);
     }
-    private void bre()
-    {
+
+    private void bre() {
         timer1.cancel();
         broken = true;
         jump.setVisibility(View.VISIBLE);
     }
-    private void over()
-    {
+
+    private void over() {
         timer1.cancel();
         jump.setVisibility(View.VISIBLE);
     }
-    private void changeUI()
-    {
+
+    private void changeUI() {
         // 更新表格
         changeChart();
         totalTimeText.setText(getStringTime(bindModel.getTime()));
         validTimeText.setText(getStringTime(bindModel.getValidTime()));
     }
+
     // 每次时间数据更新都调用这个函数，在这个函数里面模拟数据的生成和更新
     private void changeChart() {
         DrawLineChart chart = findViewById(R.id.chart);
@@ -172,6 +168,7 @@ public class BindDataPage extends AppCompatActivity {
             checkColor((int) average);
         }
     }
+
     private void checkColor(int cnt) {
         if (cnt < min) {
             forceText.setTextColor(Color.rgb(255, 160, 0));
@@ -181,6 +178,7 @@ public class BindDataPage extends AppCompatActivity {
             forceText.setTextColor(Color.RED);
         }
     }
+
     private void init() {
         DrawLineChart chart = findViewById(R.id.chart);
         chart.setBrokenLineLTRB(50, 15, 10, 5);
@@ -188,7 +186,7 @@ public class BindDataPage extends AppCompatActivity {
         chart.setCircleWidth(1f);
         chart.setBorderTextSize(15);//修改边框文字大小
         chart.setBrokenLineTextSize(10);//修改这线上文字大小
-        int maxValue=45<max?max:45;
+        int maxValue = 45 < max ? max : 45;
 //        chart.setMaxVlaue(45);
         chart.setMaxVlaue(maxValue);
         chart.setMinValue(0);
@@ -199,6 +197,7 @@ public class BindDataPage extends AppCompatActivity {
         chart.setUpper((float) max);//这两个就是上下限范围...
         chart.setLower((float) min);
     }
+
     private String getStringTime(int cnt) {
         int min = cnt / 60000;
         int second = cnt % 60000 / 1000;

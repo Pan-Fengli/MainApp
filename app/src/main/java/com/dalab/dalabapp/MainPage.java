@@ -81,9 +81,9 @@ public class MainPage extends AppCompatActivity {
     static int weight_def=65;//kg
 
     // 时间设置
-     int hoeoTime_def = 1500; //
-     int bindTime_def = 180; //
-     int hoeoValidTime_def = 900;
+     int hoeoTime_def = 20; //20min
+     int bindTime_def = 3; //3min
+     int hoeoValidTime_def = 15;//15min
     // 分数区间设置
      int hoeoVeryGood_def = 90;
      int hoeoGood_def = 75;
