@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.dalab.dalabapp.R;
+import com.dalab.dalabapp.constant.Global;
 
 public class bindAdapter extends BaseAdapter {
     private Context mContext;
@@ -36,7 +37,7 @@ public class bindAdapter extends BaseAdapter {
     }
     static class ViewHolderbind
     {
-        public TextView inner_title, inner_content;
+        public TextView inner_title, pressure;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class bindAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.inner_list_item, null);
             holder = new ViewHolderbind();
             holder.inner_title = convertView.findViewById(R.id.inner_title);
-            holder.inner_content = convertView.findViewById(R.id.inner_content);
+            holder.pressure = convertView.findViewById(R.id.inner_Pressure);
             convertView.setTag(holder);
         }
         else
@@ -58,16 +59,16 @@ public class bindAdapter extends BaseAdapter {
         if(position == 0)
         {
             holder.inner_title.setText("上肢包扎");
-            int time=15;
-            String info="有效包扎时间"+time+"min";
-            holder.inner_content.setText(info);
+            String info="最佳包扎压力"+ Global.global.up_low_value +
+                    "~" + Global.global.up_high_value +"N";
+            holder.pressure.setText(info);
         }
         else if(position == 1)
         {
             holder.inner_title.setText("下肢包扎");
-            int time=15;
-            String info="有效包扎时间"+time+"min";
-            holder.inner_content.setText(info);
+            String info="最佳包扎压力"+ Global.global.down_low_value +
+                    "~" + Global.global.down_high_value +"N";
+            holder.pressure.setText(info);
         }
         return convertView;
     }
