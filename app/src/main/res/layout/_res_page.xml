@@ -88,6 +88,9 @@
         android:textSize="30sp"
         android:text="result"
         android:gravity="center_horizontal" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/ResImage"
         android:layout_width="match_parent"
@@ -115,4 +118,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="invisible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

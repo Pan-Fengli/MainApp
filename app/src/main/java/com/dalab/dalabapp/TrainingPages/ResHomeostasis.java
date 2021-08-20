@@ -67,8 +67,10 @@ public class ResHomeostasis extends AppCompatActivity {
         if(lose > 1000)
         {
             L = Math.max(0, 1 - (float)(lose - 1000) / 1000);
-            predictType = 1;
+
         }
+        if(lose > 2000)
+            predictType = 1;
         float R = 1;
         if(releaseTime < shouldReleaseTime)
         {
