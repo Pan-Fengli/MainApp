@@ -64,14 +64,14 @@ public class MainPage extends AppCompatActivity {
     public static int upperValue = 600;
 
     //先设定默认值
-    static int left_up_low_def=200;//改成static只是为了能够在下面全局变量赋值的时候能够输入进去，这个值之后本身也不会给用户去修改。
-    static int left_up_high_def=600;
-    static int right_up_low_def=200;
-    static int right_up_high_def=600;
-    static int left_down_low_def=200;
-    static int left_down_high_def=600;
-    static int right_down_low_def=200;
-    static int right_down_high_def=600;
+    static int left_up_low_def=10;//改成static只是为了能够在下面全局变量赋值的时候能够输入进去，这个值之后本身也不会给用户去修改。
+    static int left_up_high_def=15;
+    static int right_up_low_def=10;
+    static int right_up_high_def=15;
+    static int left_down_low_def=10;
+    static int left_down_high_def=15;
+    static int right_down_low_def=10;
+    static int right_down_high_def=15;
     static int up_low_def=10;
     static int up_high_def=35;
     static int down_low_def=10;

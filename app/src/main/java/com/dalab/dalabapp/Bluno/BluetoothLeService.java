@@ -260,6 +260,8 @@ public class BluetoothLeService extends Service {
         sendBroadcast(intent);
     }
 
+    String msg1 = "";
+
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
@@ -284,7 +286,7 @@ public class BluetoothLeService extends Service {
         // For all other profiles, writes the data formatted in HEX.
         final byte[] data = characteristic.getValue();
         String msg = decodePackage(data);//其实也可以不写成一个函数，直接在这里给decode成好几个int或者float，然后putExtra
-
+        System.out.println("第1部分：" + new String(data));
         if (data != null && data.length > 0) {
 
             //此外还需要分割——之后会根据id来做。
@@ -294,17 +296,33 @@ public class BluetoothLeService extends Service {
 //            }
             //第一部分转化成float，并修改全局变量
             if (!sPlitArray[0].equals("DF Bluno")) {
-                Global.global.pressure = Float.parseFloat(sPlitArray[1]);
+//                Global.global.pressure = Float.parseFloat(sPlitArray[1]);
+                if (msg.startsWith("{")) {
+                    System.out.println("{开头" );
+                    msg1 = msg;
+                } else if (!msg.endsWith("\n")) {
+                    System.out.println("中间");
+                    msg1 = msg1 + msg;
+                }
+                else {
+                    msg=msg1+msg;
+                    System.out.println("}结尾" );
+                    System.out.println("拼接" + msg);
+                    JSONObject json = JSONObject.fromObject(msg);
+                    Global.global.pressure = Float.parseFloat(json.get("result").toString()) * 3.14f * 0.000001f / 0.0075f;//mmHg到pa，转化成压力
+                    System.out.println("result:" + Global.global.pressure);
+                    intent.putExtra(EXTRA_DATA, msg);
+                    sendBroadcast(intent);
+                }
 
-                JSONObject json=JSONObject.fromObject(msg);
-                Global.global.pressure = Float.parseFloat(json.get("result").toString());
-                System.out.println("result"+Global.global.pressure);
-
+            } else {
+                intent.putExtra(EXTRA_DATA, msg);
+                sendBroadcast(intent);
             }
 
 //                intent.putExtra(EXTRA_DATA, new String(data));
-            intent.putExtra(EXTRA_DATA, msg);
-            sendBroadcast(intent);
+//            intent.putExtra(EXTRA_DATA, msg);
+//            sendBroadcast(intent);
         }
         //其实想了想，这个解码也可以放在最外层去做——也就是我们的onreceive那里，可以最后从string去解码，变到我们需要的东西，不然中途传递数据的过程就会比较复杂
 //        }
