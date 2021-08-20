@@ -143,7 +143,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
         chart.setBorderTextSize(15);//修改边框文字大小
         chart.setBrokenLineTextSize(10);//修改这线上文字大小
 //        chart.setMaxVlaue(600);
-        int maxValue=750<max?max:750;
+//        int maxValue=750<max?max:750;
+        int maxValue=20<max?max:20;
 //        chart.setMaxVlaue(750);
         chart.setMaxVlaue(maxValue);
         chart.setMinValue(0);
@@ -177,6 +178,10 @@ public class HoeostasisDataPage extends AppCompatActivity {
                         }
                         count += speed;
                         currentData = generateData.generate(release);
+                        //现在的currentData应该是从全局变量读取
+                        //可以适当乘以一个倍数来为了放大效果
+//                        currentData=Global.global.pressure*300;
+                        currentData=Global.global.pressure;
                         // 更改表格
                         changeChart();
                         // 更改文本和图片
@@ -297,7 +302,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     private void changeUI()
     {
         updateState(increaseModel.lose);
-        bleedText.setText("失血量：" + increaseModel.lose);
+        bleedText.setText("失血量：" + String.format("%.2f", increaseModel.lose));//应该保留两位小数
         percentText.setText(String.valueOf(increaseModel.percent));
         validTimeText.setText(getStringTime(increaseModel.validTime));
 //        System.out.println(increaseModel.validTime);

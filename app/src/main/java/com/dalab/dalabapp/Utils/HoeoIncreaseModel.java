@@ -37,7 +37,7 @@ public class HoeoIncreaseModel {
             {
                 if(!recover)
                 {
-                    lose += speed;
+                    lose += bloodSpeed*0.001f*speed;//这里的bleedspeed是按照s为单位的，每次update之间的时间间隔是speed，单位是ms，
                     percent = Math.max((volumn - (int)lose) * 100 / volumn, 0);
                 }
                 judgeGap = 0;
@@ -67,7 +67,7 @@ public class HoeoIncreaseModel {
                 judgeGap = 0;
                 if(!recover)
                 {
-                    lose += speed;
+                    lose += bloodSpeed*0.001f*speed;;
                     percent = Math.max((volumn - (int)lose) * 100 / volumn, 0);
                 }
             }
