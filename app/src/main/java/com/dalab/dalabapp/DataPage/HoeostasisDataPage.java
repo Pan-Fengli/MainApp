@@ -99,7 +99,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         generateData = new GenerateData(max, min);
 //        generateData = new GenerateData(700, 550);
         increaseModel = new HoeoIncreaseModel(max, min, Volumn, bleedspeed);
-        relaxModel = new RelaxModel(relaxLowStress, relaxHighStress);
+        relaxModel = new RelaxModel(min);
 
         heartImage = findViewById(R.id.imageView3);
         bleedText = findViewById(R.id.textView3);

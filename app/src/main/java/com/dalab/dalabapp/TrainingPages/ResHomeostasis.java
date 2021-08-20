@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ResHomeostasis extends AppCompatActivity {
     int validTime = 0, delayTime = 900000, releaseTime = 0, overTime = 0;
     float lose = 2000;
-    int shouldReleaseTime = 5000;
+    int shouldReleaseTime = 1000;
     TextView delayText, overText, validText, loseText, releaseText, scoreText, resText;
     TextView levelText;
     ImageView predictImage;
