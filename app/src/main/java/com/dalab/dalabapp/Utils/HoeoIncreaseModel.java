@@ -67,7 +67,7 @@ public class HoeoIncreaseModel {
                 judgeGap = 0;
                 if(!recover)
                 {
-                    lose += bloodSpeed*0.001f*speed;;
+                    lose += bloodSpeed*0.001f*speed;
                     percent = Math.max((volumn - (int)lose) * 100 / volumn, 0);
                 }
             }

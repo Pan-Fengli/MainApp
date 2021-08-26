@@ -107,7 +107,9 @@ public class BindDataPage extends AppCompatActivity {
                             over();
                         }
                         count += speed;
-                        currentData = generateData.generate(false);
+                       // currentData = generateData.generate(false);
+                        //现在的currentData应该是从全局变量读取
+                        currentData=Global.global.pressure;
                         //更新
                         if (!bindModel.update(currentData, speed)) {
                             bre();
