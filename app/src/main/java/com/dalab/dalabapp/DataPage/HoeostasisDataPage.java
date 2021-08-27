@@ -81,7 +81,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
         else if(Global.global.currentType==21)//右上
         {
             max = Global.global.right_up_high_value;
-            min = Global.global.right_down_low_value;
+            min = Global.global.right_up_low_value;
         }
         else if(Global.global.currentType==22)//左下
         {
@@ -253,7 +253,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
             forceText.setTextColor(Color.rgb(255, 160, 0));
         } else if (min < cnt && cnt < max) {
             forceText.setTextColor(Color.rgb(0, 238, 0));
-        } else {
+        } else if(cnt>max) {
             forceText.setTextColor(Color.RED);
         }
     }
