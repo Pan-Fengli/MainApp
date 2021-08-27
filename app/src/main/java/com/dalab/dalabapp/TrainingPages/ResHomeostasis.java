@@ -80,6 +80,10 @@ public class ResHomeostasis extends AppCompatActivity {
         }
         if(overTime > 180000)
             R *= (float)Global.global.hoeoPressPunish / 100;
+        System.out.println("D:"+D);
+        System.out.println("T:"+T);
+        System.out.println("L:"+L);
+        System.out.println("R:"+R);
         return (int)(D * T * L * R * 100);
     }
     // 设置页面

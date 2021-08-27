@@ -167,7 +167,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (count >= 30000) {//5s的时候
+                        if (count >= 30000) {//30s的时候
                             speed = 800;
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
@@ -179,12 +179,10 @@ public class HoeostasisDataPage extends AppCompatActivity {
                         count += speed;
                         currentData = generateData.generate(release);
                         //现在的currentData应该是从全局变量读取
-                        //可以适当乘以一个倍数来为了放大效果
-//                        currentData=Global.global.pressure*300;
                         currentData=Global.global.pressure;
-                        // 更改表格
+                        // 更改坐标表格
                         changeChart();
-                        // 更改文本和图片
+                        // 更改心脏模型的文本和图片
                         changeUI();
                         if(oldPercent != increaseModel.percent)
                         {
@@ -223,7 +221,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
     private void changeChart() {
         DrawLineChart chart = findViewById(R.id.chart);
         float data;
-        // 可以写成一个函数来生成这里的data
+        // 可以写成一个函数来模拟生成这里的data
         data = currentData;
         storage.add(data);
         if (storage.size() == sampleDistance) {//存满了之后才计算一次。

@@ -101,10 +101,10 @@ public class MainPage extends AppCompatActivity {
     AlertDialog textTips;
 //    boolean asure=false;
 
-    //蓝牙相关
-    private ListView mListView;
-    private DeviceAdapter mAdapter;
-    private List<BluetoothDevice> mDeviceList = new ArrayList<>();
+//    //蓝牙相关
+//    private ListView mListView;
+//    private DeviceAdapter mAdapter;
+//    private List<BluetoothDevice> mDeviceList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,6 @@ public class MainPage extends AppCompatActivity {
         setContentView(R.layout.main_page);
 
         mDrawerLayout=findViewById(R.id.drawer_layout);
-//        findViewById(R.id.right_drawer).getParent().requestDisallowInterceptTouchEvent(true);//这样就不会自动退出了?
         mDrawerContent=findViewById(R.id.right_drawer);
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);//一开始是打开的，不能够自动关闭，但是能够通过代码的方式关闭
         mDrawerLayout.closeDrawer(mDrawerContent);
@@ -145,7 +144,7 @@ public class MainPage extends AppCompatActivity {
         repeatFind();
         repaetSet();
         setDef();
-        //创建对话框
+        //创建对话框，在点击恢复默认设置之前要求进行确认
         textTips = new AlertDialog.Builder(MainPage.this)
                 .setTitle("Tips:")
                 .setMessage("您确认要恢复至默认设置吗？")

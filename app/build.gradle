@@ -24,10 +24,12 @@ repositories {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    /*  导入json解析包*/
     implementation 'commons-beanutils:commons-beanutils:1.9.3'
     implementation ('net.sf.json-lib:json-lib:2.4:jdk15'){
         exclude group: 'commons-beanutils'
     }
+    /*  导入json解析包*/
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.0.0'

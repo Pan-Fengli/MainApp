@@ -314,7 +314,7 @@
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
-                        android:textColorHint="@android:color/background_light" />
+                        android:textColorHint="@color/gray" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -336,6 +336,7 @@
                     android:gravity="left"
                     android:paddingLeft="30dp"
                     android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/hoeoDelayTime"
                         android:layout_width="wrap_content"
@@ -345,7 +346,7 @@
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
-                        android:textColorHint="@android:color/background_light" />
+                        android:textColorHint="@color/gray" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -366,6 +367,7 @@
                     android:gravity="left"
                     android:paddingLeft="30dp"
                     android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/hoeoReleasePunish"
                         android:layout_width="wrap_content"
@@ -375,7 +377,7 @@
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@android:color/background_light"
-                        android:textColorHint="@android:color/background_light" />
+                        android:textColorHint="@color/gray" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

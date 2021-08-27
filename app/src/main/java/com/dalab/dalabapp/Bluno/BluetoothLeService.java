@@ -250,7 +250,7 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
-            System.out.println("onCharacteristicChanged  " + new String(characteristic.getValue()));
+//            System.out.println("onCharacteristicChanged  " + new String(characteristic.getValue()));
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
     };
@@ -261,11 +261,12 @@ public class BluetoothLeService extends Service {
     }
 
     String msg1 = "";
+    boolean isReceiving=false;
 
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
-        System.out.println("BluetoothLeService broadcastUpdate");
+//        System.out.println("BluetoothLeService broadcastUpdate");
         // This is special handling for the Heart Rate Measurement profile.  Data parsing is
         // carried out as per profile specifications:
         // http://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
@@ -285,47 +286,41 @@ public class BluetoothLeService extends Service {
 //        } else {
         // For all other profiles, writes the data formatted in HEX.
         final byte[] data = characteristic.getValue();
-        String msg = decodePackage(data);//其实也可以不写成一个函数，直接在这里给decode成好几个int或者float，然后putExtra
-        System.out.println("第1部分：" + new String(data));
+        String msg = decodePackage(data);//解包函数
         if (data != null && data.length > 0) {
+            String[] sPlitArray = msg.split("mmHg=");//根据mmHg来分割//obsolete
+            if (!sPlitArray[0].equals("DF Bluno")) {//因为传过来的第一个数据总是以DF Bluno开头的，这个数据无法被解析，故舍弃
+                //下面这段函数是拼接函数，因为蓝牙传输的数据大小限制是20byte，所以大于20byte的数据会被分割成好几块
+                //于是就用{作为开头标志，用\0作为结束的标志，来拼接出一个完整的json字符串
+                String[] datas = msg.split("\n");
+                for(int i = 0; i < datas.length; ++i)
+                {
 
-            //此外还需要分割——之后会根据id来做。
-            String[] sPlitArray = msg.split("mmHg=");
-//            for (int i = 0; i < sPlitArray.length; i++) {
-//                System.out.println("第" + i + "部分：" + sPlitArray[i]);
-//            }
-            //第一部分转化成float，并修改全局变量
-            if (!sPlitArray[0].equals("DF Bluno")) {
-//                Global.global.pressure = Float.parseFloat(sPlitArray[1]);
-                if (msg.startsWith("{")) {
-                    System.out.println("{开头" );
-                    msg1 = msg;
-                } else if (!msg.endsWith("\n")) {
-                    System.out.println("中间");
-                    msg1 = msg1 + msg;
-                }
-                else {
-                    msg=msg1+msg;
-                    System.out.println("}结尾" );
-                    System.out.println("拼接" + msg);
-                    JSONObject json = JSONObject.fromObject(msg);
-                    Global.global.pressure = Float.parseFloat(json.get("result").toString()) * 3.14f * 0.000001f / 0.0075f;//mmHg到pa，转化成压力
-                    System.out.println("result:" + Global.global.pressure);
-                    intent.putExtra(EXTRA_DATA, msg);
-                    sendBroadcast(intent);
+                    if(!datas[i].startsWith("{"))
+                        msg1 += datas[i];
+                    else msg1 = datas[i];
+//                    System.out.println(datas[i]);
+
+                    if(msg1.startsWith("{") && msg1.length() > 2 && msg1.charAt(msg1.length() - 2) == '}')
+                    {
+//                        System.out.println("yesyesyes");
+                        msg1+="\n";
+//                    System.out.println("}结尾" );
+//                        System.out.println("拼接" + msg1);
+                        JSONObject json = JSONObject.fromObject(msg1);
+//                    Global.global.pressure = Float.parseFloat(json.get("result").toString()) * 3.14f * 0.000001f / 0.0075f;//mmHg到pa，转化成压力
+                        Global.global.pressure = Float.parseFloat(json.get("result").toString());//传感器传过来的数据就是压力大小
+//                    System.out.println("result:" + Global.global.pressure);
+                        intent.putExtra(EXTRA_DATA, msg1);
+                        sendBroadcast(intent);
+                    }
                 }
 
             } else {
                 intent.putExtra(EXTRA_DATA, msg);
                 sendBroadcast(intent);
             }
-
-//                intent.putExtra(EXTRA_DATA, new String(data));
-//            intent.putExtra(EXTRA_DATA, msg);
-//            sendBroadcast(intent);
         }
-        //其实想了想，这个解码也可以放在最外层去做——也就是我们的onreceive那里，可以最后从string去解码，变到我们需要的东西，不然中途传递数据的过程就会比较复杂
-//        }
     }
 
     private static final String CHARSET_NAME = "utf-8";
