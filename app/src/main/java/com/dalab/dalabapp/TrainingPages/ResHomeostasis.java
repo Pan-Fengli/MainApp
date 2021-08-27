@@ -59,7 +59,8 @@ public class ResHomeostasis extends AppCompatActivity {
     int getPoint()
     {
         // D延迟系数T有效时间系数L失血量系数R释放系数
-        float D = Math.max(0, 1 - (float)delayTime/(Global.global.hoeoDelayTime * 1000));
+        float tmp = Math.max((float)delayTime - Global.global.toleranceDelayTime * 1000, 0);
+        float D = Math.max(0, 1 - tmp/(Global.global.hoeoDelayTime * 1000));
         float T = 1;
         if(validTime < Global.global.hoeoValidTime)
             T = 0;

@@ -323,6 +323,38 @@
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
                 </LinearLayout>
+<!--                ***************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="准备时间"
+                    android:textColor="@android:color/background_light" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:paddingLeft="30dp"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/toleranceDelayTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="10"
+                        android:text="10"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@android:color/background_light"
+                        android:textColorHint="@android:color/background_light" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="20sp" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -510,7 +542,6 @@
                     android:text="分割线"
                     android:layout_width="match_parent"
                     android:background="@color/colorAccent"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

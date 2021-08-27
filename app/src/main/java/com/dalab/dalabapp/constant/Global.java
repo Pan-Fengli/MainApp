@@ -41,6 +41,7 @@ public class Global extends Application {
     public int hoeoReleasePunish = 60;
     public int bindPressPunish = 80;
     public int bindDelayTime = 30;
+    public int toleranceDelayTime = 10;// 单位s
     @Override
     public void onCreate()
     {

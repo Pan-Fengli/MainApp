@@ -57,6 +57,7 @@ public class MainPage extends AppCompatActivity {
     EditText bindVeryGood, bindGood, bindNormal;
     EditText hoeoDelayTime, hoeoPressPunish, hoeoReleasePunish;
     EditText bindPressPunish, bindDelayTime;
+    EditText toleranceDelayTime;
 
     boolean opened=false;
     //
@@ -321,6 +322,8 @@ public class MainPage extends AppCompatActivity {
                 break;
             case 28:Global.global.bindPressPunish = value;
                 break;
+            case 29:Global.global.toleranceDelayTime = value;
+                break;
         }
     }
 
@@ -371,6 +374,7 @@ public class MainPage extends AppCompatActivity {
         hoeoReleasePunish = findViewById(R.id.hoeoReleasePunish);
         bindDelayTime = findViewById(R.id.bindDelayTime);
         bindPressPunish = findViewById(R.id.bindPressPunish);
+        toleranceDelayTime = findViewById(R.id.toleranceDelayTime);
     }
     void repaetSet()
     {
@@ -422,6 +426,7 @@ public class MainPage extends AppCompatActivity {
         HWsetFoucus(hoeoReleasePunish, 26);
         HWsetFoucus(bindDelayTime, 27);
         HWsetFoucus(bindPressPunish, 28);
+        HWsetFoucus(toleranceDelayTime, 29);
     }
 
     public void setDefault(View view)//在这之前是不是还应该弹出窗口来向用户确认一下？
