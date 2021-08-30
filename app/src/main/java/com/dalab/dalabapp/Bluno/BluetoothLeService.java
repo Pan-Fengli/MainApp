@@ -261,7 +261,7 @@ public class BluetoothLeService extends Service {
     }
 
     String msg1 = "";
-    boolean isReceiving=false;
+    boolean isReceiving = false;
 
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
@@ -292,25 +292,16 @@ public class BluetoothLeService extends Service {
             if (!sPlitArray[0].equals("DF Bluno")) {//因为传过来的第一个数据总是以DF Bluno开头的，这个数据无法被解析，故舍弃
                 //下面这段函数是拼接函数，因为蓝牙传输的数据大小限制是20byte，所以大于20byte的数据会被分割成好几块
                 //于是就用{作为开头标志，用\0作为结束的标志，来拼接出一个完整的json字符串
-                String[] datas = msg.split("\n");
-                for(int i = 0; i < datas.length; ++i)
-                {
-
-                    if(!datas[i].startsWith("{"))
+                String[] datas = msg.split("\n");//根据结束标志符分出第一行的结尾和第二行的开头两部分。
+                for (int i = 0; i < datas.length; ++i) {
+                    if (!datas[i].startsWith("{"))//如果不是{开头，那么就是中间（或结尾）的部分，拼接到原来的字符串上面去
                         msg1 += datas[i];
-                    else msg1 = datas[i];
-//                    System.out.println(datas[i]);
-
-                    if(msg1.startsWith("{") && msg1.length() > 2 && msg1.charAt(msg1.length() - 2) == '}')
-                    {
-//                        System.out.println("yesyesyes");
-                        msg1+="\n";
-//                    System.out.println("}结尾" );
-//                        System.out.println("拼接" + msg1);
+                    else msg1 = datas[i]; //检测到{开头，新的一行开始了
+                    //检查是否构造出完整一行数据
+                    if (msg1.startsWith("{") && msg1.length() > 2 && msg1.charAt(msg1.length() - 2) == '}') {//之所以是-2 是因为split了之后会在最后加一个类似于\0的字符
+                        msg1 += "\n";
                         JSONObject json = JSONObject.fromObject(msg1);
-//                    Global.global.pressure = Float.parseFloat(json.get("result").toString()) * 3.14f * 0.000001f / 0.0075f;//mmHg到pa，转化成压力
                         Global.global.pressure = Float.parseFloat(json.get("result").toString());//传感器传过来的数据就是压力大小
-//                    System.out.println("result:" + Global.global.pressure);
                         intent.putExtra(EXTRA_DATA, msg1);
                         sendBroadcast(intent);
                     }
