@@ -45,6 +45,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
     Timer timer1;
     ArrayList<Float> Values = new ArrayList<Float>();
+    ArrayList<Float> Times = new ArrayList<Float>();
     int sampleDistance = 10;//采样的间距，在demo里面体现为每点击n次按钮才会显示一次
     ArrayList<Float> storage = new ArrayList<Float>();
     int lowerValue = 200;
@@ -117,6 +118,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
 
         init();//初始化坐标数据
         Values.add(0.0f);
+        Times.add(0.0f);
         timerText = findViewById(R.id.timerText);
         validTimeText = findViewById(R.id.timerText2);
         validTimeText.setTextColor(Color.rgb(255, 130, 71));//有效时间和训练时间用不同的颜色
@@ -159,6 +161,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
 //        chart.setLower((float) lowerValue);
         chart.setUpper((float) max);//这两个就是上下限范围...
         chart.setLower((float) min);
+
+        chart.setValid(Global.global.hoeoTime);
     }
     int count;
     private void startTimer() {
@@ -234,12 +238,19 @@ public class HoeostasisDataPage extends AppCompatActivity {
             }
             average /= sampleDistance;
             Values.add(average);
+            Times.add(count/1000.0f);
             float[] floats = new float[Values.size()];
             int index = 0;
             for (final Float value : Values) {
                 floats[index++] = value;
             }
+            float[] minutes = new float[Times.size()];
+            index = 0;
+            for (final Float value : Times) {
+                minutes[index++] = value;
+            }
             chart.setValue(floats);
+            chart.setTime(minutes);
 //            chart.setX_MaxVlaue(count/1000.0f);
             chart.setCurrent_maxVlaue(count/1000.0f);
             chart.invalidate();//重绘
