@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import java.text.DecimalFormat;
 
+import static java.lang.Math.min;
+
 public class DrawLineChart extends View {
     /**
      * View宽度
@@ -83,6 +85,7 @@ public class DrawLineChart extends View {
      * 数据值
      */
     private float[] value = new float[]{-5.55f, -6.899f, -4.55f, -0.045f, 21.511f, 22.221f, 22.330f, 21.448f, 21.955f, 23.6612f, 22, 22.18883f, 21.47995f};
+    private float[] time=new float[]{0,0,0};
     /**
      * 图表的最大值
      */
@@ -101,6 +104,9 @@ public class DrawLineChart extends View {
      */
     private float x_minValue = 0f;
     private float current_maxVlaue = 0f;
+
+    private float min2=5f;
+    private float max2=25f;
     /**
      * 要计算的总值
      */
@@ -205,11 +211,31 @@ public class DrawLineChart extends View {
         mBrokenLineBottom = dip2px(b);
     }
 
+    public void setValid(float time)
+    {
+        //根据传入的有效时间去调整max2和min2
+        if(time>=15 && time<=20)
+        {
+            max2=25;min2=5;
+        }
+        else if(20<time && time<=40)
+        {
+            max2=50;min2=10;
+        }
+        else if(40<time && time<=60)
+        {
+            max2=20;min2=100;
+        }
+    }
+
     /**
      * 数据data
      */
     public void setValue(float[] value) {
         this.value = value;
+    }
+    public void setTime(float[] time) {
+        this.time = time;
     }
 
     /**
@@ -530,9 +556,9 @@ public class DrawLineChart extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //如果把width修改了呢？固定成最大值
-        float actual_width = current_maxVlaue / x_maxVlaue * mNeedDrawWidth;//这里的1200就是训练总时间
+//        float actual_width = current_maxVlaue / x_maxVlaue * mNeedDrawWidth;//这里的1200就是训练总时间
 //        mPoints = getPoints(value,mNeedDrawHeight,mNeedDrawWidth,calculateValue,minValue,mBrokenLineLeft,mBrokenLineTop);
-        mPoints = getPoints(value, mNeedDrawHeight, actual_width, calculateValue, minValue, mBrokenLineLeft, mBrokenLineTop);
+        mPoints = updatePoint(value,time, mNeedDrawHeight, mNeedDrawWidth, calculateValue, minValue, mBrokenLineLeft, mBrokenLineTop);
         x_calculateValue = x_maxVlaue - x_minValue;
         /**计算框线横坐标间隔的数据平均值*/
         x_averageValue = x_calculateValue / (x_numberLine - 1);
@@ -656,21 +682,38 @@ public class DrawLineChart extends View {
             if (i != numberLine - 1) {
                 canvas.drawLine(mBrokenLineLeft, nowadayHeight + mBrokenLineTop, mViewWidth, nowadayHeight + mBrokenLineTop, mHorizontalLinePaint);
             }
-            canvas.drawText(floatKeepTwoDecimalPlaces(v) + "", mBrokenLineLeft - dip2px(2), nowadayHeight + mBrokenLineTop, mTextPaint);
-        }
-        /**绘制边框分段横坐标与分段文本*/
-        float averageWeight = mNeedDrawWidth / (x_numberLine - 1);
+//            canvas.drawText(floatKeepTwoDecimalPlaces(v) + "", mBrokenLineLeft - dip2px(2), nowadayHeight + mBrokenLineTop, mTextPaint);
+            canvas.drawText((int)(v) + "", mBrokenLineLeft - dip2px(2), nowadayHeight + mBrokenLineTop, mTextPaint);
 
-        for (int i = 0; i < x_numberLine; i++) {
-            float nowadayWeight = averageWeight * i;
-            float v = x_averageValue * i + x_minValue;
+        }
+
+        /**绘制边框分段横坐标与分段文本*/
+//        float averageWeight = mNeedDrawWidth / (x_numberLine - 1);
+        float averageWeight = mNeedDrawWidth * 3/5 / 3;//第一部分，从0~3的weight,把3/5再分成三份
+        float nowadayWeight=0;
+        float v=0;//1,2,3
+        for (int i = 1; i <=3; i++) {
+            nowadayWeight = averageWeight * i;
+            v = i;
+                canvas.drawLine(mBrokenLineLeft + nowadayWeight - dip2px(5), mViewHeight - mBrokenLineBottom, mBrokenLineLeft + nowadayWeight - dip2px(5), mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
+                canvas.drawText((int)v + "", mBrokenLineLeft + nowadayWeight, mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
+        }
+        //画3之后的那个,可以认为是参数min2，
+        float distance=dip2px(15);
+        float NewStart=mBrokenLineLeft + nowadayWeight+distance- dip2px(5);
+        canvas.drawLine(mBrokenLineLeft + nowadayWeight+distance- dip2px(5), mViewHeight - mBrokenLineBottom, mBrokenLineLeft + nowadayWeight+distance- dip2px(5) , mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
+        canvas.drawText((int)min2 + "", mBrokenLineLeft + nowadayWeight+distance, mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
+
+        x_averageValue=(max2-min2)/4;
+        averageWeight = (mNeedDrawWidth *2 /5 - distance) / 4;//第三部分，从min2到max2的weight,把剩下的再分成份
+        for (int i = 1; i <=4; i++) {//四份
+            nowadayWeight = averageWeight * i;
+            v = x_averageValue * i + min2;
 
             /**最后横线无需绘制，否则会将边框横线覆盖*/
-            if (i != 0) {
-                canvas.drawLine(mBrokenLineLeft + nowadayWeight - dip2px(10), mViewHeight - mBrokenLineBottom, mBrokenLineLeft + nowadayWeight - dip2px(10), mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
-                canvas.drawText(floatKeepTwoDecimalPlaces(v) + "", mBrokenLineLeft + nowadayWeight, mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
+                canvas.drawLine(NewStart + nowadayWeight, mViewHeight - mBrokenLineBottom, NewStart + nowadayWeight , mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
+                canvas.drawText((int)(v) + "", NewStart + nowadayWeight+ dip2px(7), mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
 
-            }
         }
 
         /**竖线*/
@@ -693,11 +736,11 @@ public class DrawLineChart extends View {
         float averageHeight = mNeedDrawHeight / (numberLine - 1);
         float upperHeight = (maxVlaue - upper) * averageHeight / averageValue;
         canvas.drawLine(mBrokenLineLeft, upperHeight + mBrokenLineTop, mViewWidth, upperHeight + mBrokenLineTop, upperPaint);
-        canvas.drawText(floatKeepTwoDecimalPlaces(upper) + "", mBrokenLineLeft - dip2px(2), upperHeight + mBrokenLineTop, mTextPaint);
+        canvas.drawText((int)(upper) + "", mBrokenLineLeft - dip2px(2), upperHeight + mBrokenLineTop, mTextPaint);
 
         float lowerHeight = (maxVlaue - lower) * averageHeight / averageValue;
         canvas.drawLine(mBrokenLineLeft, lowerHeight + mBrokenLineTop, mViewWidth, lowerHeight + mBrokenLineTop, lowerPaint);
-        canvas.drawText(floatKeepTwoDecimalPlaces(lower) + "", mBrokenLineLeft - dip2px(2), lowerHeight + mBrokenLineTop, mTextPaint);
+        canvas.drawText((int)(lower) + "", mBrokenLineLeft - dip2px(2), lowerHeight + mBrokenLineTop, mTextPaint);
 
     }
 
@@ -705,6 +748,7 @@ public class DrawLineChart extends View {
      * 根据值计算在该值的 x，y坐标
      */
     public Point[] getPoints(float[] values, float height, float width, float max, float min, float left, float top) {
+
         float leftPading = width / (values.length - 1);//绘制边距
         Point[] points = new Point[values.length];
         for (int i = 0; i < values.length; i++) {
@@ -717,6 +761,45 @@ public class DrawLineChart extends View {
             int pointX = (int) (leftPading * i + left);
             Point point = new Point(pointX, pointY);
             points[i] = point;
+        }
+        return points;
+    }
+    public Point[] updatePoint(float[] values,float[] times, float height, float width, float max, float min, float left, float top)
+    {
+        //需要知道每个点对应的时间才行...
+        int length=min(values.length,times.length);
+        Point[] points = new Point[length];
+
+        for (int i = 0; i < values.length && i < times.length; i++) {
+            float minute=times[i]/60;
+            double value = values[i] - min;
+            //计算每点高度所以对应的值
+            double mean = (double) max / height;
+            //获取要绘制的高度
+            float drawHeight = (float) (value / mean);
+            int pointY = (int) (height + top - drawHeight);
+            //问题只发生在X坐标
+            //分成三段处理
+            if(minute<=3)
+            {
+                float leftPading = minute/3*3/5*width;//绘制边距
+                int pointX = (int) (leftPading + left);
+                Point point = new Point(pointX, pointY);
+                points[i] = point;
+            }
+            else if(minute>3 && minute<=min2)
+            {
+                float leftPading = 3*width/5+ (minute-3)/(min2-3)*dip2px(15);//dip2px(15)即distance
+                int pointX = (int) (leftPading + left);
+                Point point = new Point(pointX, pointY);
+                points[i] = point;
+            }
+            else if(minute<max2 && minute>min2){
+                float leftPading = 3*width/5+dip2px(15)+ (minute-min2)/(max2-min2)*(2*width/5-dip2px(15));//dip2px(15)即distance
+                int pointX = (int) (leftPading + left);
+                Point point = new Point(pointX, pointY);
+                points[i] = point;
+            }
         }
         return points;
     }
