@@ -148,7 +148,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
 //        chart.setMaxVlaue(750);
         chart.setMaxVlaue(maxValue);
         chart.setMinValue(0);
-        chart.setX_MaxVlaue(12000);
+        chart.setX_MaxVlaue(60*Global.global.hoeoTime);//这个应该就是训练时长，比如20min就是20*60
         chart.setX_MinValue(0);
         chart.setNumberLine(4);//5根线
         chart.setX_NumberLine(4);//5根线
@@ -240,7 +240,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
                 floats[index++] = value;
             }
             chart.setValue(floats);
-            chart.setX_MaxVlaue(count/1000.0f);
+//            chart.setX_MaxVlaue(count/1000.0f);
+            chart.setCurrent_maxVlaue(count/1000.0f);
             chart.invalidate();//重绘
             storage.clear();
             //最后再修改text
