@@ -53,12 +53,24 @@ public class DrawLineChart extends View {
     private float maxVlaue=27.55f;
     /**图表的最小值*/
     private float minValue=-19.12f;
+
+    /**图表的横坐标最大值*/
+    private float x_maxVlaue=12000.0f;
+    /**图表的横坐标最小值*/
+    private float x_minValue=0f;
+
     /**要计算的总值*/
     private float calculateValue;
     /**框线平均值*/
     private float averageValue;
+    /**要计算的总值*/
+    private float x_calculateValue;
+    /**框线平均值*/
+    private float x_averageValue;
     /**横线数量*/
     private float numberLine=10;
+    /**横坐标的桩数量*/
+    private float x_numberLine=10;
     /**边框线颜色*/
     private int mBorderLineColor= Color.BLACK;
     /**边框线的宽度*/
@@ -119,6 +131,14 @@ public class DrawLineChart extends View {
         this.minValue = minValue;
     }
 
+    /**图表显示最大值*/
+    public void setX_MaxVlaue(float maxVlaue) {
+        this.x_maxVlaue = maxVlaue;
+    }
+    /**图表显示最小值*/
+    public void setX_MinValue(float minValue) {
+        this.x_minValue = minValue;
+    }
     //范围的上下限
     public void setUpper(float upperValue)
     {
@@ -133,6 +153,11 @@ public class DrawLineChart extends View {
     public void setNumberLine(float numberLine) {
         this.numberLine = numberLine;
     }
+    /**图表纵坐标的桩数量*/
+    public void setX_NumberLine(float numberLine) {
+        this.x_numberLine = numberLine;
+    }
+
     /**边框线颜色*/
     public void setBorderLineColor(int borderLineColor) {
         mBorderLineColor = borderLineColor;
@@ -235,10 +260,15 @@ public class DrawLineChart extends View {
         /**计算总值*/
         calculateValue=maxVlaue-minValue;
 
+
         initNeedDrawWidthAndHeight();
 
         /**计算框线横线间隔的数据平均值*/
         averageValue = calculateValue/(numberLine-1);
+
+        x_calculateValue=x_maxVlaue-x_minValue;
+        /**计算框线横坐标间隔的数据平均值*/
+        x_averageValue = x_calculateValue/(x_numberLine-1);
 
         initPaint();//什么时候需要init这个东西，才能够让我们的修改有作用...
 
@@ -337,6 +367,9 @@ public class DrawLineChart extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPoints = getPoints(value,mNeedDrawHeight,mNeedDrawWidth,calculateValue,minValue,mBrokenLineLeft,mBrokenLineTop);
+        x_calculateValue=x_maxVlaue-x_minValue;
+        /**计算框线横坐标间隔的数据平均值*/
+        x_averageValue = x_calculateValue/(x_numberLine-1);
         /**绘制边框线和边框文本*/
         DrawBorderLineAndText(canvas);
 
@@ -452,11 +485,26 @@ public class DrawLineChart extends View {
             }
             canvas.drawText(floatKeepTwoDecimalPlaces(v)+"",mBrokenLineLeft-dip2px(2),nowadayHeight+mBrokenLineTop,mTextPaint);
         }
+        /**绘制边框分段横坐标与分段文本*/
+        float averageWeight=mNeedDrawWidth/(x_numberLine-1);
+
+        for (int i = 0; i < x_numberLine; i++) {
+            float nowadayWeight= averageWeight*i;
+            float v=x_averageValue*i+x_minValue;
+
+            /**最后横线无需绘制，否则会将边框横线覆盖*/
+            if(i!=0) {
+                canvas.drawLine(mBrokenLineLeft+nowadayWeight-dip2px(10), mViewHeight-mBrokenLineBottom, mBrokenLineLeft+nowadayWeight-dip2px(10), mViewHeight-mBrokenLineBottom-dip2px(12), mBorderLinePaint);
+                canvas.drawText(floatKeepTwoDecimalPlaces(v)+"",mBrokenLineLeft+nowadayWeight,mViewHeight-mBrokenLineBottom+dip2px(13),mTextPaint);
+
+            }
+        }
 
         /**竖线*/
         for (int i = 1; i < mPoints.length; i++) {
             //canvas.drawLine(mPoints[i].x,mBrok enLineTop,mPoints[i].x,mBrokenLineTop+mNeedDrawHeight,mBorderLinePaint);
         }
+
     }
     /**保留2位小数*/
     private String  floatKeepTwoDecimalPlaces(float f){
