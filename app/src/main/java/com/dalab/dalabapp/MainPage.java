@@ -212,6 +212,10 @@ public class MainPage extends AppCompatActivity {
                     // 此处为失去焦点时的处理内容
                     if (et.getText() != null && !et.getText().toString().equals("")) {
                         int tmp = Integer.parseInt(et.getText().toString());
+                        if(type == 17 && tmp > 60)
+                            tmp = 60;
+                        else if(type == 17 && tmp < 15)
+                            tmp = 15;
                         setValue(tmp, type);
                         et.setText(String.valueOf(tmp));
                     } else {
