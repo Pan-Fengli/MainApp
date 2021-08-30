@@ -1,6 +1,7 @@
 package com.dalab.dalabapp.TrainingPages;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -63,8 +64,16 @@ public class ResBind extends AppCompatActivity {
     private void setUI(int score)
     {
         delayText.setText("延迟" + getStringTime(delayTime));
+        if(score == 20)
+            delayText.setTextColor(Color.RED);
+        else
+            delayText.setTextColor(Color.rgb(0, 238, 0));
         validText.setText("有效" + getStringTime(validTime));
         averageText.setText("平均压力" + String.format("%.2f", averageStress)+"N");//保留两位小数
+        if(score == 80)
+            delayText.setTextColor(Color.RED);
+        else
+            delayText.setTextColor(Color.rgb(0, 238, 0));
         if(score >= Global.global.bindVeryGood)
             levelText.setText("优秀");
         else if(score >= Global.global.bindGood)

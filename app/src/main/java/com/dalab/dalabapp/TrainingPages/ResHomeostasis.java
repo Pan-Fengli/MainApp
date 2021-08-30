@@ -1,6 +1,7 @@
 package com.dalab.dalabapp.TrainingPages;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -61,30 +62,51 @@ public class ResHomeostasis extends AppCompatActivity {
         // D延迟系数T有效时间系数L失血量系数R释放系数
         float tmp = Math.max((float)delayTime - Global.global.toleranceDelayTime * 1000, 0);
         float D = Math.max(0, 1 - tmp/(Global.global.hoeoDelayTime * 1000));
+        if(D == 1)
+            delayText.setTextColor(Color.rgb(0, 238,0));
+        else if(D == 0)
+            delayText.setTextColor(Color.RED);
+        else
+            delayText.setTextColor(Color.rgb(255,160,0));
         float T = 1;
         if(validTime < Global.global.hoeoValidTime)
+        {
             T = 0;
+            validText.setTextColor(Color.RED);
+        }
+        else
+            validText.setTextColor(Color.rgb(0, 238,0));
         float L = 1;
         if(lose > 1000)
         {
             L = Math.max(0, 1 - (float)(lose - 1000) / 1000);
-
+            if(lose > 2000)
+            {
+                predictType = 1;
+                loseText.setTextColor(Color.RED);
+            }
+            else
+                loseText.setTextColor(Color.rgb(255, 160, 0));
         }
-        if(lose > 2000)
-            predictType = 1;
+        else
+            loseText.setTextColor(Color.rgb(0, 238, 0));
         float R = 1;
         if(releaseTime < shouldReleaseTime)
         {
             R = (float)Global.global.hoeoReleasePunish / 100;
             if(predictType == 0)
                 predictType = 2;
+            releaseText.setTextColor(Color.RED);
         }
+        else
+            releaseText.setTextColor(Color.rgb(0, 238, 0));
         if(overTime > 180000)
+        {
             R *= (float)Global.global.hoeoPressPunish / 100;
-        System.out.println("D:"+D);
-        System.out.println("T:"+T);
-        System.out.println("L:"+L);
-        System.out.println("R:"+R);
+            overText.setTextColor(Color.RED);
+        }
+        else
+            overText.setTextColor(Color.rgb(0, 238,0));
         return (int)(D * T * L * R * 100);
     }
     // 设置页面
