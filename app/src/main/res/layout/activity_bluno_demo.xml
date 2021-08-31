@@ -32,12 +32,13 @@
             android:id="@+id/serialReveicedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="10sp"
             android:layout_below="@+id/editText2"
             android:layout_alignStart="@+id/editText2"
             android:layout_alignEnd="@+id/serialSendText"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:textColor="@color/text_color"
+            android:textSize="10sp" />
     </ScrollView>
 
     <Button
@@ -57,6 +58,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:text="接收数据:"
+        android:textColor="@color/text_color"
         android:textSize="20sp" />
 
     <EditText
