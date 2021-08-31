@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="00:00"
         android:textSize="35sp"
-
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.566"
@@ -20,25 +20,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.02" />
 
-    <TextView
-        android:id="@+id/timerText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:00"
-        android:textSize="35sp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.842" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="止血带压力值"
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/forceText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="300N"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,11 +53,11 @@
         android:id="@+id/layout"
         android:layout_width="362dp"
         android:layout_height="246dp"
-
         android:layout_marginTop="104dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-8dp">
+        tools:layout_editor_absoluteX="-8dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView10"
@@ -85,7 +74,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal ">
+            >
 
             <TextView
                 android:id="@+id/textView11"
@@ -137,31 +126,53 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.522" />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.513"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.67"
+    android:orientation="vertical"
+    android:paddingLeft="150dp"
+    >
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="失血量：0ml"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659" />
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="当前状态：无明显症状"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
-
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="有效止血时间："
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/timerText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textSize="35sp"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</LinearLayout>
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -173,34 +184,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-
-    <!--     <Button
-            android:id="@+id/nextPage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="进入评价页面"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:layout_constraintVertical_bias="0.62"
-            tools:visibility="invisible" /> -->
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="有效止血时间："
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <Button
         android:id="@+id/JumpToRes"
@@ -210,16 +194,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timerText2"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.933" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="训练时间："
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@+id/timerText"
