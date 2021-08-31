@@ -68,6 +68,7 @@ public class ResHomeostasis extends AppCompatActivity {
             delayText.setTextColor(Color.RED);
         else
             delayText.setTextColor(Color.rgb(255,160,0));
+        // 205 92 92
         float T = 1;
         if(validTime < Global.global.hoeoValidTime)
         {
