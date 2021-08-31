@@ -220,8 +220,8 @@ public class HoeostasisDataPage extends AppCompatActivity {
     private String getStringTime(int cnt) {
         int min = cnt / 60000;
         int second = cnt % 60000 / 1000;
-        int minisecond = cnt % 1000 / 10;
-        return String.format(Locale.CHINA, "%02d:%02d:%02d", min, second, minisecond);
+//        int minisecond = cnt % 1000 / 10;
+        return String.format(Locale.CHINA, "%02d:%02d", min, second);
     }
 
     // 每次时间数据更新都调用这个函数，在这个函数里面模拟数据的生成和更新
