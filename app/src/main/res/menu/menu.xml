@@ -19,7 +19,7 @@
     <!--        app:showAsAction="never" />-->
     <item
         android:id="@+id/action_settings"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/gear1"
         android:onClick="MenuOpenSettings"
         android:orderInCategory="100"
         android:title="@string/app_name"

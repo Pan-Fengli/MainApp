@@ -152,7 +152,7 @@ public class MainPage extends AppCompatActivity {
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainPage.this, "Asure",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainPage.this, "已恢复默认设置",Toast.LENGTH_SHORT).show();
 //                        asure=true;//确认
                         setDef();
                     }
@@ -160,7 +160,7 @@ public class MainPage extends AppCompatActivity {
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainPage.this, "Cancel",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainPage.this, "取消",Toast.LENGTH_SHORT).show();
 //                        asure=false;//确认
                     }
                 })
