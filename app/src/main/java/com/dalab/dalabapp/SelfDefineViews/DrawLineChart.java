@@ -697,14 +697,14 @@ public class DrawLineChart extends View {
         for (int i = 1; i <=3; i++) {
             nowadayWeight = averageWeight * i;
             v = i;
-                canvas.drawLine(mBrokenLineLeft + nowadayWeight - dip2px(5), mViewHeight - mBrokenLineBottom, mBrokenLineLeft + nowadayWeight - dip2px(5), mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
-                canvas.drawText((int)v + "", mBrokenLineLeft + nowadayWeight, mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
+                canvas.drawLine(mBrokenLineLeft + nowadayWeight , mViewHeight - mBrokenLineBottom, mBrokenLineLeft + nowadayWeight , mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
+                canvas.drawText((int)v + "", mBrokenLineLeft + nowadayWeight+dip2px(5), mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
         }
         //画3之后的那个,可以认为是参数min2，
         float distance=dip2px(15);
-        float NewStart=mBrokenLineLeft + nowadayWeight+distance- dip2px(5);
-        canvas.drawLine(mBrokenLineLeft + nowadayWeight+distance- dip2px(5), mViewHeight - mBrokenLineBottom, mBrokenLineLeft + nowadayWeight+distance- dip2px(5) , mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
-        canvas.drawText((int)min2 + "", mBrokenLineLeft + nowadayWeight+distance, mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
+        float NewStart=mBrokenLineLeft + nowadayWeight+distance;
+        canvas.drawLine(NewStart, mViewHeight - mBrokenLineBottom, NewStart , mViewHeight - mBrokenLineBottom - dip2px(12), mBorderLinePaint);
+        canvas.drawText((int)min2 + "", mBrokenLineLeft + nowadayWeight+distance+dip2px(5), mViewHeight - mBrokenLineBottom + dip2px(13), mTextPaint);
 
         x_averageValue=(max2-min2)/4;
         averageWeight = (mNeedDrawWidth *2 /5 - distance) / 4;//第三部分，从min2到max2的weight,把剩下的再分成份

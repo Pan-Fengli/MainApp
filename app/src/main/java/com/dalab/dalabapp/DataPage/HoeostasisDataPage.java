@@ -174,7 +174,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (count >= 30000) {//30s的时候
+                        if (count >= 180000) {//30s的时候
                             speed = 800;
                             //或许还可以加上其他的提示信息
                             infoText.setText("时间加速跳动到15min...");
