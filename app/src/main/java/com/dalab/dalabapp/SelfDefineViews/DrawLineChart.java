@@ -680,7 +680,9 @@ public class DrawLineChart extends View {
 
             /**最后横线无需绘制，否则会将边框横线覆盖*/
             if (i != numberLine - 1) {
-                canvas.drawLine(mBrokenLineLeft, nowadayHeight + mBrokenLineTop, mViewWidth, nowadayHeight + mBrokenLineTop, mHorizontalLinePaint);
+//                canvas.drawLine(mBrokenLineLeft, nowadayHeight + mBrokenLineTop, mViewWidth, nowadayHeight + mBrokenLineTop, mHorizontalLinePaint);
+                canvas.drawLine(mBrokenLineLeft, nowadayHeight + mBrokenLineTop, mBrokenLineLeft+dip2px(10), nowadayHeight + mBrokenLineTop, mHorizontalLinePaint);
+
             }
 //            canvas.drawText(floatKeepTwoDecimalPlaces(v) + "", mBrokenLineLeft - dip2px(2), nowadayHeight + mBrokenLineTop, mTextPaint);
             canvas.drawText((int)(v) + "", mBrokenLineLeft - dip2px(2), nowadayHeight + mBrokenLineTop, mTextPaint);

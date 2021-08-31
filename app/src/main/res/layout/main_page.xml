@@ -22,8 +22,7 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:logo="@drawable/ic_launcher_round"
-            app:subtitle="战场自救训练系统"
-            app:title="DALAB" />
+            app:title="战创伤应急救护系统" />
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -49,7 +48,7 @@
 
     <LinearLayout
         android:id="@+id/right_drawer"
-        android:layout_width="240dp"
+        android:layout_width="380dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="#111"
@@ -85,7 +84,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="240dp"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:background="#111"
@@ -137,6 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
                         android:text="~"
                         android:textColor="@android:color/background_light"
                         android:textSize="20sp" />
