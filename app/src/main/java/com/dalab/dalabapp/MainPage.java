@@ -472,7 +472,7 @@ public class MainPage extends AppCompatActivity {
         Global.global.height_value=height_def;
         height.setText(String.valueOf(height_def));
         Global.global.weight_value=weight_def;
-        weight.setText(String.valueOf(height_def));
+        weight.setText(String.valueOf(weight_def));
 
         Global.global.hoeoTime=hoeoTime_def;
         hoeoTime.setText(String.valueOf(hoeoTime_def));

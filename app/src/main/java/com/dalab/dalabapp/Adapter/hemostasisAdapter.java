@@ -67,7 +67,7 @@ public class hemostasisAdapter extends BaseAdapter {
 
             int min= Global.global.left_up_low_value;
             int max=Global.global.left_up_high_value;
-            String info="最佳压力范围"+min+"N~"+max+"N";
+            String info="最佳压力范围"+min+"~"+max+"牛顿";
             holder.pressure.setText(info);
         }
         else if(position == 1)
@@ -76,21 +76,21 @@ public class hemostasisAdapter extends BaseAdapter {
             int min= Global.global.right_up_low_value;
             int max=Global.global.right_up_high_value;
             int time=15;
-            String info="最佳压力范围"+min+"N~"+max+"N";//\n换行符
+            String info="最佳压力范围"+min+"~"+max+"牛顿";//\n换行符
             holder.pressure.setText(info);
         }
         else if(position == 2)
         {
             holder.title.setText("左下肢止血");
             String info = "最佳压力范围" + Global.global.left_down_low_value + "~"
-                    + Global.global.left_down_high_value + "N";
+                    + Global.global.left_down_high_value + "牛顿";
             holder.pressure.setText(info);
         }
         else if(position == 3)
         {
             holder.title.setText("右下肢止血");
             String info = "最佳压力范围" + Global.global.right_down_low_value + "~"
-                    + Global.global.right_down_high_value + "N";
+                    + Global.global.right_down_high_value + "牛顿";
             holder.pressure.setText(info);
         }
         return convertView;
