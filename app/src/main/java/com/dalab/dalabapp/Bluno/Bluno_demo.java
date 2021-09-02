@@ -127,20 +127,20 @@ public class Bluno_demo extends BlunoLibrary {
     @Override
     public void onSerialReceived(String theString) {							//Once connection data received, this function will be called
         // TODO Auto-generated method stub
-        if(!inOrOut)
-        {
+//        if(!inOrOut)
+//        
             serialReceivedText.append(theString);							//append the text into the EditText
             //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
             ((ScrollView)serialReceivedText.getParent()).fullScroll(View.FOCUS_DOWN);
 //            System.out.println("msg:"+app.pressure);
-        }
-        else{
-            //就不用那么复杂的append，在这里就直接修改全局变量就行了
-            System.out.println("app.down_High");
-        }
+//        }
+//        else{
+//            //就不用那么复杂的append，在这里就直接修改全局变量就行了
+//            System.out.println("app.down_High");
+//        }
     }
 
-    //下面这一段是为了获取到权限，才能够扫描得到
+    //下面这一段是为了获取到权限，才能够扫描得到设备
     @SuppressLint("WrongConstant")
     private void getPermission() {
 //		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
