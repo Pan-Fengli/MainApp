@@ -293,7 +293,9 @@
                         android:layout_weight="2"
                         android:text="~"
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp"
+                        />
 
                     <EditText
                         android:id="@+id/right_down_High"
@@ -639,8 +641,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:text="~"
-                        android:textColor="@color/text_color"
-                        android:textSize="20sp" />
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp"
+                        />
 
                     <EditText
                         android:id="@+id/up_High"
@@ -685,8 +689,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:text="~"
-                        android:textColor="@color/text_color"
-                        android:textSize="20sp" />
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp" />
 
                     <EditText
                         android:id="@+id/down_High"
@@ -801,7 +806,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="分钟"
-                        android:textColor="@android:color/background_light"
+                        android:textColor="@color/text_color"
                         android:textSize="20sp" />
                 </LinearLayout>
 

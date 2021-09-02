@@ -60,14 +60,14 @@ public class bindAdapter extends BaseAdapter {
         {
             holder.inner_title.setText("上肢包扎");
             String info="最佳包扎压力"+ Global.global.up_low_value +
-                    "~" + Global.global.up_high_value +"N";
+                    "~" + Global.global.up_high_value +"牛顿";
             holder.pressure.setText(info);
         }
         else if(position == 1)
         {
             holder.inner_title.setText("下肢包扎");
             String info="最佳包扎压力"+ Global.global.down_low_value +
-                    "~" + Global.global.down_high_value +"N";
+                    "~" + Global.global.down_high_value +"牛顿";
             holder.pressure.setText(info);
         }
         return convertView;

@@ -256,7 +256,7 @@ public class HoeostasisDataPage extends AppCompatActivity {
             chart.invalidate();//重绘
             storage.clear();
             //最后再修改text
-            String newForce = (int) average + "N";
+            String newForce = (int) average + "牛";
             forceText.setText(newForce);
             //还要检查一下颜色
             checkColor((int) average);
