@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:text="训练得分："
+        />
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="score"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+    <TextView
+        android:id="@+id/Level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="优秀"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/delayText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="delay"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:id="@+id/validText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="valid"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:id="@+id/overText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="overstress"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/loseBloodText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="loseBlood"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/loose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:textAlignment="center" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:text="止血结果："
+        />
+    <TextView
+        android:id="@+id/_res"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="result"
+        android:gravity="center_horizontal" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/ResImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:src="@drawable/body"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/broken_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:src="@drawable/left_up_broken"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

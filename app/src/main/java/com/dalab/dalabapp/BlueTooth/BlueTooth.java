@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dalab.dalabapp.R;
@@ -357,6 +358,7 @@ public class BlueTooth extends AppCompatActivity {
 
     //绑定的方法,每一个item被点击了之后就可以进行绑定
     private AdapterView.OnItemClickListener bindDeviceClick = new AdapterView.OnItemClickListener() {
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             BluetoothDevice device = mDeviceList.get(position);
@@ -369,12 +371,6 @@ public class BlueTooth extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             BluetoothDevice device = mBondedDeviceList.get(i);
-
-//            if (mConnectThread != null) {
-//                mConnectThread.cancel();
-//            }
-//            mConnectThread = new ConnectThread(device, mController.getAdapter(), mUIHandler);//把网络数据发到UI...
-//            mConnectThread.start();
             com.dalab.dalabapp.controller.ChatController.getInstance().startChat(device, mController.getAdapter(), mUIHandler);
         }
     };

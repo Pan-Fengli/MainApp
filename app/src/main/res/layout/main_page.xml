@@ -1,23 +1,987 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:descendantFocusability="beforeDescendants"
+    tools:context=".MainPage">
 
-    <ListView
-        android:id="@+id/list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/stat_sys_data_bluetooth" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="战创伤应急救护系统" />
+    </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16sp"
+            app:srcCompat="@android:drawable/stat_sys_data_bluetooth" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/right_drawer"
+        android:layout_width="380dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@android:color/background_light"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:descendantFocusability="beforeDescendants"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                android:onClick="closeSettings"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/back" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="设置"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="290dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="@android:color/background_light"
+                android:descendantFocusability="beforeDescendants"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="止血标准设置"
+
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="左上肢压力(牛顿)"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/left_up_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/left_up_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_weight="2"-->
+                    <!--                        android:text="mmHg"-->
+                    <!--                        android:textColor="@android:color/background_light"-->
+                    <!--                        android:textSize="15sp" />-->
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="右上肢压力(牛顿)"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/right_up_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/right_up_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="左下肢压力(牛顿)"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/left_down_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp" />
+
+                    <EditText
+                        android:id="@+id/left_down_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="右下肢压力(牛顿)"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/right_down_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/right_down_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="有效止血时长"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoValidTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="15"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分钟"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <!--                ***************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="止血带穿戴时限"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/toleranceDelayTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="10"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:text="10"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="止血延迟时间"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoDelayTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="30"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未松开止血带惩罚系数"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoReleasePunish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="60"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="压力过大惩罚系数"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoPressPunish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="90"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="止血训练总时长"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="20"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分钟"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="计分区间"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoVeryGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="90"
+                        android:textColor="@color/text_color"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="优秀"
+                        android:textColor="@color/text_color"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="75"
+                        android:textColor="@color/text_color"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="良好"
+                        android:textColor="@color/text_color"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/hoeoNormal"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="60"
+                        android:textColor="@color/text_color"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="合格"
+                        android:textColor="@color/text_color"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="@color/colorAccent"
+                    android:text="分割线" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="包扎标准设置"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎上肢压力(牛顿)"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/up_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/up_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+                <!--                *********************************************-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎下肢压力(牛顿)"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/down_Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:hint="下限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="~"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="23sp" />
+
+                    <EditText
+                        android:id="@+id/down_High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="5"
+                        android:hint="上限"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎压力过大惩罚系数"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/bindPressPunish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="80"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎延迟时间"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/bindDelayTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="30"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="秒"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="包扎训练总时长"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/bindTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="3"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分钟"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="计分区间"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/bindVeryGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="90"
+                        android:textColor="@color/text_color"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="优秀"
+                        android:textColor="@color/text_color"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/bindGood"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="75"
+                        android:textColor="@color/text_color"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="良好"
+                        android:textColor="@color/text_color"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/bindNormal"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="60"
+                        android:textColor="@color/text_color"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="合格"
+                        android:textColor="@color/text_color"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="@color/colorAccent"
+                    android:text="分割线" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="用户参数"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="身高"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="身高(cm)"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="厘米"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="体重"
+                    android:textColor="@color/text_color"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <EditText
+                        android:id="@+id/weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="3"
+                        android:hint="体重(kg)"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@android:color/background_light" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="公斤"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/set_def"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:onClick="setDefault"
+                    android:text="恢复默认设置" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

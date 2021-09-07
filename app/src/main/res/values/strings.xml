@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DALabApp</string>
+    <string name="app_name">战创伤应急救护系统</string>
     <string name="action_settings">Settings</string>
     <string name="alpha">Alpha</string>
     <string name="support_bluetooth">是否支持蓝牙</string>
@@ -14,4 +14,6 @@
     <string name="stop_listening">结束监听</string>
     <string name="disconnect">断开连接</string>
     <string name="hello">hello</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+    <string name="unknown_device">Unknown device</string>
 </resources>
